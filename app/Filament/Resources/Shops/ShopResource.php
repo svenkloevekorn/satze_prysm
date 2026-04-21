@@ -26,7 +26,7 @@ class ShopResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Shops';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Stammdaten';
+    protected static string|\UnitEnum|null $navigationGroup = 'Marktanalyse';
 
     protected static ?int $navigationSort = 3;
 

@@ -36,13 +36,15 @@ Volles Briefing: siehe Konversation / `PLAN.md`.
 
 ## 🧭 Arbeitsweise (für Claude)
 
-1. **Immer auf Deutsch** antworten (aus globaler Regel).
-2. **Beginner-freundlich** – Schritte erklären, Fachbegriffe kurz erläutern.
-3. **Plan → TODO → Umsetzung**: Vor größeren Änderungen Plan checken / anpassen.
-4. **Nach jeder Code-Änderung** `php artisan test` ausführen, bevor "fertig" gesagt wird.
-5. **Neue Features brauchen Tests** (Pest Feature-Tests für Filament Resources).
-6. **TODO.md pflegen:** Am Ende jeder Aufgabe fragen, ob abgehakt werden soll.
-7. **Vor Destruktivem** (rm, git reset, DB drop) immer nachfragen.
+1. **Zu Beginn jeder Session:** `SESSION-STATE.md` lesen – dort steht, wo wir aufgehört haben.
+2. **Immer auf Deutsch** antworten (aus globaler Regel).
+3. **Beginner-freundlich** – Schritte erklären, Fachbegriffe kurz erläutern.
+4. **Plan → TODO → Umsetzung**: Vor größeren Änderungen Plan checken / anpassen.
+5. **Nach jeder Code-Änderung** `php artisan test` ausführen, bevor "fertig" gesagt wird.
+6. **Zusätzlich** `./vendor/bin/pint --test` + `./vendor/bin/phpstan analyse` müssen grün bleiben.
+7. **Neue Features brauchen Tests** (Pest Feature-Tests für Filament Resources).
+8. **TODO.md + SESSION-STATE.md pflegen:** Am Ende jeder Aufgabe fragen, ob abgehakt werden soll.
+9. **Vor Destruktivem** (rm, git reset, DB drop) immer nachfragen.
 
 ---
 

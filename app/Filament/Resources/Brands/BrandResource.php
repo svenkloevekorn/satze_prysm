@@ -26,9 +26,9 @@ class BrandResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Marken';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Stammdaten';
+    protected static string|\UnitEnum|null $navigationGroup = 'Marktanalyse';
 
-    protected static ?int $navigationSort = 2;
+    protected static ?int $navigationSort = 2;  // in Marktanalyse nach Wettbewerbsprodukten
 
     protected static ?string $recordTitleAttribute = 'name';
 

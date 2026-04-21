@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Staeze PM – Test-Checkliste</title>
+<style>
+  :root {
+    --bg: #f7f7f8;
+    --card: #ffffff;
+    --border: #e5e7eb;
+    --text: #111827;
+    --muted: #6b7280;
+    --accent: #d97706;
+    --accent-hover: #b45309;
+    --green: #10b981;
+    --red: #ef4444;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f172a;
+      --card: #1e293b;
+      --border: #334155;
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    margin: 0;
+    padding: 2rem 1rem;
+    line-height: 1.5;
+  }
+  .container { max-width: 960px; margin: 0 auto; }
+  header {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    margin-bottom: 1.5rem;
+    position: sticky;
+    top: 1rem;
+    z-index: 10;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+  h1 { margin: 0 0 .5rem; font-size: 1.75rem; }
+  .meta { color: var(--muted); font-size: .875rem; margin: 0 0 1rem; }
+  .progress-wrap {
+    background: var(--border);
+    border-radius: 999px;
+    height: 12px;
+    overflow: hidden;
+    margin: 1rem 0 .5rem;
+  }
+  .progress-bar {
+    background: linear-gradient(90deg, var(--accent), var(--green));
+    height: 100%;
+    transition: width .3s;
+    border-radius: 999px;
+  }
+  .progress-text {
+    display: flex;
+    justify-content: space-between;
+    font-size: .875rem;
+    color: var(--muted);
+  }
+  .controls {
+    display: flex;
+    gap: .5rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+  }
+  .btn {
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: .5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: .875rem;
+    transition: background .15s;
+  }
+  .btn:hover { background: var(--border); }
+  .btn.primary { background: var(--accent); color: white; border-color: var(--accent); }
+  .btn.primary:hover { background: var(--accent-hover); }
+  .btn.danger { color: var(--red); }
+  .saved-indicator {
+    display: inline-block;
+    color: var(--green);
+    font-size: .75rem;
+    margin-left: .5rem;
+    opacity: 0;
+    transition: opacity .3s;
+  }
+  .saved-indicator.visible { opacity: 1; }
+
+  section {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  h2 {
+    margin: 0 0 .5rem;
+    font-size: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+  }
+  h2 .count {
+    color: var(--muted);
+    font-size: .875rem;
+    font-weight: normal;
+    margin-left: auto;
+  }
+  h3 {
+    font-size: 1rem;
+    margin: 1.25rem 0 .5rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    font-weight: 600;
+  }
+  .intro {
+    color: var(--muted);
+    font-size: .875rem;
+    margin: 0 0 1rem;
+  }
+  .item {
+    display: flex;
+    align-items: flex-start;
+    gap: .75rem;
+    padding: .5rem .75rem;
+    border-radius: 6px;
+    transition: background .15s;
+  }
+  .item:hover { background: rgba(0,0,0,0.03); }
+  @media (prefers-color-scheme: dark) {
+    .item:hover { background: rgba(255,255,255,0.03); }
+  }
+  .item input[type="checkbox"] {
+    margin-top: .25rem;
+    width: 1.1rem;
+    height: 1.1rem;
+    cursor: pointer;
+    accent-color: var(--accent);
+    flex-shrink: 0;
+  }
+  .item label {
+    cursor: pointer;
+    flex: 1;
+  }
+  .item.checked label {
+    color: var(--muted);
+    text-decoration: line-through;
+  }
+  .step-id {
+    font-family: ui-monospace, monospace;
+    color: var(--muted);
+    font-size: .8125rem;
+    margin-right: .5rem;
+    display: inline-block;
+    min-width: 2.5rem;
+  }
+  .expected {
+    display: block;
+    font-size: .8125rem;
+    color: var(--muted);
+    margin-top: .125rem;
+  }
+  code {
+    background: rgba(0,0,0,0.07);
+    padding: .125rem .375rem;
+    border-radius: 4px;
+    font-size: .875rem;
+  }
+  @media (prefers-color-scheme: dark) {
+    code { background: rgba(255,255,255,0.1); }
+  }
+  .filter-active .item:not(.unchecked-only) { display: none; }
+  .filter-active .item.unchecked-only { display: flex; }
+  .filter-done .item:not(.checked) { display: none; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>✅ Staeze PM – Test-Checkliste</h1>
+  <p class="meta">
+    Interaktive Liste aller Test-Schritte. Dein Fortschritt wird automatisch im Browser (localStorage) gespeichert.
+    <span id="savedIndicator" class="saved-indicator">✓ gespeichert</span>
+  </p>
+  <div class="progress-wrap"><div id="progressBar" class="progress-bar" style="width: 0%"></div></div>
+  <div class="progress-text">
+    <span><strong id="checkedCount">0</strong> von <strong id="totalCount">0</strong> erledigt</span>
+    <span id="percentText">0 %</span>
+  </div>
+  <div class="controls">
+    <button class="btn" onclick="setFilter('all')" id="filter-all">Alle zeigen</button>
+    <button class="btn" onclick="setFilter('open')" id="filter-open">Nur offene</button>
+    <button class="btn" onclick="setFilter('done')" id="filter-done">Nur erledigte</button>
+    <button class="btn danger" onclick="resetAll()">Zurücksetzen</button>
+    <button class="btn primary" onclick="exportResults()">Exportieren</button>
+  </div>
+</header>
+
+<!-- VORBEREITUNG -->
+<section>
+  <h2>🚦 Vorbereitung <span class="count"></span></h2>
+  <p class="intro">Bevor du mit dem Testen startest.</p>
+  <div class="item"><input type="checkbox" id="pre-1"><label for="pre-1">Herd-App läuft, Site <code>staeze-pm.test</code> ist verlinkt</label></div>
+  <div class="item"><input type="checkbox" id="pre-2"><label for="pre-2">Postgres-Service grün in Herd</label></div>
+  <div class="item"><input type="checkbox" id="pre-3"><label for="pre-3">Im Browser: http://staeze-pm.test/admin/login eingeloggt als <code>admin@admin.com / password</code></label></div>
+  <div class="item"><input type="checkbox" id="pre-4"><label for="pre-4">Im Terminal: <code>php artisan test</code> → 73 Tests grün</label></div>
+</section>
+
+<!-- PHASE 1: STAMMDATEN -->
+<section>
+  <h2>1️⃣ Stammdaten <span class="count"></span></h2>
+  <p class="intro">Menü → Stammdaten / Marktanalyse (Marken, Shops) / Bewertungen.</p>
+
+  <h3>Kategorien</h3>
+  <div class="item"><input type="checkbox" id="s1-1"><label for="s1-1"><span class="step-id">1.1</span>7 Kategorien vorhanden (Cycling Jerseys, Bib Shorts, Running Shirts, Running Shorts, Jackets, T-Shirts, Bags)</label></div>
+  <div class="item"><input type="checkbox" id="s1-2"><label for="s1-2"><span class="step-id">1.2</span>Suche „Cycling" → nur Cycling Jerseys</label></div>
+  <div class="item"><input type="checkbox" id="s1-3"><label for="s1-3"><span class="step-id">1.3</span>Filter „Aktiv-Status" funktioniert</label></div>
+  <div class="item"><input type="checkbox" id="s1-4"><label for="s1-4"><span class="step-id">1.4</span>Neu anlegen → Slug füllt sich automatisch</label></div>
+  <div class="item"><input type="checkbox" id="s1-5"><label for="s1-5"><span class="step-id">1.5</span>Bearbeiten + Toggle „Aktiv" funktioniert</label></div>
+  <div class="item"><input type="checkbox" id="s1-6"><label for="s1-6"><span class="step-id">1.6</span>Bulk-Löschen mit Bestätigung</label></div>
+  <div class="item"><input type="checkbox" id="s1-7"><label for="s1-7"><span class="step-id">1.7</span>Doppelter Slug → Fehlermeldung (Unique-Check)</label></div>
+
+  <h3>Marken (in Marktanalyse-Gruppe)</h3>
+  <div class="item"><input type="checkbox" id="s2-1"><label for="s2-1"><span class="step-id">2.1</span>Neue Marke „Castelli" anlegen</label></div>
+  <div class="item"><input type="checkbox" id="s2-2"><label for="s2-2"><span class="step-id">2.2</span>Doppelter Name „Castelli" → Fehler</label></div>
+  <div class="item"><input type="checkbox" id="s2-3"><label for="s2-3"><span class="step-id">2.3</span>Suche + Filter „Nur inaktive" funktioniert</label></div>
+
+  <h3>Shops (in Marktanalyse-Gruppe)</h3>
+  <div class="item"><input type="checkbox" id="s3-1"><label for="s3-1"><span class="step-id">3.1</span>4 Shops vorgeseedet (Amazon DE, Bike-Discount, Wiggle, SportScheck)</label></div>
+  <div class="item"><input type="checkbox" id="s3-2"><label for="s3-2"><span class="step-id">3.2</span>URL in Tabelle öffnet neuen Tab</label></div>
+  <div class="item"><input type="checkbox" id="s3-3"><label for="s3-3"><span class="step-id">3.3</span>Ungültige URL bei Neu → Fehlermeldung</label></div>
+  <div class="item"><input type="checkbox" id="s3-4"><label for="s3-4"><span class="step-id">3.4</span>Land „DE" als Badge angezeigt</label></div>
+
+  <h3>Bewertungs-Dimensionen</h3>
+  <div class="item"><input type="checkbox" id="s4-1"><label for="s4-1"><span class="step-id">4.1</span>5 Dimensionen vorhanden (Design, Material, Verarbeitung, Performance, Preis-Leistung)</label></div>
+  <div class="item"><input type="checkbox" id="s4-2"><label for="s4-2"><span class="step-id">4.2</span>Sortierung nach Sort-Order korrekt</label></div>
+  <div class="item"><input type="checkbox" id="s4-3"><label for="s4-3"><span class="step-id">4.3</span>Neue Dimension „Komfort" anlegen</label></div>
+  <div class="item"><input type="checkbox" id="s4-4"><label for="s4-4"><span class="step-id">4.4</span>Doppelter Name → Fehler</label></div>
+
+  <h3>Qualitätskriterien</h3>
+  <div class="item"><input type="checkbox" id="s5-1"><label for="s5-1"><span class="step-id">5.1</span>6 Kriterien vorhanden (Nahtqualität, Atmungsaktivität, Passform, Wasserdichtigkeit, Polsterung, Reflektoren)</label></div>
+  <div class="item"><input type="checkbox" id="s5-2"><label for="s5-2"><span class="step-id">5.2</span>Kategorie-Badges pro Kriterium sichtbar</label></div>
+  <div class="item"><input type="checkbox" id="s5-3"><label for="s5-3"><span class="step-id">5.3</span>Filter „Kategorie → Jackets" → passende Kriterien</label></div>
+  <div class="item"><input type="checkbox" id="s5-4"><label for="s5-4"><span class="step-id">5.4</span>Neues Kriterium „UV-Schutz" mit Kategorien anlegen</label></div>
+  <div class="item"><input type="checkbox" id="s5-5"><label for="s5-5"><span class="step-id">5.5</span>Kategorie entfernen → Badge verschwindet</label></div>
+
+  <h3>Rollen & Rechte (Filament Shield)</h3>
+  <div class="item"><input type="checkbox" id="s6-1"><label for="s6-1"><span class="step-id">6.1</span>Shield → Roles: „super_admin" sichtbar</label></div>
+  <div class="item"><input type="checkbox" id="s6-2"><label for="s6-2"><span class="step-id">6.2</span>Neue Rolle „editor" anlegen</label></div>
+  <div class="item"><input type="checkbox" id="s6-3"><label for="s6-3"><span class="step-id">6.3</span>Permissions zuweisen + speichern</label></div>
+</section>
+
+<!-- PHASE 2: MARKTANALYSE -->
+<section>
+  <h2>2️⃣ Marktanalyse – Wettbewerbsprodukte <span class="count"></span></h2>
+
+  <h3>Liste & Tab-Formular</h3>
+  <div class="item"><input type="checkbox" id="m6-1"><label for="m6-1"><span class="step-id">6.1</span>3 vorgeseedete Produkte sichtbar (Castelli, Rapha, Assos)</label></div>
+  <div class="item"><input type="checkbox" id="m6-2"><label for="m6-2"><span class="step-id">6.2</span>Spalte „Shops" zeigt Anzahl (2)</label></div>
+  <div class="item"><input type="checkbox" id="m6-3"><label for="m6-3"><span class="step-id">6.3</span>4 Tabs im Formular: Allgemein / Eigenschaften / Preis & Bewertung / Bilder</label></div>
+  <div class="item"><input type="checkbox" id="m6-4"><label for="m6-4"><span class="step-id">6.4</span>Name leer → Validierungsfehler</label></div>
+  <div class="item"><input type="checkbox" id="m6-5"><label for="m6-5"><span class="step-id">6.5</span>Marke inline anlegen (+ Erstellen) funktioniert</label></div>
+  <div class="item"><input type="checkbox" id="m6-6"><label for="m6-6"><span class="step-id">6.6</span>Material/Farbe/Größe als Tag (Komma = neuer Tag)</label></div>
+  <div class="item"><input type="checkbox" id="m6-7"><label for="m6-7"><span class="step-id">6.7</span>Bewertung 11 → Validation blockt</label></div>
+  <div class="item"><input type="checkbox" id="m6-8"><label for="m6-8"><span class="step-id">6.8</span>Bild hochladen → Vorschau erscheint</label></div>
+  <div class="item"><input type="checkbox" id="m6-9"><label for="m6-9"><span class="step-id">6.9</span>Speichern → Produkt in Liste mit Thumbnail</label></div>
+
+  <h3>Shop-Einträge (RelationManager)</h3>
+  <div class="item"><input type="checkbox" id="m7-1"><label for="m7-1"><span class="step-id">7.1</span>„Shop-Einträge"-Tabelle unter Produkt</label></div>
+  <div class="item"><input type="checkbox" id="m7-2"><label for="m7-2"><span class="step-id">7.2</span>Neuen Shop-Eintrag hinzufügen (Shop, URL, Preis, Datum)</label></div>
+  <div class="item"><input type="checkbox" id="m7-3"><label for="m7-3"><span class="step-id">7.3</span>URL-Klick öffnet neuen Tab</label></div>
+  <div class="item"><input type="checkbox" id="m7-4"><label for="m7-4"><span class="step-id">7.4</span>Shop-Eintrag löschen</label></div>
+
+  <h3>Filter & Suche</h3>
+  <div class="item"><input type="checkbox" id="m8-1"><label for="m8-1"><span class="step-id">8.1</span>Suche „Castelli" → nur Castelli-Produkte</label></div>
+  <div class="item"><input type="checkbox" id="m8-2"><label for="m8-2"><span class="step-id">8.2</span>Filter „Marke → Rapha" → nur Rapha</label></div>
+  <div class="item"><input type="checkbox" id="m8-3"><label for="m8-3"><span class="step-id">8.3</span>Filter „Kategorie → Cycling Jerseys"</label></div>
+  <div class="item"><input type="checkbox" id="m8-4"><label for="m8-4"><span class="step-id">8.4</span>Filter „Preis": von 100, bis 200</label></div>
+  <div class="item"><input type="checkbox" id="m8-5"><label for="m8-5"><span class="step-id">8.5</span>Sortierung nach Bewertung funktioniert</label></div>
+
+  <h3>CSV-Import & -Export</h3>
+  <div class="item"><input type="checkbox" id="m9-1"><label for="m9-1"><span class="step-id">9.1</span>CSV-Import-Button öffnet Modal</label></div>
+  <div class="item"><input type="checkbox" id="m9-2"><label for="m9-2"><span class="step-id">9.2</span>Beispieldatei <code>docs/beispiel-imports/wettbewerbsprodukte-beispiel.csv</code> hochgeladen</label></div>
+  <div class="item"><input type="checkbox" id="m9-3"><label for="m9-3"><span class="step-id">9.3</span>Import: „3 Zeilen importiert"</label></div>
+  <div class="item"><input type="checkbox" id="m9-4"><label for="m9-4"><span class="step-id">9.4</span>Neue Marken „Gore Wear / Pearl Izumi / Salomon" automatisch angelegt</label></div>
+  <div class="item"><input type="checkbox" id="m9-5"><label for="m9-5"><span class="step-id">9.5</span>CSV-Export-Button: CSV wird heruntergeladen</label></div>
+  <div class="item"><input type="checkbox" id="m9-6"><label for="m9-6"><span class="step-id">9.6</span>Materialien in Export als „Polyester, Lycra" (komma-getrennt)</label></div>
+
+  <h3>Bilder-Verwaltung</h3>
+  <div class="item"><input type="checkbox" id="m10-1"><label for="m10-1"><span class="step-id">10.1</span>Bilder per Drag & Drop umsortieren</label></div>
+  <div class="item"><input type="checkbox" id="m10-2"><label for="m10-2"><span class="step-id">10.2</span>Image-Editor (Crop) öffnet sich</label></div>
+  <div class="item"><input type="checkbox" id="m10-3"><label for="m10-3"><span class="step-id">10.3</span>11 Bilder hochladen → blockt (Max 10)</label></div>
+</section>
+
+<!-- PHASE 3: LIEFERANTEN -->
+<section>
+  <h2>3️⃣ Lieferanten <span class="count"></span></h2>
+
+  <h3>Lieferanten anlegen</h3>
+  <div class="item"><input type="checkbox" id="l11-1"><label for="l11-1"><span class="step-id">11.1</span>2 Demo-Lieferanten vorhanden (Textiles Pro Portugal, Sofia Garments)</label></div>
+  <div class="item"><input type="checkbox" id="l11-2"><label for="l11-2"><span class="step-id">11.2</span>Counter-Badges „Kontakte" + „Produkte" in Liste</label></div>
+  <div class="item"><input type="checkbox" id="l11-3"><label for="l11-3"><span class="step-id">11.3</span>Firmenname leer → Validierungsfehler</label></div>
+  <div class="item"><input type="checkbox" id="l11-4"><label for="l11-4"><span class="step-id">11.4</span>Bewertung 11 → Validation blockt</label></div>
+  <div class="item"><input type="checkbox" id="l11-5"><label for="l11-5"><span class="step-id">11.5</span>Neuer Lieferant „Alpine Outdoor Ltd" angelegt</label></div>
+
+  <h3>Ansprechpartner (Contacts RM)</h3>
+  <div class="item"><input type="checkbox" id="l12-1"><label for="l12-1"><span class="step-id">12.1</span>Detail-Seite zeigt Sections + Tabs „Ansprechpartner" + „Produkte"</label></div>
+  <div class="item"><input type="checkbox" id="l12-2"><label for="l12-2"><span class="step-id">12.2</span>Ansprechpartner hinzufügen (Name, Rolle, Email, Telefon)</label></div>
+  <div class="item"><input type="checkbox" id="l12-3"><label for="l12-3"><span class="step-id">12.3</span>Email-Copy-Icon kopiert in Zwischenablage</label></div>
+  <div class="item"><input type="checkbox" id="l12-4"><label for="l12-4"><span class="step-id">12.4</span>Ungültige Email → Fehler</label></div>
+  <div class="item"><input type="checkbox" id="l12-5"><label for="l12-5"><span class="step-id">12.5</span>Ansprechpartner löschen</label></div>
+
+  <h3>Lieferanten-Produkte inline</h3>
+  <div class="item"><input type="checkbox" id="l13-1"><label for="l13-1"><span class="step-id">13.1</span>Produkt „Pro Summer Jersey" mit EK 18.50, VK 69, MOQ 100 sichtbar</label></div>
+  <div class="item"><input type="checkbox" id="l13-2"><label for="l13-2"><span class="step-id">13.2</span>Produkt hinzufügen + speichern</label></div>
+  <div class="item"><input type="checkbox" id="l13-3"><label for="l13-3"><span class="step-id">13.3</span>Produkt löschen</label></div>
+
+  <h3>Lieferanten-Produkte-Liste (eigener Menüpunkt)</h3>
+  <div class="item"><input type="checkbox" id="l14-1"><label for="l14-1"><span class="step-id">14.1</span>Alle Lieferanten-Produkte übergreifend sichtbar</label></div>
+  <div class="item"><input type="checkbox" id="l14-2"><label for="l14-2"><span class="step-id">14.2</span>4 Tabs im Formular: Allgemein / Preis / Eigenschaften / Bilder</label></div>
+  <div class="item"><input type="checkbox" id="l14-3"><label for="l14-3"><span class="step-id">14.3</span>EK/VK/MOQ-Felder speichern</label></div>
+  <div class="item"><input type="checkbox" id="l14-4"><label for="l14-4"><span class="step-id">14.4</span>Bilder hochladen</label></div>
+  <div class="item"><input type="checkbox" id="l14-5"><label for="l14-5"><span class="step-id">14.5</span>Filter „Lieferant" multi-select</label></div>
+  <div class="item"><input type="checkbox" id="l14-6"><label for="l14-6"><span class="step-id">14.6</span>Sortierung nach EK-Preis</label></div>
+
+  <h3>CSV-Import/Export</h3>
+  <div class="item"><input type="checkbox" id="l15-1"><label for="l15-1"><span class="step-id">15.1</span>Beispiel-CSV <code>docs/beispiel-imports/lieferanten-produkte-beispiel.csv</code> importieren</label></div>
+  <div class="item"><input type="checkbox" id="l15-2"><label for="l15-2"><span class="step-id">15.2</span>Neuer Lieferant „Alpine Outdoor Ltd" automatisch angelegt</label></div>
+  <div class="item"><input type="checkbox" id="l15-3"><label for="l15-3"><span class="step-id">15.3</span>CSV-Export funktioniert</label></div>
+
+  <h3>Cascade-Delete</h3>
+  <div class="item"><input type="checkbox" id="l16-1"><label for="l16-1"><span class="step-id">16.1</span>Lieferant löschen → Kontakte + Produkte verschwinden mit</label></div>
+</section>
+
+<!-- PHASE 4: BEWERTUNGSSYSTEM -->
+<section>
+  <h2>4️⃣ Bewertungssystem <span class="count"></span></h2>
+
+  <h3>Übersicht aller Bewertungen</h3>
+  <div class="item"><input type="checkbox" id="b17-1"><label for="b17-1"><span class="step-id">17.1</span>Mindestens 5 Bewertungen vorgeseedet</label></div>
+  <div class="item"><input type="checkbox" id="b17-2"><label for="b17-2"><span class="step-id">17.2</span>Objekt-Typ-Badge (Wettbewerber / Lieferant / Finales Produkt)</label></div>
+  <div class="item"><input type="checkbox" id="b17-3"><label for="b17-3"><span class="step-id">17.3</span>Dimension als Badge oder „Gesamt"</label></div>
+  <div class="item"><input type="checkbox" id="b17-4"><label for="b17-4"><span class="step-id">17.4</span>Art-Farben: Intern blau, Extern gelb</label></div>
+  <div class="item"><input type="checkbox" id="b17-5"><label for="b17-5"><span class="step-id">17.5</span>Score als x/10 formatiert</label></div>
+  <div class="item"><input type="checkbox" id="b17-6"><label for="b17-6"><span class="step-id">17.6</span>Filter „Art" → nur intern funktioniert</label></div>
+  <div class="item"><input type="checkbox" id="b17-7"><label for="b17-7"><span class="step-id">17.7</span>Filter „Objekt-Typ" filtert korrekt</label></div>
+  <div class="item"><input type="checkbox" id="b17-8"><label for="b17-8"><span class="step-id">17.8</span>Filter „Dimension → Design"</label></div>
+
+  <h3>Bewertung bei Wettbewerbsprodukt</h3>
+  <div class="item"><input type="checkbox" id="b18-1"><label for="b18-1"><span class="step-id">18.1</span>Tab „Bewertungen" im Produkt sichtbar</label></div>
+  <div class="item"><input type="checkbox" id="b18-2"><label for="b18-2"><span class="step-id">18.2</span>Castelli hat 3 vorgeseedete Bewertungen</label></div>
+  <div class="item"><input type="checkbox" id="b18-3"><label for="b18-3"><span class="step-id">18.3</span>„Bewertung hinzufügen" – ohne Objekt-Typ-Feld (auto gesetzt)</label></div>
+  <div class="item"><input type="checkbox" id="b18-4"><label for="b18-4"><span class="step-id">18.4</span>Score 11 → Validation blockt</label></div>
+  <div class="item"><input type="checkbox" id="b18-5"><label for="b18-5"><span class="step-id">18.5</span>Bewertung ohne Dimension = Gesamt</label></div>
+  <div class="item"><input type="checkbox" id="b18-6"><label for="b18-6"><span class="step-id">18.6</span>Bewertung bearbeiten</label></div>
+  <div class="item"><input type="checkbox" id="b18-7"><label for="b18-7"><span class="step-id">18.7</span>Bewertung löschen</label></div>
+
+  <h3>Bewertung bei Lieferanten-Produkt</h3>
+  <div class="item"><input type="checkbox" id="b19-1"><label for="b19-1"><span class="step-id">19.1</span>Pro Summer Jersey hat vorgeseedete Bewertung</label></div>
+  <div class="item"><input type="checkbox" id="b19-2"><label for="b19-2"><span class="step-id">19.2</span>Neue Bewertung hinzufügen funktioniert</label></div>
+  <div class="item"><input type="checkbox" id="b19-3"><label for="b19-3"><span class="step-id">19.3</span>In Übersicht als Objekt-Typ „Lieferant" sichtbar</label></div>
+
+  <h3>Durchschnitts-Bewertung</h3>
+  <div class="item"><input type="checkbox" id="b20-1"><label for="b20-1"><span class="step-id">20.1</span>Spalte „⌀ Bewertung" in Wettbewerbsprodukte-Liste</label></div>
+  <div class="item"><input type="checkbox" id="b20-2"><label for="b20-2"><span class="step-id">20.2</span>Spalte „⌀ Bewertung" in Lieferanten-Produkte-Liste</label></div>
+  <div class="item"><input type="checkbox" id="b20-3"><label for="b20-3"><span class="step-id">20.3</span>Produkt ohne Bewertung → „–"</label></div>
+
+  <h3>Bewertung über eigenständige Resource</h3>
+  <div class="item"><input type="checkbox" id="b21-1"><label for="b21-1"><span class="step-id">21.1</span>„Alle Bewertungen → Neu" zeigt vollständiges Formular</label></div>
+  <div class="item"><input type="checkbox" id="b21-2"><label for="b21-2"><span class="step-id">21.2</span>Objekt-Typ wechseln → Objekt-Liste aktualisiert sich</label></div>
+</section>
+
+<!-- PHASE 5: PRODUKT-ENTWICKLUNG -->
+<section>
+  <h2>5️⃣ Produkt-Entwicklung <span class="count"></span></h2>
+
+  <h3>Entwicklungs-Pipeline</h3>
+  <div class="item"><input type="checkbox" id="p22-1"><label for="p22-1"><span class="step-id">22.1</span>3 vorgeseedete Items (Staeze Pro Summer Jersey, Race Bib, Daily Tee)</label></div>
+  <div class="item"><input type="checkbox" id="p22-2"><label for="p22-2"><span class="step-id">22.2</span>Status-Spalte mit Farbe + Icon pro Status</label></div>
+  <div class="item"><input type="checkbox" id="p22-3"><label for="p22-3"><span class="step-id">22.3</span>Filter „Status → Idee"</label></div>
+  <div class="item"><input type="checkbox" id="p22-4"><label for="p22-4"><span class="step-id">22.4</span>Filter „Verantwortlich → Admin"</label></div>
+  <div class="item"><input type="checkbox" id="p22-5"><label for="p22-5"><span class="step-id">22.5</span>Überschrittene Deadline wird rot</label></div>
+
+  <h3>Entwicklungs-Item anlegen</h3>
+  <div class="item"><input type="checkbox" id="p23-1"><label for="p23-1"><span class="step-id">23.1</span>4 Tabs: Allgemein / Eigenschaften / Inspiration & Basis / Bilder</label></div>
+  <div class="item"><input type="checkbox" id="p23-2"><label for="p23-2"><span class="step-id">23.2</span>Status-Dropdown zeigt alle 8 Stati mit Nummern</label></div>
+  <div class="item"><input type="checkbox" id="p23-3"><label for="p23-3"><span class="step-id">23.3</span>Verantwortlich ist automatisch ich</label></div>
+  <div class="item"><input type="checkbox" id="p23-4"><label for="p23-4"><span class="step-id">23.4</span>Wettbewerbsprodukt als Inspiration verknüpfen</label></div>
+  <div class="item"><input type="checkbox" id="p23-5"><label for="p23-5"><span class="step-id">23.5</span>Lieferanten-Produkt als Basis verknüpfen</label></div>
+  <div class="item"><input type="checkbox" id="p23-6"><label for="p23-6"><span class="step-id">23.6</span>Bilder hochladen (max 15)</label></div>
+
+  <h3>🎯 Auto-Übergang auf „Finales Produkt"</h3>
+  <div class="item"><input type="checkbox" id="p24-1"><label for="p24-1"><span class="step-id">24.1</span>Finale Produkte-Liste ist initial leer</label></div>
+  <div class="item"><input type="checkbox" id="p24-2"><label for="p24-2"><span class="step-id">24.2</span>Ein Item auf Status „8. Final" setzen</label></div>
+  <div class="item"><input type="checkbox" id="p24-3"><label for="p24-3"><span class="step-id">24.3</span>Neues finales Produkt erscheint automatisch (Name + Preis + Kategorie übernommen)</label></div>
+  <div class="item"><input type="checkbox" id="p24-4"><label for="p24-4"><span class="step-id">24.4</span>Zweites Speichern erzeugt kein Duplikat</label></div>
+  <div class="item"><input type="checkbox" id="p24-5"><label for="p24-5"><span class="step-id">24.5</span>Name im Entwicklungs-Item ändern → Finales Produkt bleibt unverändert</label></div>
+  <div class="item"><input type="checkbox" id="p24-6"><label for="p24-6"><span class="step-id">24.6</span>SKU/VK/Beschreibung im finalen Produkt nachpflegen</label></div>
+
+  <h3>Finale Produkte</h3>
+  <div class="item"><input type="checkbox" id="p25-1"><label for="p25-1"><span class="step-id">25.1</span>Liste sortiert nach Launch-Datum</label></div>
+  <div class="item"><input type="checkbox" id="p25-2"><label for="p25-2"><span class="step-id">25.2</span>Marge-%-Spalte berechnet automatisch ((VK-EK)/VK)×100</label></div>
+  <div class="item"><input type="checkbox" id="p25-3"><label for="p25-3"><span class="step-id">25.3</span>Manuell anlegen (ohne Entwicklungs-Item) möglich</label></div>
+  <div class="item"><input type="checkbox" id="p25-4"><label for="p25-4"><span class="step-id">25.4</span>Doppelte SKU → Fehler</label></div>
+  <div class="item"><input type="checkbox" id="p25-5"><label for="p25-5"><span class="step-id">25.5</span>Bewertungen-Tab funktioniert</label></div>
+
+  <h3>Bewertungen an Finalen Produkten</h3>
+  <div class="item"><input type="checkbox" id="p26-1"><label for="p26-1"><span class="step-id">26.1</span>Neue Bewertung (intern, Dimension, Score)</label></div>
+  <div class="item"><input type="checkbox" id="p26-2"><label for="p26-2"><span class="step-id">26.2</span>„Alle Bewertungen" zeigt Objekt-Typ „Finales Produkt"</label></div>
+  <div class="item"><input type="checkbox" id="p26-3"><label for="p26-3"><span class="step-id">26.3</span>„⌀ Bewertung" in Finale-Produkte-Liste</label></div>
+
+  <h3>Status-Workflow alle 8 Stati</h3>
+  <div class="item"><input type="checkbox" id="p27-1"><label for="p27-1"><span class="step-id">27.1</span>1. Idee → grau, Glühbirne</label></div>
+  <div class="item"><input type="checkbox" id="p27-2"><label for="p27-2"><span class="step-id">27.2</span>2. In Ausarbeitung → blau, Stift</label></div>
+  <div class="item"><input type="checkbox" id="p27-3"><label for="p27-3"><span class="step-id">27.3</span>3. Konzept bestätigt → blau, Häkchen</label></div>
+  <div class="item"><input type="checkbox" id="p27-4"><label for="p27-4"><span class="step-id">27.4</span>4. Tech Sheet erstellt → gelb, Dokument</label></div>
+  <div class="item"><input type="checkbox" id="p27-5"><label for="p27-5"><span class="step-id">27.5</span>5. An Lieferant gesendet → gelb, Papierflieger</label></div>
+  <div class="item"><input type="checkbox" id="p27-6"><label for="p27-6"><span class="step-id">27.6</span>6. Sample erhalten → gelb, Geschenk</label></div>
+  <div class="item"><input type="checkbox" id="p27-7"><label for="p27-7"><span class="step-id">27.7</span>7. Überarbeitet → gelb, Kreispfeil</label></div>
+  <div class="item"><input type="checkbox" id="p27-8"><label for="p27-8"><span class="step-id">27.8</span>8. Final → grün, Trophäe → Finales Produkt wird angelegt</label></div>
+
+  <h3>Bulk-Status-Action</h3>
+  <div class="item"><input type="checkbox" id="p-bulk-1"><label for="p-bulk-1">Mehrere Items per Checkbox auswählen</label></div>
+  <div class="item"><input type="checkbox" id="p-bulk-2"><label for="p-bulk-2">Toolbar „Status ändern" → neuer Status gesetzt + Success-Notification</label></div>
+</section>
+
+<!-- PHASE 6: DASHBOARD & SUCHE -->
+<section>
+  <h2>6️⃣ Dashboard & Globale Suche <span class="count"></span></h2>
+
+  <h3>Dashboard-Widgets</h3>
+  <div class="item"><input type="checkbox" id="d28-1"><label for="d28-1"><span class="step-id">28.1</span>4 Kennzahlen-Karten oben</label></div>
+  <div class="item"><input type="checkbox" id="d28-2"><label for="d28-2"><span class="step-id">28.2</span>Widget „Offene Entwicklungen" zeigt max. 5 Items</label></div>
+  <div class="item"><input type="checkbox" id="d28-3"><label for="d28-3"><span class="step-id">28.3</span>Status-Badges mit Farbe + Icon im Widget</label></div>
+  <div class="item"><input type="checkbox" id="d28-4"><label for="d28-4"><span class="step-id">28.4</span>Überfällige Deadline rot</label></div>
+  <div class="item"><input type="checkbox" id="d28-5"><label for="d28-5"><span class="step-id">28.5</span>Klick auf Item-Name → Edit-Seite</label></div>
+  <div class="item"><input type="checkbox" id="d28-6"><label for="d28-6"><span class="step-id">28.6</span>Widget „Unbewertete Wettbewerbsprodukte" funktioniert</label></div>
+  <div class="item"><input type="checkbox" id="d28-7"><label for="d28-7"><span class="step-id">28.7</span>Nach Bewertung verschwindet Produkt aus Widget</label></div>
+  <div class="item"><input type="checkbox" id="d28-8"><label for="d28-8"><span class="step-id">28.8</span>Widget „Letzte Bewertungen" zeigt neueste 5</label></div>
+  <div class="item"><input type="checkbox" id="d28-9"><label for="d28-9"><span class="step-id">28.9</span>Widget „Letzte Änderungen" mit „vor 2 Tagen" Format</label></div>
+
+  <h3>Globale Suche</h3>
+  <div class="item"><input type="checkbox" id="d29-1"><label for="d29-1"><span class="step-id">29.1</span>⌘+K (Mac) / Strg+K (Win) öffnet Suchfeld</label></div>
+  <div class="item"><input type="checkbox" id="d29-2"><label for="d29-2"><span class="step-id">29.2</span>„Castelli" findet Castelli Climber Jersey</label></div>
+  <div class="item"><input type="checkbox" id="d29-3"><label for="d29-3"><span class="step-id">29.3</span>„Textiles" findet Textiles Pro Portugal</label></div>
+  <div class="item"><input type="checkbox" id="d29-4"><label for="d29-4"><span class="step-id">29.4</span>„Jersey" findet Produkte aus mehreren Bereichen</label></div>
+  <div class="item"><input type="checkbox" id="d29-5"><label for="d29-5"><span class="step-id">29.5</span>Klick auf Suchergebnis → Edit-Seite</label></div>
+  <div class="item"><input type="checkbox" id="d29-6"><label for="d29-6"><span class="step-id">29.6</span>ESC schließt Suchfeld</label></div>
+
+  <h3>Edit-Seiten-Regression</h3>
+  <div class="item"><input type="checkbox" id="d30-1"><label for="d30-1"><span class="step-id">30.1</span>Entwicklungs-Item → Tab „Inspiration & Basis" lädt ohne 500-Fehler</label></div>
+  <div class="item"><input type="checkbox" id="d30-2"><label for="d30-2"><span class="step-id">30.2</span>Wettbewerbs- + Lieferantenprodukte zuweisen + speichern</label></div>
+</section>
+
+<!-- BONUS-FEATURES -->
+<section>
+  <h2>🎁 Bonus-Features <span class="count"></span></h2>
+
+  <h3>CSV-Export</h3>
+  <div class="item"><input type="checkbox" id="x31-1"><label for="x31-1"><span class="step-id">31.1</span>Wettbewerbsprodukte → CSV-Export Dialog öffnet</label></div>
+  <div class="item"><input type="checkbox" id="x31-2"><label for="x31-2"><span class="step-id">31.2</span>Notification „X Zeilen exportiert"</label></div>
+  <div class="item"><input type="checkbox" id="x31-3"><label for="x31-3"><span class="step-id">31.3</span>Download enthält alle Felder mit deutschen Spalten</label></div>
+  <div class="item"><input type="checkbox" id="x31-4"><label for="x31-4"><span class="step-id">31.4</span>Materialien als „Polyester, Lycra" (komma-getrennt)</label></div>
+  <div class="item"><input type="checkbox" id="x31-5"><label for="x31-5"><span class="step-id">31.5</span>Lieferanten-Produkte-Export mit EK/VK/MOQ</label></div>
+
+  <h3>Widget „Letzte Bewertungen"</h3>
+  <div class="item"><input type="checkbox" id="x32-1"><label for="x32-1"><span class="step-id">32.1</span>Widget sichtbar auf Dashboard</label></div>
+  <div class="item"><input type="checkbox" id="x32-2"><label for="x32-2"><span class="step-id">32.2</span>Zeigt neueste 5 mit Kontext</label></div>
+  <div class="item"><input type="checkbox" id="x32-3"><label for="x32-3"><span class="step-id">32.3</span>Empty-State wenn leer</label></div>
+
+  <h3>Admin-Reset-Befehl</h3>
+  <div class="item"><input type="checkbox" id="x33-1"><label for="x33-1"><span class="step-id">33.1</span>Terminal: <code>php artisan staeze:reset-admin</code> ausgeführt</label></div>
+  <div class="item"><input type="checkbox" id="x33-2"><label for="x33-2"><span class="step-id">33.2</span>Passwort-Reset mit eigenen Werten: <code>--email=... --password=...</code></label></div>
+</section>
+
+<!-- AUTOMATISCHE TESTS -->
+<section>
+  <h2>🧪 Automatische Tests <span class="count"></span></h2>
+  <p class="intro">Diese laufen automatisch – müssen nur einmal geprüft werden.</p>
+  <div class="item"><input type="checkbox" id="a-1"><label for="a-1">Terminal: <code>php artisan test</code> → <strong>73 passed</strong></label></div>
+  <div class="item"><input type="checkbox" id="a-2"><label for="a-2">Terminal: <code>./vendor/bin/pint --test</code> → <strong>passed</strong></label></div>
+  <div class="item"><input type="checkbox" id="a-3"><label for="a-3">Terminal: <code>./vendor/bin/phpstan analyse</code> → <strong>0 errors</strong></label></div>
+</section>
+
+<footer style="text-align: center; color: var(--muted); font-size: .875rem; padding: 2rem 0;">
+  Staeze PM Test-Checkliste · Stand 2026-04-21 · <a href="MANUELLE-TESTS.md" style="color: var(--accent);">Volle Doku</a>
+</footer>
+
+</div>
+
+<script>
+(function() {
+  const STORAGE_KEY = 'staeze-pm-checkliste-v1';
+  const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  const progressBar = document.getElementById('progressBar');
+  const checkedCount = document.getElementById('checkedCount');
+  const totalCount = document.getElementById('totalCount');
+  const percentText = document.getElementById('percentText');
+  const savedIndicator = document.getElementById('savedIndicator');
+
+  // Stand wiederherstellen
+  function restore() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+      checkboxes.forEach(cb => {
+        if (saved[cb.id]) {
+          cb.checked = true;
+          cb.closest('.item').classList.add('checked');
+        }
+      });
+    } catch(e) { console.warn('restore failed', e); }
+  }
+
+  // Speichern
+  let saveTimer = null;
+  function save() {
+    const state = {};
+    checkboxes.forEach(cb => { if (cb.checked) state[cb.id] = true; });
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    savedIndicator.classList.add('visible');
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(() => savedIndicator.classList.remove('visible'), 1200);
+  }
+
+  // Progress updaten
+  function updateProgress() {
+    const total = checkboxes.length;
+    const checked = Array.from(checkboxes).filter(cb => cb.checked).length;
+    const pct = total > 0 ? Math.round((checked / total) * 100) : 0;
+    progressBar.style.width = pct + '%';
+    checkedCount.textContent = checked;
+    totalCount.textContent = total;
+    percentText.textContent = pct + ' %';
+
+    // Section-Counts updaten
+    document.querySelectorAll('section').forEach(sec => {
+      const all = sec.querySelectorAll('input[type="checkbox"]');
+      const done = Array.from(all).filter(cb => cb.checked).length;
+      const counter = sec.querySelector('h2 .count');
+      if (counter) counter.textContent = done + ' / ' + all.length;
+    });
+  }
+
+  checkboxes.forEach(cb => {
+    cb.addEventListener('change', () => {
+      cb.closest('.item').classList.toggle('checked', cb.checked);
+      save();
+      updateProgress();
+    });
+  });
+
+  // Filter
+  window.setFilter = function(mode) {
+    document.querySelectorAll('.item').forEach(item => {
+      const isChecked = item.querySelector('input').checked;
+      item.style.display = (
+        mode === 'all' ||
+        (mode === 'open' && !isChecked) ||
+        (mode === 'done' && isChecked)
+      ) ? '' : 'none';
+    });
+    ['all','open','done'].forEach(m => {
+      document.getElementById('filter-' + m).classList.toggle('primary', m === mode);
+    });
+  };
+
+  window.resetAll = function() {
+    if (!confirm('Wirklich alle Häkchen zurücksetzen?')) return;
+    localStorage.removeItem(STORAGE_KEY);
+    checkboxes.forEach(cb => {
+      cb.checked = false;
+      cb.closest('.item').classList.remove('checked');
+    });
+    updateProgress();
+  };
+
+  window.exportResults = function() {
+    const total = checkboxes.length;
+    const checked = Array.from(checkboxes).filter(cb => cb.checked).length;
+    const open = [];
+    checkboxes.forEach(cb => {
+      if (!cb.checked) {
+        const label = cb.closest('.item').querySelector('label').innerText;
+        open.push('• ' + label);
+      }
+    });
+    const report = [
+      '# Staeze PM – Test-Report',
+      '',
+      'Stand: ' + new Date().toLocaleString('de-DE'),
+      '',
+      'Fortschritt: **' + checked + ' / ' + total + '** (' + Math.round(checked/total*100) + ' %)',
+      '',
+      open.length > 0 ? '## Noch offen (' + open.length + ')' : '## Alles erledigt! 🎉',
+      '',
+      open.join('\n'),
+    ].join('\n');
+
+    const blob = new Blob([report], { type: 'text/markdown' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'test-report-' + new Date().toISOString().slice(0,10) + '.md';
+    a.click();
+  };
+
+  // Init
+  restore();
+  updateProgress();
+  setFilter('all');
+})();
+</script>
+</body>
+</html>
