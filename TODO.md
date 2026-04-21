@@ -47,11 +47,25 @@ Siehe Erledigt-Bereich unten.
 
 ---
 
-## 🟡 Phase 7 – Deployment (Mittwald)
+## ⏸️ Phase 7 – Deployment (Mittwald) – **PAUSIERT**
 
+> **Warten auf User:** GitHub-Repo anlegen + Mittwald-Server vorbereiten.
+
+### Sven muss zuerst erledigen:
+
+- [ ] GitHub-Repo anlegen (Empfehlung: `staeze-produktmanagement`, privat)
+- [ ] Mittwald: Webspace / Projekt anlegen
+- [ ] Mittwald: SSH-Zugang einrichten
+- [ ] Mittwald: PostgreSQL-DB bereitstellen (Version prüfen – ideal 16+)
+- [ ] Mittwald: PHP 8.3+ aktivieren
+- [ ] Mittwald: Domain / Subdomain zuweisen
+
+### Dann (durch Claude):
+
+- [ ] Remote in Git eintragen + erster Push
 - [ ] `.env.production` Template
 - [ ] GitHub-Actions Workflow `.github/workflows/deploy.yml`
-- [ ] SSH-Key + Deployment-Secrets in GitHub anlegen
+- [ ] SSH-Key + Deployment-Secrets in GitHub anlegen (Sven)
 - [ ] Erste Deployment-Testrunde auf Mittwald
 - [ ] User-Dokumentation (`docs/user-guide.md`) schreiben
 - [ ] README.md: Produktions-Setup ergänzen
