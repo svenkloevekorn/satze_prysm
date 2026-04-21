@@ -118,6 +118,40 @@ Qualitäts-Bereich.
 
 ---
 
+## 📦 UI-Ausbau: Produkte nach Kategorie gruppieren (geplant)
+
+**Gewünscht:** In den Produkt-Listen (Wettbewerbsprodukte + Finale Produkte) sollen
+die Einträge **nach Kategorie gruppiert** angezeigt werden. Z.B. alle „Cycling Jerseys"
+als Gruppe, dann „Bib Shorts", dann „Running Shirts" etc. — ein- und ausklappbar.
+
+**Betrifft:**
+- Wettbewerbsprodukte (`CompetitorProductResource`)
+- Finale Produkte (`FinalProductResource`)
+- Eventuell auch Lieferanten-Produkte + Entwicklungs-Items (nur wenn sinnvoll)
+
+**Umsetzungs-Skizze:**
+- [ ] Filament Table `->groups([Group::make('category.name')->label('Kategorie')])`
+- [ ] Default-Gruppierung nach Kategorie an, User kann wechseln/deaktivieren
+- [ ] Funktioniert mit Unterkategorien: entweder Oberkategorie gruppieren,
+      oder beide Ebenen hierarchisch darstellen
+- [ ] Anzahl Produkte pro Gruppe anzeigen (Counter)
+- [ ] Tests: Gruppierung schaltbar, Unterkategorien korrekt gruppiert
+
+**Offene Frage:** Gruppierung nach Oberkategorie, Unterkategorie, oder beides
+(verschachtelte Gruppen)? Filament unterstützt nur eine Gruppierungs-Ebene –
+Entscheidung bei Umsetzung.
+
+**Zusätzlich:** Auch Gruppierung nach **Hersteller/Marke** anbieten:
+- Wettbewerbsprodukte → nach `brand.name` gruppieren
+- Lieferanten-Produkte → nach `supplier.name` gruppieren
+- Finale Produkte → keine Marke (interne Produkte)
+
+User soll per Dropdown zwischen „Gruppieren nach: Kategorie / Hersteller / keine"
+wählen können. Filament-Syntax:
+`->groups([Group::make('category.name'), Group::make('brand.name')])`.
+
+---
+
 ## 💡 Ideen / Backlog (post-MVP)
 
 - Variantenmanagement

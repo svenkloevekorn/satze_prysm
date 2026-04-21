@@ -50,7 +50,13 @@ einzeln klicken. Details unter `TODO.md` → „Bewertungssystem – Ausbau".
 pro Produkt eine abhakbare Checkliste der Kriterien aus der zugehörigen
 Kategorie. Details unter `TODO.md` → „Bewertungssystem – Ausbau".
 
-**Reihenfolge:** erst A, dann B.
+**C) Produkte nach Kategorie UND Hersteller gruppieren:** In Wettbewerbs- und
+Finale-Produkte-Listen umschaltbare Gruppierung nach Kategorie oder Hersteller/Marke
+(Wettbewerb: `brand.name`, Lieferant: `supplier.name`). Filament `->groups()`.
+Details unter `TODO.md` → „UI-Ausbau: Produkte nach Kategorie gruppieren".
+
+**Reihenfolge:** erst A, dann B, dann C (C ist vergleichsweise klein und
+könnte auch zwischenrein als Quick-Win).
 
 ### Phase 7 – Deployment Mittwald
 
