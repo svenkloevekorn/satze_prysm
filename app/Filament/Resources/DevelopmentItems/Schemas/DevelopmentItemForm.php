@@ -95,7 +95,11 @@ class DevelopmentItemForm
                                         Select::make('competitorInspirations')
                                             ->label('Wettbewerbsprodukte')
                                             ->multiple()
-                                            ->relationship('competitorInspirations', 'name')
+                                            ->relationship(
+                                                'competitorInspirations',
+                                                'name',
+                                                fn ($query) => $query->select(['competitor_products.id', 'competitor_products.name']),
+                                            )
                                             ->preload()
                                             ->searchable()
                                             ->columnSpanFull(),
@@ -106,7 +110,11 @@ class DevelopmentItemForm
                                         Select::make('supplierBasis')
                                             ->label('Lieferanten-Produkte')
                                             ->multiple()
-                                            ->relationship('supplierBasis', 'name')
+                                            ->relationship(
+                                                'supplierBasis',
+                                                'name',
+                                                fn ($query) => $query->select(['supplier_products.id', 'supplier_products.name']),
+                                            )
                                             ->preload()
                                             ->searchable()
                                             ->columnSpanFull(),

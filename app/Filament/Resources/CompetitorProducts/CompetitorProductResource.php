@@ -32,6 +32,19 @@ class CompetitorProductResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['name', 'brand.name', 'category.name'];
+    }
+
+    public static function getGlobalSearchResultDetails($record): array
+    {
+        return [
+            'Marke' => $record->brand?->name,
+            'Kategorie' => $record->category?->name,
+        ];
+    }
+
     public static function form(Schema $schema): Schema
     {
         return CompetitorProductForm::configure($schema);

@@ -41,13 +41,9 @@ Siehe Erledigt-Bereich unten.
 
 ---
 
-## 🟡 Phase 6 – Dashboard & Suche
+## 🟢 Phase 6 – Dashboard & Suche *(erledigt)*
 
-- [ ] Dashboard-Widget: letzte Produkte
-- [ ] Dashboard-Widget: offene Entwicklungen
-- [ ] Dashboard-Widget: unbewertete Produkte
-- [ ] Dashboard-Widget: letzte Änderungen
-- [ ] Filament Global Search konfigurieren
+Siehe Erledigt-Bereich unten.
 
 ---
 
@@ -177,3 +173,18 @@ Siehe Erledigt-Bereich unten.
 - [x] Inspirations-Verknüpfungen: Staeze Jersey ← Castelli, Staeze Bib ← Rapha
 - [x] **51 Tests grün** (10 neue für DevelopmentItem + FinalProduct, inkl. Auto-Finalisierung-Test)
 - [x] Test-Doku erweitert: Phase 5 mit 25+ manuellen Test-Schritten
+
+### Phase 6 – Dashboard & Suche *(2026-04-21)*
+
+- [x] **4 Dashboard-Widgets:**
+  - `StatsOverview`: 4 Kennzahlen-Karten mit 60s-Polling
+  - `OffeneEntwicklungenWidget`: max. 5 nicht-finale Items mit Status-Badges + Deadline-Warnung
+  - `UnbewerteteProdukteWidget`: Produkte ohne Bewertung
+  - `LetzteAenderungenWidget`: zuletzt geänderte Wettbewerbsprodukte
+- [x] Widgets im AdminPanelProvider registriert
+- [x] **Globale Suche** (⌘+K / Strg+K) in allen 6 Resources aktiviert
+- [x] `getGloballySearchableAttributes` + `getGlobalSearchResultDetails` für alle Resources
+- [x] **Bugfix:** Postgres `DISTINCT`-Fehler bei JSON-Spalten in DevelopmentItem-Edit-Seite (Select auf id+name limitiert)
+- [x] Regression-Test für JSON-Bug
+- [x] **58 Tests grün** (7 neue, davon 6 für Widgets + 1 Regression-Test)
+- [x] Test-Doku erweitert: Phase 6 mit 10+ manuellen Test-Schritten

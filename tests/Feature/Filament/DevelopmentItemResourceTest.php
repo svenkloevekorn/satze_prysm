@@ -122,3 +122,14 @@ it('kann Entwicklungs-Item bearbeiten', function () {
 
     expect($item->fresh()->name)->toBe('Neu');
 });
+
+it('laedt Edit-Seite auch wenn Wettbewerbs-/Lieferantenprodukte existieren (JSON-Fix)', function () {
+    // Regression: Postgres konnte SELECT DISTINCT auf Tabellen mit JSON-Spalten
+    // nicht ausfuehren – das brach die Edit-Seite. Fix: Select nur id+name.
+    \App\Models\CompetitorProduct::factory()->count(3)->create();
+    \App\Models\SupplierProduct::factory()->count(3)->create();
+    $item = DevelopmentItem::factory()->create();
+
+    livewire(EditDevelopmentItem::class, ['record' => $item->getRouteKey()])
+        ->assertSuccessful();
+});

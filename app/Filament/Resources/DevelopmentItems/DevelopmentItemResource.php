@@ -32,6 +32,19 @@ class DevelopmentItemResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['name', 'category.name'];
+    }
+
+    public static function getGlobalSearchResultDetails($record): array
+    {
+        return [
+            'Status' => $record->status?->label(),
+            'Kategorie' => $record->category?->name,
+        ];
+    }
+
     public static function form(Schema $schema): Schema
     {
         return DevelopmentItemForm::configure($schema);

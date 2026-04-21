@@ -32,6 +32,19 @@ class SupplierProductResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['name', 'supplier.name', 'category.name'];
+    }
+
+    public static function getGlobalSearchResultDetails($record): array
+    {
+        return [
+            'Lieferant' => $record->supplier?->name,
+            'Kategorie' => $record->category?->name,
+        ];
+    }
+
     public static function form(Schema $schema): Schema
     {
         return SupplierProductForm::configure($schema);

@@ -32,6 +32,19 @@ class FinalProductResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['name', 'sku', 'category.name'];
+    }
+
+    public static function getGlobalSearchResultDetails($record): array
+    {
+        return [
+            'SKU' => $record->sku,
+            'Kategorie' => $record->category?->name,
+        ];
+    }
+
     public static function form(Schema $schema): Schema
     {
         return FinalProductForm::configure($schema);

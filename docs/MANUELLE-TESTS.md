@@ -473,7 +473,45 @@ Durchlaufe mit einem Test-Item alle 8 Stati in Reihenfolge:
 
 ---
 
+## ✅ Phase 6 – Dashboard & Globale Suche testen
+
+**Menü:** Dashboard (Startseite)
+
+### 🔹 28. Dashboard-Widgets
+
+| # | Was tun? | Erwartung |
+|---|---|---|
+| 28.1 | Dashboard-Startseite aufrufen | Oben **4 Kennzahlen-Karten**: Wettbewerbsprodukte, Offene Entwicklungen, Finale Produkte, Aktive Lieferanten |
+| 28.2 | Kennzahlen auto-aktualisieren | Alle 60 Sekunden (Polling) |
+| 28.3 | Widget „Offene Entwicklungen" | Zeigt max. 5 nicht-finale Items, neueste zuerst |
+| 28.4 | Status-Badges im Widget | Mit individueller Farbe + Icon pro Status |
+| 28.5 | Überfällige Deadline im Widget | Datum **rot** gefärbt |
+| 28.6 | Klick auf Item-Name | Springt direkt zum Bearbeiten-Formular |
+| 28.7 | Widget „Unbewertete Wettbewerbsprodukte" | Listet Produkte ohne jede Bewertung |
+| 28.8 | Produkt im Widget bewerten → Dashboard neu laden | Produkt verschwindet aus Liste |
+| 28.9 | Widget „Letzte Änderungen" | Zeigt neueste 5 geänderte Wettbewerbsprodukte mit „vor 2 Tagen" Format |
+
+### 🔹 29. Globale Suche
+
+| # | Was tun? | Erwartung |
+|---|---|---|
+| 29.1 | Tastenkürzel **⌘+K** (Mac) oder **Strg+K** (Win) | Globales Suchfeld öffnet sich |
+| 29.2 | „Castelli" eingeben | Findet **Wettbewerbsprodukt** Castelli Climber Jersey mit Kategorie + Marke |
+| 29.3 | „Textiles" eingeben | Findet **Lieferant** „Textiles Pro Portugal" mit Land + Bewertung |
+| 29.4 | „Jersey" eingeben | Findet Produkte aus **mehreren Bereichen**: Wettbewerber, Lieferanten, Entwicklung |
+| 29.5 | Klick auf Suchergebnis | Springt direkt zur Edit-Seite des Objekts |
+| 29.6 | „staeze" eingeben | Findet Entwicklungs-Items mit Status-Anzeige |
+| 29.7 | Suchfeld mit ESC schließen | OK |
+
+### 🔹 30. Regression-Test Bug Edit-Seite
+
+| # | Was tun? | Erwartung |
+|---|---|---|
+| 30.1 | Entwicklungs-Item „Staeze Pro Summer Jersey v1" öffnen → Tab „Inspiration & Basis" | **Lädt ohne 500-Fehler** (früherer Postgres-JSON-Bug ist behoben) |
+| 30.2 | Wettbewerbsprodukte zuweisen + Lieferanten-Produkte zuweisen | Speichert |
+
+---
+
 ## 🌍 Spätere Phasen *(Platzhalter)*
 
-### Phase 6 – Dashboard & Suche *(folgt)*
 ### Phase 7 – Deployment Mittwald *(folgt)*
