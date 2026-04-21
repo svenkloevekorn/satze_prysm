@@ -4,33 +4,16 @@
 
 ---
 
-## 🟢 Phase 0 – Fundament
+## 🟢 Phase 0 – Fundament  *(fast komplett erledigt)*
 
-- [ ] Laravel 11 im Ordner `STZ_staeze-produktmanagement` installieren
-- [ ] `.env` einrichten (PostgreSQL-Connection)
-- [ ] PostgreSQL 16 lokal einrichten (Herd oder Docker)
-- [ ] Datenbank `staeze_pm` anlegen + Migration-Test
-- [ ] Herd-Site einrichten (`staeze-pm.test`)
-- [ ] Git-Repo initialisieren + `.gitignore` prüfen
-- [ ] GitHub-Repo anlegen + erster Push
-- [ ] Pest installieren + erster Dummy-Test grün
-- [ ] Filament 3 installieren
-- [ ] ersten Admin-User anlegen (`php artisan make:filament-user`)
-- [ ] `filament-shield` (Rollen/Rechte) installieren
-- [ ] `spatie/laravel-medialibrary` für Anhänge installieren
-- [ ] README.md (Basis) schreiben
+- [ ] GitHub-Repo anlegen + erster Push  *(machst du im Nachgang)*
+- [ ] README.md (Basis) schreiben  *(folgt am Ende)*
 
 ---
 
-## 🟡 Phase 1 – Stammdaten
+## 🟢 Phase 1 – Stammdaten *(erledigt)*
 
-- [ ] Migration + Model + Filament-Resource: `Category`
-- [ ] Migration + Model + Filament-Resource: `Brand`
-- [ ] Migration + Model + Filament-Resource: `Shop`
-- [ ] Migration + Model + Filament-Resource: `RatingDimension`
-- [ ] Migration + Model + Filament-Resource: `QualityCriterion` (mit Category-Relation)
-- [ ] Seeder mit MVP-Kategorien (Cycling Jerseys, Bib Shorts, etc.)
-- [ ] Tests für alle Stammdaten-CRUDs
+Siehe Erledigt-Bereich unten.
 
 ---
 
@@ -116,4 +99,30 @@
 
 ## ✅ Erledigt
 
-<!-- Abgehakte Punkte wandern hierher -->
+### Phase 0 – Fundament *(2026-04-21)*
+
+- [x] Laravel 13.5 (neueste statt 11) im Projektroot installiert
+- [x] `.env` auf PostgreSQL umgestellt (Connection läuft)
+- [x] PostgreSQL 18 (via Herd) eingerichtet
+- [x] Datenbank `staeze_pm` angelegt + Migrations laufen
+- [x] Herd-Site `staeze-pm.test` läuft (HTTP 200)
+- [x] Git-Repo initialisiert + erster Commit (`11b2255`)
+- [x] Pest läuft + 2/2 Tests grün
+- [x] Filament 5 (neueste statt 3) installiert
+- [x] Admin-User `admin@admin.com` mit super_admin-Rolle
+- [x] `filament-shield` installiert + Permissions generiert
+- [x] `spatie/laravel-medialibrary` + Filament-Plugin installiert
+- [x] App-Sprache auf Deutsch (`APP_LOCALE=de`)
+
+### Phase 1 – Stammdaten *(2026-04-21)*
+
+- [x] Migration + Model + Filament-Resource: `Category` (7 vorgeseedet)
+- [x] Migration + Model + Filament-Resource: `Brand`
+- [x] Migration + Model + Filament-Resource: `Shop` (4 vorgeseedet)
+- [x] Migration + Model + Filament-Resource: `RatingDimension` (5 vorgeseedet: Design, Material, Verarbeitung, Performance, Preis-Leistung)
+- [x] Migration + Model + Filament-Resource: `QualityCriterion` (6 vorgeseedet, mit Kategorien-Relation)
+- [x] Pivot-Tabelle `category_quality_criterion` (n:m)
+- [x] Alle Resources unter Navigations-Gruppe "Stammdaten" gruppiert
+- [x] Filter, Suche, deutsche Labels überall
+- [x] **14 Tests grün** (Category-Resource + Smoke-Tests aller 4 neuen Resources)
+- [x] Doku angelegt: `docs/MANUELLE-TESTS.md` für eigene Browser-Tests
