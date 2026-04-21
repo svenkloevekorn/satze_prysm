@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             CompetitorProductSeeder::class,
             SupplierSeeder::class,
             RatingSeeder::class,
+            DevelopmentItemSeeder::class,
         ]);
     }
 }

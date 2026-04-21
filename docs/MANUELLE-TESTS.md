@@ -397,8 +397,83 @@ Wenn ich (Claude) eine neue Phase abgeschlossen habe, gehe so vor:
 
 ---
 
+## ✅ Phase 5 – Produkt-Entwicklung testen
+
+**Menü:** Produkt-Entwicklung → Entwicklungs-Pipeline / Finale Produkte
+
+### 🔹 22. Entwicklungs-Pipeline – Liste & Status
+
+| # | Was tun? | Erwartung |
+|---|---|---|
+| 22.1 | „Entwicklungs-Pipeline" öffnen | 3 vorgeseedete Items: Staeze Pro Summer Jersey v1 (In Ausarbeitung), Staeze Race Bib 2026 (Tech Sheet erstellt), Staeze Daily Tee (Idee) |
+| 22.2 | Status-Spalte | Jeder Status hat **eigene Farbe + Icon**: Idee (grau), In Arbeit (blau), Konzept/Tech/Sample/Revised (gelb), Final (grün) |
+| 22.3 | Filter „Status" → nur „Idee" | Zeigt nur Staeze Daily Tee |
+| 22.4 | Filter „Verantwortlich" → Admin | Zeigt nur meine Items |
+| 22.5 | Deadline-Spalte | Falls Deadline überschritten und nicht final → **rot** |
+
+### 🔹 23. Entwicklungs-Item anlegen (4-Tab-Formular)
+
+| # | Was tun? | Erwartung |
+|---|---|---|
+| 23.1 | „Neu" klicken | Formular mit 4 Tabs: Allgemein / Eigenschaften / Inspiration & Basis / Bilder & Skizzen |
+| 23.2 | Tab „Allgemein": Name + Kategorie Pflicht, Status-Dropdown zeigt alle 8 Stati mit Nummern | OK |
+| 23.3 | Verantwortlich ist automatisch ich | OK |
+| 23.4 | Deadline setzen | Funktioniert |
+| 23.5 | Tab „Eigenschaften": Materialien, Farben, Größen als Tags + Zielpreis | Speichert |
+| 23.6 | Tab „Inspiration & Basis": Wettbewerbsprodukt + Lieferanten-Produkt verknüpfen | Speichert als n:m-Relation |
+| 23.7 | Tab „Bilder & Skizzen": max 15 Uploads | Drag-Sort funktioniert |
+| 23.8 | Speichern | Neues Item in Liste |
+
+### 🔹 24. 🎯 AUTOMATISCHER Übergang auf „Finales Produkt"
+
+Das ist das **Kernfeature dieser Phase**: wenn ein Entwicklungs-Item den Status **„Final"** bekommt, wird automatisch ein `FinalProduct` angelegt.
+
+| # | Was tun? | Erwartung |
+|---|---|---|
+| 24.1 | Unter „Finale Produkte" nachsehen | Liste ist leer |
+| 24.2 | Ein beliebiges Entwicklungs-Item öffnen, Status auf **„8. Final"** setzen, speichern | Erfolg |
+| 24.3 | Zur Liste „Finale Produkte" wechseln | **Neues finales Produkt erscheint!** Name + Kategorie + Preis wurden übernommen |
+| 24.4 | Zurück ins Entwicklungs-Item, nochmal speichern (ohne Änderung) | Kein Duplikat entsteht |
+| 24.5 | Entwicklungs-Item-Name ändern und speichern | Finales Produkt **nicht** automatisch geändert – das ist volle Kontrolle für dich |
+| 24.6 | Im finalen Produkt: SKU „STZ-ABC123", VK-Preis, Beschreibung nachpflegen | Speichert |
+
+### 🔹 25. Finale Produkte – Liste & Features
+
+| # | Was tun? | Erwartung |
+|---|---|---|
+| 25.1 | Liste öffnen | Zeigt deine finalen Produkte, sortiert nach Launch-Datum |
+| 25.2 | Spalte „Marge %" | Berechnet automatisch: ((VK - EK) / VK) × 100 |
+| 25.3 | Klick „Neu" → manuell ein finales Produkt anlegen (ohne Entwicklungs-Item) | Geht auch |
+| 25.4 | SKU doppelt eintragen | Validation-Error (muss einzigartig sein) |
+| 25.5 | Tab „Bewertungen" unten im Finalen Produkt | Funktioniert genauso wie bei Wettbewerbs-/Lieferanten-Produkten |
+
+### 🔹 26. Bewertungen an Finalen Produkten
+
+| # | Was tun? | Erwartung |
+|---|---|---|
+| 26.1 | Finales Produkt öffnen → Tab „Bewertungen" | Zunächst leer |
+| 26.2 | Bewertung hinzufügen (intern, Dimension Design, 9/10) | Erscheint in Tabelle |
+| 26.3 | Zur Übersicht „Alle Bewertungen" → Objekt-Typ-Filter | Option „Finales Produkt" jetzt auch verfügbar |
+| 26.4 | Spalte „⌀ Bewertung" in der Finale-Produkte-Liste | Zeigt Durchschnitt an |
+
+### 🔹 27. Status-Workflow in natürlicher Reihenfolge
+
+Durchlaufe mit einem Test-Item alle 8 Stati in Reihenfolge:
+
+| # | Status setzen | Erwartung |
+|---|---|---|
+| 27.1 | 1. Idee (Default) | Grau, Glühbirne |
+| 27.2 | 2. In Ausarbeitung | Blau, Stift |
+| 27.3 | 3. Konzept bestätigt | Blau, Häkchen |
+| 27.4 | 4. Tech Sheet erstellt | Gelb, Dokument |
+| 27.5 | 5. An Lieferant gesendet | Gelb, Papierflieger |
+| 27.6 | 6. Sample erhalten | Gelb, Geschenk |
+| 27.7 | 7. Überarbeitet | Gelb, Kreispfeil |
+| 27.8 | 8. Final | **Grün**, Trophäe → **Finales Produkt wird angelegt** |
+
+---
+
 ## 🌍 Spätere Phasen *(Platzhalter)*
 
-### Phase 5 – Produkt-Entwicklung *(folgt)*
 ### Phase 6 – Dashboard & Suche *(folgt)*
 ### Phase 7 – Deployment Mittwald *(folgt)*

@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Ratings\Schemas;
 
 use App\Enums\RatingType;
 use App\Models\CompetitorProduct;
+use App\Models\FinalProduct;
 use App\Models\SupplierProduct;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
@@ -28,6 +29,7 @@ class RatingForm
                         ->options([
                             'competitor_product' => 'Wettbewerbsprodukt',
                             'supplier_product' => 'Lieferanten-Produkt',
+                            'final_product' => 'Finales Produkt',
                         ])
                         ->required()
                         ->live()
@@ -38,6 +40,7 @@ class RatingForm
                             return match ($get('ratable_type')) {
                                 'competitor_product' => CompetitorProduct::query()->pluck('name', 'id')->toArray(),
                                 'supplier_product' => SupplierProduct::query()->pluck('name', 'id')->toArray(),
+                                'final_product' => FinalProduct::query()->pluck('name', 'id')->toArray(),
                                 default => [],
                             };
                         })

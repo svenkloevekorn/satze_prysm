@@ -1,40 +1,41 @@
 <?php
 
-namespace App\Filament\Resources\Ratings\Tables;
+namespace App\Filament\Resources\FinalProducts\RelationManagers;
 
 use App\Enums\RatingType;
-use App\Models\CompetitorProduct;
-use App\Models\FinalProduct;
-use App\Models\SupplierProduct;
+use App\Filament\Resources\Ratings\Schemas\RatingForm;
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\CreateAction;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 
-class RatingsTable
+class RatingsRelationManager extends RelationManager
 {
-    public static function configure(Table $table): Table
+    protected static string $relationship = 'ratings';
+
+    protected static ?string $title = 'Bewertungen';
+
+    protected static ?string $modelLabel = 'Bewertung';
+
+    protected static ?string $pluralModelLabel = 'Bewertungen';
+
+    public function form(Schema $schema): Schema
+    {
+        return RatingForm::configure($schema, inRelationManager: true);
+    }
+
+    public function table(Table $table): Table
     {
         return $table
+            ->recordTitleAttribute('score')
             ->defaultSort('rated_at', 'desc')
             ->columns([
-                TextColumn::make('ratable_type')
-                    ->label('Objekt-Typ')
-                    ->formatStateUsing(fn (string $state) => match ($state) {
-                        'competitor_product', CompetitorProduct::class => 'Wettbewerber',
-                        'supplier_product', SupplierProduct::class => 'Lieferant',
-                        'final_product', FinalProduct::class => 'Finales Produkt',
-                        default => class_basename($state),
-                    })
-                    ->badge()
-                    ->color('gray'),
-                TextColumn::make('ratable.name')
-                    ->label('Produkt')
-                    ->searchable()
-                    ->weight('bold')
-                    ->wrap(),
                 TextColumn::make('dimension.name')
                     ->label('Dimension')
                     ->badge()
@@ -48,9 +49,10 @@ class RatingsTable
                     ->label('Score')
                     ->formatStateUsing(fn (int $state) => "{$state}/10")
                     ->sortable(),
-                TextColumn::make('user.name')
-                    ->label('Bewertet von')
-                    ->toggleable(),
+                TextColumn::make('comment')
+                    ->label('Kommentar')
+                    ->limit(60)
+                    ->tooltip(fn ($record) => $record->comment),
                 TextColumn::make('rated_at')
                     ->label('Datum')
                     ->date('d.m.Y')
@@ -60,19 +62,22 @@ class RatingsTable
                 SelectFilter::make('type')
                     ->label('Art')
                     ->options(RatingType::options()),
-                SelectFilter::make('ratable_type')
-                    ->label('Objekt-Typ')
-                    ->options([
-                        'competitor_product' => 'Wettbewerbsprodukt',
-                        'supplier_product' => 'Lieferanten-Produkt',
-                        'final_product' => 'Finales Produkt',
-                    ]),
                 SelectFilter::make('rating_dimension_id')
                     ->label('Dimension')
                     ->relationship('dimension', 'name'),
             ])
+            ->headerActions([
+                CreateAction::make()
+                    ->label('Bewertung hinzufügen')
+                    ->mutateFormDataUsing(function (array $data) {
+                        $data['user_id'] ??= auth()->id();
+
+                        return $data;
+                    }),
+            ])
             ->recordActions([
                 EditAction::make(),
+                DeleteAction::make(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

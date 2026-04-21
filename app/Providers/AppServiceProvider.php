@@ -21,6 +21,7 @@ class AppServiceProvider extends ServiceProvider
         \Illuminate\Database\Eloquent\Relations\Relation::morphMap([
             'competitor_product' => \App\Models\CompetitorProduct::class,
             'supplier_product' => \App\Models\SupplierProduct::class,
+            'final_product' => \App\Models\FinalProduct::class,
         ]);
     }
 }

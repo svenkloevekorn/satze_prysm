@@ -35,14 +35,9 @@ Siehe Erledigt-Bereich unten.
 
 ---
 
-## 🟡 Phase 5 – Modul 2: Product Development
+## 🟢 Phase 5 – Modul 2: Product Development *(erledigt)*
 
-- [ ] Enum `DevelopmentStatus` (8 Stati)
-- [ ] Migration + Model + Resource: `DevelopmentItem`
-- [ ] Migration: `development_competitor_product` (n:m)
-- [ ] Migration: `development_supplier_product` (n:m)
-- [ ] Übergang "final" → `FinalProduct`
-- [ ] Tests
+Siehe Erledigt-Bereich unten.
 
 ---
 
@@ -163,3 +158,22 @@ Siehe Erledigt-Bereich unten.
 - [x] 5 Demo-Bewertungen vorgeseedet (Castelli 3×, Rapha 1×, Lieferanten-Produkt 1×)
 - [x] **41 Tests grün** (10 neue für Ratings, inkl. polymorphe Relationen, Validierung, AverageScore)
 - [x] Test-Doku erweitert: Phase 4 mit 20+ manuellen Test-Schritten
+
+### Phase 5 – Modul 2: Product Development *(2026-04-21)*
+
+- [x] Enum `DevelopmentStatus` mit 8 Stati, jeweils Label + Farbe + Heroicon
+- [x] Migration + Model `DevelopmentItem` (Name, Kategorie, User, Status, Materialien/Farben/Größen JSON, Zielpreis, Deadline, Bilder)
+- [x] Migration + Model `FinalProduct` (SKU, EK/VK, Launch-Datum, Beschreibung, Bilder, mit `HasRatings`)
+- [x] Pivot-Tabellen `competitor_product_development_item` + `development_item_supplier_product` (n:m)
+- [x] **Auto-Anlegen des FinalProduct** bei Status-Wechsel auf „final" (im `booted()` Model-Hook)
+- [x] Filament-Resource `DevelopmentItem` mit **4-Tab-Formular** (Allgemein / Eigenschaften / Inspiration & Basis / Bilder)
+- [x] Filament-Resource `FinalProduct` mit Sections + **Marge %** berechnet in Tabelle
+- [x] RelationManager Ratings auch für FinalProduct
+- [x] Status-Badges mit individueller Farbe + Icon pro Status
+- [x] Deadline-Warnung (rot wenn überschritten)
+- [x] Rating-Formular um `final_product` erweitert (polymorph)
+- [x] Navigation-Gruppe „Produkt-Entwicklung"
+- [x] 3 Demo-Entwicklungs-Items vorgeseedet (Staeze Pro Summer Jersey v1, Race Bib 2026, Daily Tee)
+- [x] Inspirations-Verknüpfungen: Staeze Jersey ← Castelli, Staeze Bib ← Rapha
+- [x] **51 Tests grün** (10 neue für DevelopmentItem + FinalProduct, inkl. Auto-Finalisierung-Test)
+- [x] Test-Doku erweitert: Phase 5 mit 25+ manuellen Test-Schritten
