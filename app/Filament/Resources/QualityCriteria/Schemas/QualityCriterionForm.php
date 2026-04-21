@@ -26,9 +26,10 @@ class QualityCriterionForm
                 Select::make('categories')
                     ->label('Gilt für Kategorien')
                     ->multiple()
-                    ->relationship('categories', 'name')
+                    ->relationship('categories', 'name', fn ($query) => $query->with('parent'))
+                    ->getOptionLabelFromRecordUsing(fn ($record) => $record->fullName())
                     ->preload()
-                    ->searchable()
+                    ->searchable(['name'])
                     ->columnSpanFull()
                     ->helperText('Wähle die Produktkategorien, für die dieses Kriterium gilt.'),
                 Toggle::make('is_active')

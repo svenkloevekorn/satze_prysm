@@ -5,6 +5,7 @@ use App\Filament\Resources\Categories\Pages\EditCategory;
 use App\Filament\Resources\Categories\Pages\ListCategories;
 use App\Models\Category;
 use App\Models\User;
+use Illuminate\Validation\ValidationException;
 
 use function Pest\Livewire\livewire;
 
@@ -57,4 +58,45 @@ it('bearbeitet eine Kategorie', function () {
         ->assertHasNoFormErrors();
 
     expect($category->fresh()->name)->toBe('Neu');
+});
+
+it('erlaubt eine Unterkategorie unter einer Oberkategorie', function () {
+    $parent = Category::factory()->create(['name' => 'Shirts']);
+    $child = Category::factory()->create([
+        'name' => 'Langarm-Shirts',
+        'parent_id' => $parent->id,
+    ]);
+
+    expect($child->parent->id)->toBe($parent->id);
+    expect($parent->children)->toHaveCount(1);
+    expect($child->fullName())->toBe('Shirts › Langarm-Shirts');
+});
+
+it('blockiert 3. Ebene (Sub-Sub-Kategorie)', function () {
+    $parent = Category::factory()->create(['name' => 'Shirts']);
+    $child = Category::factory()->create([
+        'name' => 'Langarm',
+        'parent_id' => $parent->id,
+    ]);
+
+    // Versuch: eine Kategorie unter die bereits verschachtelte Kategorie zu haengen
+    expect(fn () => Category::factory()->create([
+        'name' => 'Merino',
+        'parent_id' => $child->id,
+    ]))->toThrow(ValidationException::class);
+});
+
+it('blockiert das Selbst-Referenzieren', function () {
+    $category = Category::factory()->create();
+
+    expect(fn () => $category->update(['parent_id' => $category->id]))
+        ->toThrow(ValidationException::class);
+});
+
+it('erkennt Top-Level-Kategorie', function () {
+    $parent = Category::factory()->create();
+    $child = Category::factory()->create(['parent_id' => $parent->id]);
+
+    expect($parent->isTopLevel())->toBeTrue();
+    expect($child->isTopLevel())->toBeFalse();
 });

@@ -35,8 +35,9 @@ class DevelopmentItemForm
                                             ->columnSpanFull(),
                                         Select::make('category_id')
                                             ->label('Kategorie')
-                                            ->relationship('category', 'name')
-                                            ->searchable()
+                                            ->relationship('category', 'name', fn ($query) => $query->with('parent'))
+                                            ->getOptionLabelFromRecordUsing(fn ($record) => $record->fullName())
+                                            ->searchable(['name'])
                                             ->preload()
                                             ->required(),
                                         Select::make('status')

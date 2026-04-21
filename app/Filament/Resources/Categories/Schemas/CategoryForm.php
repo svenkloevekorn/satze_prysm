@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources\Categories\Schemas;
 
+use App\Models\Category;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -14,6 +16,25 @@ class CategoryForm
     {
         return $schema
             ->components([
+                Select::make('parent_id')
+                    ->label('Oberkategorie')
+                    ->placeholder('— keine (ist selbst Oberkategorie) —')
+                    ->options(function ($record) {
+                        $query = Category::query()
+                            ->whereNull('parent_id') // nur Top-Level
+                            ->orderBy('name');
+
+                        // Beim Bearbeiten: sich selbst ausschließen
+                        if ($record) {
+                            $query->where('id', '!=', $record->id);
+                        }
+
+                        return $query->pluck('name', 'id');
+                    })
+                    ->searchable()
+                    ->preload()
+                    ->helperText('Leer lassen = das ist eine Oberkategorie. Maximal 2 Ebenen erlaubt.')
+                    ->columnSpanFull(),
                 TextInput::make('name')
                     ->label('Name')
                     ->required()
