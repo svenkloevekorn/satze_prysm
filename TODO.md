@@ -214,3 +214,14 @@ Siehe Erledigt-Bereich unten.
 - [x] **Empty-States** in den großen Tabellen (CompetitorProduct, SupplierProduct, Supplier, DevelopmentItem, FinalProduct)
 - [x] **Bulk-Status-Action** für DevelopmentItems (mehrere Items gleichzeitig auf neuen Status setzen)
 - [x] **70 Tests grün** (12 neue: 11 Smoketests + 1 Bulk-Action)
+
+### Bonus-Features *(2026-04-21)*
+
+- [x] **`.env.production.example`** – Produktions-Konfigurations-Vorlage (Mittwald-ready)
+- [x] **`deploy.sh`** – Deployment-Skript (composer install, migrate, caches, storage-link, npm build)
+- [x] **CSV-Exporter** für Wettbewerbs- + Lieferanten-Produkte (mit deutschen Spalten, JSON-Arrays als Strings)
+- [x] **„CSV-Export"**-Button in beiden Produkt-Listen neben dem Import-Button
+- [x] **Dashboard-Widget „Letzte Bewertungen"** (polymorphe Anzeige, Art-Badge, Score)
+- [x] **Artisan-Befehl `staeze:reset-admin`** – Passwort + Rolle zurücksetzen/anlegen (Notfall-Befehl)
+- [x] **73 Tests grün** (3 neue: 2 Reset-Admin + 1 Letzte-Bewertungen-Widget)
+- [x] Test-Doku: Abschnitt „Bonus-Features" mit 11 Test-Schritten

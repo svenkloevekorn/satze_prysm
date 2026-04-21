@@ -512,6 +512,42 @@ Durchlaufe mit einem Test-Item alle 8 Stati in Reihenfolge:
 
 ---
 
+## ✅ Bonus-Features testen
+
+### 🔹 31. CSV-Export
+
+| # | Was tun? | Erwartung |
+|---|---|---|
+| 31.1 | Marktanalyse → Wettbewerbsprodukte → „CSV-Export" | Export-Dialog öffnet sich |
+| 31.2 | „Export starten" | Notification: „Zeilen exportiert" |
+| 31.3 | CSV-Datei herunterladen (Notification-Link) | Enthält alle Felder mit deutschen Spalten-Namen |
+| 31.4 | Materialien / Farben / Größen in CSV | Als komma-getrennte Werte (z.B. `Polyester, Lycra`) |
+| 31.5 | Lieferanten-Produkte → „CSV-Export" | Analog mit EK, VK, MOQ |
+
+### 🔹 32. Widget „Letzte Bewertungen"
+
+| # | Was tun? | Erwartung |
+|---|---|---|
+| 32.1 | Dashboard öffnen | Widget „Letzte Bewertungen" sichtbar |
+| 32.2 | Zeigt max. 5 neueste Bewertungen | Mit Produkt, Dimension, Art (intern/extern), Score, Datum |
+| 32.3 | Widget ist leer (wenn keine Bewertungen) | Freundlicher Empty-State |
+
+### 🔹 33. Admin-Reset-Befehl (für Notfälle)
+
+Im Terminal:
+
+```bash
+# Admin zurücksetzen (Default-E-Mail und -Passwort)
+php artisan staeze:reset-admin
+
+# Mit eigener E-Mail / Passwort
+php artisan staeze:reset-admin --email=mein@mail.de --password=geheim
+```
+
+Setzt Passwort neu und weist die super_admin-Rolle zu. Wird der User nicht gefunden, legt der Befehl ihn an.
+
+---
+
 ## 🌍 Spätere Phasen *(Platzhalter)*
 
 ### Phase 7 – Deployment Mittwald *(folgt)*

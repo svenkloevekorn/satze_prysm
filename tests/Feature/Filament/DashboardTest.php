@@ -2,6 +2,7 @@
 
 use App\Enums\DevelopmentStatus;
 use App\Filament\Widgets\LetzteAenderungenWidget;
+use App\Filament\Widgets\LetzteBewertungenWidget;
 use App\Filament\Widgets\OffeneEntwicklungenWidget;
 use App\Filament\Widgets\StatsOverview;
 use App\Filament\Widgets\UnbewerteteProdukteWidget;
@@ -66,4 +67,14 @@ it('rendert das Widget Letzte Änderungen', function () {
     CompetitorProduct::factory()->count(3)->create();
 
     livewire(LetzteAenderungenWidget::class)->assertSuccessful();
+});
+
+it('rendert das Widget Letzte Bewertungen', function () {
+    $product = CompetitorProduct::factory()->create();
+    Rating::factory()->count(3)->create([
+        'ratable_type' => 'competitor_product',
+        'ratable_id' => $product->id,
+    ]);
+
+    livewire(LetzteBewertungenWidget::class)->assertSuccessful();
 });

@@ -3,6 +3,7 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Widgets\LetzteAenderungenWidget;
+use App\Filament\Widgets\LetzteBewertungenWidget;
 use App\Filament\Widgets\OffeneEntwicklungenWidget;
 use App\Filament\Widgets\StatsOverview;
 use App\Filament\Widgets\UnbewerteteProdukteWidget;
@@ -44,6 +45,7 @@ class AdminPanelProvider extends PanelProvider
                 StatsOverview::class,
                 OffeneEntwicklungenWidget::class,
                 UnbewerteteProdukteWidget::class,
+                LetzteBewertungenWidget::class,
                 LetzteAenderungenWidget::class,
             ])
             ->globalSearchKeyBindings(['command+k', 'ctrl+k'])
