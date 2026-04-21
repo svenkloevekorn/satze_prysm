@@ -39,6 +39,40 @@ it('legt eine neue Marke an', function () {
     expect(Brand::where('name', 'Castelli')->exists())->toBeTrue();
 });
 
+it('speichert Marken-Website und Social-Media-Kanäle', function () {
+    livewire(CreateBrand::class)
+        ->fillForm([
+            'name' => 'Rapha',
+            'country' => 'GB',
+            'website' => 'https://www.rapha.cc',
+            'instagram' => 'rapha',
+            'facebook' => 'https://www.facebook.com/rapha',
+            'linkedin' => 'https://www.linkedin.com/company/rapha',
+            'tiktok' => 'rapha.cc',
+            'youtube' => 'https://www.youtube.com/@rapha',
+            'is_active' => true,
+        ])
+        ->call('create')
+        ->assertHasNoFormErrors();
+
+    $brand = Brand::where('name', 'Rapha')->first();
+    expect($brand->country)->toBe('GB');
+    expect($brand->website)->toBe('https://www.rapha.cc');
+    expect($brand->instagram)->toBe('rapha');
+    expect($brand->facebook)->toBe('https://www.facebook.com/rapha');
+    expect($brand->tiktok)->toBe('rapha.cc');
+});
+
+it('validiert Website-URL bei Marken', function () {
+    livewire(CreateBrand::class)
+        ->fillForm([
+            'name' => 'Test',
+            'website' => 'kein-link',
+        ])
+        ->call('create')
+        ->assertHasFormErrors(['website']);
+});
+
 it('zeigt die Shop-Liste an', function () {
     Shop::factory()->count(3)->create();
     livewire(ListShops::class)->assertSuccessful();

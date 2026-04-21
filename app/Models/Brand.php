@@ -8,7 +8,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-#[Fillable(['name', 'description', 'notes', 'is_active'])]
+#[Fillable([
+    'name',
+    'description',
+    'website',
+    'country',
+    'instagram',
+    'facebook',
+    'linkedin',
+    'tiktok',
+    'youtube',
+    'notes',
+    'is_active',
+])]
 class Brand extends Model
 {
     /** @use HasFactory<BrandFactory> */
