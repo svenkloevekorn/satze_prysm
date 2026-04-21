@@ -1,58 +1,184 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Staeze PM – Product Intelligence Platform
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Interne Software zur Marktanalyse, Produktentwicklung und Lieferantenverwaltung im Bereich Sportbekleidung (Cycling, Running, Outdoor).
 
-## About Laravel
+**Ziel:** Datenbasierte Produktentwicklung statt Bauchgefühl.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🧱 Tech-Stack
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+| Schicht | Technologie |
+|---|---|
+| Framework | Laravel 13 |
+| PHP | 8.4 (via Laravel Herd lokal) |
+| Datenbank | PostgreSQL 18 |
+| Admin-UI | Filament 5 |
+| Rollen & Rechte | `bezhansalleh/filament-shield` + Spatie Permission |
+| Anhänge | `spatie/laravel-medialibrary` |
+| Tests | Pest 4 |
+| Deployment | Mittwald via GitHub Actions |
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## 🚀 Lokales Setup
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Voraussetzungen
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+- [Laravel Herd](https://herd.laravel.com/) (enthält PHP 8.4, PostgreSQL 18, Composer, Node)
+- Git
 
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+### Installation
 
 ```bash
-composer require laravel/boost --dev
+git clone <repo-url> staeze-produktmanagement
+cd staeze-produktmanagement
 
-php artisan boost:install
+# Abhängigkeiten
+composer install
+npm install
+
+# Umgebung vorbereiten
+cp .env.example .env
+php artisan key:generate
+
+# Datenbank anlegen (einmalig)
+psql -h 127.0.0.1 -p 5432 -U postgres -c "CREATE DATABASE staeze_pm;"
+
+# Migrationen + Testdaten
+php artisan migrate --seed
+
+# Admin-User anlegen
+php artisan make:filament-user
+# (oder: admin@admin.com / password wird per Seeder erstellt)
+
+# Shield: Rollen & Permissions generieren
+php artisan shield:generate --all --panel=admin
+
+# Herd-Site verlinken
+herd link staeze-pm
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+App läuft dann auf **http://staeze-pm.test** – Admin-Panel unter **http://staeze-pm.test/admin**.
 
-## Contributing
+Login: `admin@admin.com` / `password`
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Frontend-Assets
 
-## Code of Conduct
+```bash
+npm run dev    # Dev-Modus mit Watcher
+npm run build  # Produktions-Build
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Tests
 
-## Security Vulnerabilities
+```bash
+php artisan test
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Erwartung: **58+ Tests grün**.
 
-## License
+---
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## 📁 Projekt-Struktur
+
+```
+app/
+  Enums/               # DevelopmentStatus, RatingType
+  Filament/
+    Imports/           # CSV-Importer
+    Resources/         # 9 Filament-Resources (alle CRUDs)
+    Widgets/           # Dashboard-Widgets
+  Models/
+    Concerns/          # HasRatings Trait
+  Providers/           # Gate::before, Morph-Map
+database/
+  migrations/          # DB-Schema
+  seeders/             # Demo-Daten
+docs/
+  MANUELLE-TESTS.md    # ~100 Browser-Test-Schritte
+  beispiel-imports/    # CSV-Vorlagen
+  user-guide.md        # Endnutzer-Dokumentation
+tests/
+  Feature/Filament/    # Pest-Tests
+```
+
+---
+
+## 📐 Fachliches Modell (Überblick)
+
+```
+Stammdaten: Category · Brand · Shop · RatingDimension · QualityCriterion
+Marktanalyse: CompetitorProduct (↔ Shop via ProductShopEntry)
+Lieferanten: Supplier (hat Contacts + SupplierProducts)
+Entwicklung: DevelopmentItem (8 Stati) → FinalProduct (bei "final" auto-erstellt)
+Bewertungen: Rating (polymorph an allen Produkt-Typen)
+```
+
+**Kernfeature:** Setzt man ein Entwicklungs-Item auf Status „Final", wird automatisch
+ein `FinalProduct` erzeugt (Model-Hook in `booted()`).
+
+---
+
+## 📥 CSV-Import
+
+Beispiel-CSV-Dateien liegen unter `docs/beispiel-imports/`:
+
+- `wettbewerbsprodukte-beispiel.csv`
+- `lieferanten-produkte-beispiel.csv`
+
+Im Admin-Panel oben rechts auf **„CSV-Import"**. Marken, Lieferanten und Kategorien werden bei Bedarf automatisch angelegt.
+
+---
+
+## 🔐 Rollen & Rechte
+
+- **super_admin** – kann alles (umgeht alle Permission-Checks via `Gate::before`)
+- Weitere Rollen lassen sich über das Admin-Panel → **Filament Shield → Roles** anlegen
+
+---
+
+## 🌍 Produktions-Deployment (Mittwald)
+
+> ⏸️ **In Vorbereitung.** Siehe `TODO.md` – Phase 7.
+
+Grobe Schritte (werden ergänzt):
+
+1. GitHub-Repo anlegen, lokal pushen
+2. Mittwald-Webspace aufsetzen (PostgreSQL 16+, PHP 8.3+)
+3. SSH-Key + Deployment-Secrets in GitHub konfigurieren
+4. GitHub-Actions Workflow (`.github/workflows/deploy.yml`) triggert bei Push auf `main`
+5. Auf Server: `composer install --no-dev`, `migrate --force`, `optimize`, Shield cachen
+
+Detail-Anleitung folgt nach Vorbereitung des Servers.
+
+---
+
+## 🧪 Manuelles Testen
+
+Siehe [`docs/MANUELLE-TESTS.md`](docs/MANUELLE-TESTS.md) – Schritt-für-Schritt-Anleitung für alle Module (~100 Test-Schritte).
+
+---
+
+## 📖 Nutzer-Dokumentation
+
+Siehe [`docs/user-guide.md`](docs/user-guide.md).
+
+---
+
+## ℹ️ Konventionen
+
+- **Immer** `php artisan test` vor „fertig" (CLAUDE.md-Regel)
+- **Neue Features** brauchen Tests
+- **Änderungen an TODO.md** einchecken
+
+---
+
+## 🆘 Troubleshooting
+
+Siehe Abschnitt „Was tun, wenn was nicht klappt?" in `docs/MANUELLE-TESTS.md`.
+
+Typische Fälle:
+- **500 bei Edit-Seite mit Postgres** → Cache leeren: `php artisan optimize:clear`
+- **403 im Admin** → `php artisan tinker --execute="\App\Models\User::where('email','admin@admin.com')->first()->syncRoles(['super_admin']);"`
+- **DB neu aufbauen** → `php artisan migrate:fresh --seed`

@@ -16,6 +16,9 @@ class SupplierProductsTable
     {
         return $table
             ->defaultSort('created_at', 'desc')
+            ->emptyStateHeading('Noch keine Lieferanten-Produkte')
+            ->emptyStateDescription('Leg ein Produkt an oder importiere eine CSV-Liste.')
+            ->emptyStateIcon('heroicon-o-cube')
             ->columns([
                 SpatieMediaLibraryImageColumn::make('thumb')
                     ->label('')

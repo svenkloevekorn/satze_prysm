@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Brand;
+use App\Models\Category;
 use App\Models\CompetitorProduct;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -21,8 +23,8 @@ class CompetitorProductFactory extends Factory
 
         return [
             'name' => fake()->words(3, true),
-            'brand_id' => \App\Models\Brand::factory(),
-            'category_id' => \App\Models\Category::factory(),
+            'brand_id' => Brand::factory(),
+            'category_id' => Category::factory(),
             'description' => fake()->paragraph(),
             'materials' => fake()->randomElements(['Polyester', 'Nylon', 'Merino', 'Lycra', 'Baumwolle'], 2),
             'colors' => fake()->randomElements(['Schwarz', 'Weiß', 'Rot', 'Blau', 'Grün'], 2),

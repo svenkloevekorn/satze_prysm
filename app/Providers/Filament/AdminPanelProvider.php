@@ -2,8 +2,12 @@
 
 namespace App\Providers\Filament;
 
-use Filament\Http\Middleware\Authenticate;
+use App\Filament\Widgets\LetzteAenderungenWidget;
+use App\Filament\Widgets\OffeneEntwicklungenWidget;
+use App\Filament\Widgets\StatsOverview;
+use App\Filament\Widgets\UnbewerteteProdukteWidget;
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
+use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -11,8 +15,6 @@ use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
-use Filament\Widgets\AccountWidget;
-use Filament\Widgets\FilamentInfoWidget;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
@@ -39,10 +41,10 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->widgets([
-                \App\Filament\Widgets\StatsOverview::class,
-                \App\Filament\Widgets\OffeneEntwicklungenWidget::class,
-                \App\Filament\Widgets\UnbewerteteProdukteWidget::class,
-                \App\Filament\Widgets\LetzteAenderungenWidget::class,
+                StatsOverview::class,
+                OffeneEntwicklungenWidget::class,
+                UnbewerteteProdukteWidget::class,
+                LetzteAenderungenWidget::class,
             ])
             ->globalSearchKeyBindings(['command+k', 'ctrl+k'])
             ->middleware([

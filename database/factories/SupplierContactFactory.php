@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Supplier;
 use App\Models\SupplierContact;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -18,7 +19,7 @@ class SupplierContactFactory extends Factory
     public function definition(): array
     {
         return [
-            'supplier_id' => \App\Models\Supplier::factory(),
+            'supplier_id' => Supplier::factory(),
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'phone' => fake()->phoneNumber(),

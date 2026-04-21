@@ -1,0 +1,18 @@
+{
+    "preset": "laravel",
+    "exclude": [
+        "bootstrap/cache",
+        "storage",
+        "vendor"
+    ],
+    "rules": {
+        "concat_space": {
+            "spacing": "none"
+        },
+        "ordered_imports": {
+            "sort_algorithm": "alpha"
+        },
+        "single_quote": true,
+        "trailing_comma_in_multiline": true
+    }
+}

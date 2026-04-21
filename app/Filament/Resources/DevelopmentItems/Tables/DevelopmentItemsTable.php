@@ -3,13 +3,17 @@
 namespace App\Filament\Resources\DevelopmentItems\Tables;
 
 use App\Enums\DevelopmentStatus;
+use Filament\Actions\BulkAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Forms\Components\Select;
+use Filament\Notifications\Notification;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Collection;
 
 class DevelopmentItemsTable
 {
@@ -17,6 +21,9 @@ class DevelopmentItemsTable
     {
         return $table
             ->defaultSort('created_at', 'desc')
+            ->emptyStateHeading('Noch keine Entwicklungs-Items')
+            ->emptyStateDescription('Starte mit einer ersten Idee – Status „Idee" reicht zum Anfang.')
+            ->emptyStateIcon('heroicon-o-light-bulb')
             ->columns([
                 SpatieMediaLibraryImageColumn::make('thumb')
                     ->label('')
@@ -78,6 +85,24 @@ class DevelopmentItemsTable
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
+                    BulkAction::make('changeStatus')
+                        ->label('Status ändern')
+                        ->icon('heroicon-o-arrow-path')
+                        ->schema([
+                            Select::make('status')
+                                ->label('Neuer Status')
+                                ->options(DevelopmentStatus::options())
+                                ->required(),
+                        ])
+                        ->action(function (array $data, Collection $records) {
+                            $records->each(fn ($record) => $record->update(['status' => $data['status']]));
+
+                            Notification::make()
+                                ->title($records->count().' Items aktualisiert')
+                                ->success()
+                                ->send();
+                        })
+                        ->deselectRecordsAfterCompletion(),
                     DeleteBulkAction::make(),
                 ]),
             ]);

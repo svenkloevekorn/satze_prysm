@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Concerns\HasRatings;
+use Database\Factories\CompetitorProductFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -27,8 +28,9 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 ])]
 class CompetitorProduct extends Model implements HasMedia
 {
-    /** @use HasFactory<\Database\Factories\CompetitorProductFactory> */
+    /** @use HasFactory<CompetitorProductFactory> */
     use HasFactory;
+
     use HasRatings;
     use InteractsWithMedia;
 

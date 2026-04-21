@@ -9,6 +9,7 @@ use Filament\Actions\Imports\ImportColumn;
 use Filament\Actions\Imports\Importer;
 use Filament\Actions\Imports\Models\Import;
 use Illuminate\Support\Number;
+use Illuminate\Support\Str;
 
 class SupplierProductImporter extends Importer
 {
@@ -35,7 +36,7 @@ class SupplierProductImporter extends Importer
                 ->fillRecordUsing(function (SupplierProduct $record, ?string $state) {
                     if (filled($state)) {
                         $category = Category::firstOrCreate(
-                            ['slug' => \Illuminate\Support\Str::slug($state)],
+                            ['slug' => Str::slug($state)],
                             ['name' => trim($state), 'is_active' => true],
                         );
                         $record->category_id = $category->id;

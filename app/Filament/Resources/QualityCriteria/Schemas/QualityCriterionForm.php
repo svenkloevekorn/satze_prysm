@@ -2,10 +2,9 @@
 
 namespace App\Filament\Resources\QualityCriteria\Schemas;
 
-use App\Models\Category;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Schema;
 

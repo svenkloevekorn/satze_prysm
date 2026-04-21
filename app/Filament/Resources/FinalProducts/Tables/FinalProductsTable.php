@@ -16,6 +16,9 @@ class FinalProductsTable
     {
         return $table
             ->defaultSort('launched_at', 'desc')
+            ->emptyStateHeading('Noch keine finalen Produkte')
+            ->emptyStateDescription('Sobald ein Entwicklungs-Item Status „Final" erreicht, erscheint es hier automatisch.')
+            ->emptyStateIcon('heroicon-o-trophy')
             ->columns([
                 SpatieMediaLibraryImageColumn::make('thumb')
                     ->label('')

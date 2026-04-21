@@ -16,6 +16,9 @@ class SuppliersTable
     {
         return $table
             ->defaultSort('name')
+            ->emptyStateHeading('Noch keine Lieferanten')
+            ->emptyStateDescription('Leg den ersten Lieferanten an, danach kannst du Kontakte und Produkte hinzufügen.')
+            ->emptyStateIcon('heroicon-o-building-office')
             ->columns([
                 TextColumn::make('name')
                     ->label('Firmenname')

@@ -1,20 +1,21 @@
 <?php
 
+use App\Filament\Resources\SupplierProducts\Pages\CreateSupplierProduct;
+use App\Filament\Resources\SupplierProducts\Pages\ListSupplierProducts;
 use App\Filament\Resources\Suppliers\Pages\CreateSupplier;
 use App\Filament\Resources\Suppliers\Pages\EditSupplier;
 use App\Filament\Resources\Suppliers\Pages\ListSuppliers;
 use App\Filament\Resources\Suppliers\RelationManagers\ContactsRelationManager;
 use App\Filament\Resources\Suppliers\RelationManagers\ProductsRelationManager;
-use App\Filament\Resources\SupplierProducts\Pages\CreateSupplierProduct;
-use App\Filament\Resources\SupplierProducts\Pages\ListSupplierProducts;
 use App\Models\Category;
 use App\Models\Supplier;
 use App\Models\SupplierContact;
 use App\Models\SupplierProduct;
 use App\Models\User;
-use Spatie\Permission\Models\Role;
 
 use function Pest\Livewire\livewire;
+
+use Spatie\Permission\Models\Role;
 
 beforeEach(function () {
     $role = Role::firstOrCreate(['name' => 'super_admin', 'guard_name' => 'web']);

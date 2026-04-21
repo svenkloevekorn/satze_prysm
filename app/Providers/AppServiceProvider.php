@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\CompetitorProduct;
+use App\Models\FinalProduct;
+use App\Models\SupplierProduct;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
@@ -18,10 +22,10 @@ class AppServiceProvider extends ServiceProvider
             return $user->hasRole('super_admin') ? true : null;
         });
 
-        \Illuminate\Database\Eloquent\Relations\Relation::morphMap([
-            'competitor_product' => \App\Models\CompetitorProduct::class,
-            'supplier_product' => \App\Models\SupplierProduct::class,
-            'final_product' => \App\Models\FinalProduct::class,
+        Relation::morphMap([
+            'competitor_product' => CompetitorProduct::class,
+            'supplier_product' => SupplierProduct::class,
+            'final_product' => FinalProduct::class,
         ]);
     }
 }

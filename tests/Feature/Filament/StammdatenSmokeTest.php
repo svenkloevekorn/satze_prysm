@@ -13,9 +13,10 @@ use App\Models\QualityCriterion;
 use App\Models\RatingDimension;
 use App\Models\Shop;
 use App\Models\User;
-use Spatie\Permission\Models\Role;
 
 use function Pest\Livewire\livewire;
+
+use Spatie\Permission\Models\Role;
 
 beforeEach(function () {
     $role = Role::firstOrCreate(['name' => 'super_admin', 'guard_name' => 'web']);

@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
+use App\Models\Supplier;
 use App\Models\SupplierProduct;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -20,8 +22,8 @@ class SupplierProductFactory extends Factory
         $ek = fake()->randomFloat(2, 5, 50);
 
         return [
-            'supplier_id' => \App\Models\Supplier::factory(),
-            'category_id' => \App\Models\Category::factory(),
+            'supplier_id' => Supplier::factory(),
+            'category_id' => Category::factory(),
             'name' => fake()->words(3, true),
             'description' => fake()->paragraph(),
             'purchase_price' => $ek,

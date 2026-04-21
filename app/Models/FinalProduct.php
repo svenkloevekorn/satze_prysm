@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Concerns\HasRatings;
+use Database\Factories\FinalProductFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -22,8 +23,9 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 ])]
 class FinalProduct extends Model implements HasMedia
 {
-    /** @use HasFactory<\Database\Factories\FinalProductFactory> */
+    /** @use HasFactory<FinalProductFactory> */
     use HasFactory;
+
     use HasRatings;
     use InteractsWithMedia;
 

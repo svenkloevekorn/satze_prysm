@@ -5,6 +5,8 @@ namespace App\Filament\Resources\CompetitorProducts;
 use App\Filament\Resources\CompetitorProducts\Pages\CreateCompetitorProduct;
 use App\Filament\Resources\CompetitorProducts\Pages\EditCompetitorProduct;
 use App\Filament\Resources\CompetitorProducts\Pages\ListCompetitorProducts;
+use App\Filament\Resources\CompetitorProducts\RelationManagers\RatingsRelationManager;
+use App\Filament\Resources\CompetitorProducts\RelationManagers\ShopEntriesRelationManager;
 use App\Filament\Resources\CompetitorProducts\Schemas\CompetitorProductForm;
 use App\Filament\Resources\CompetitorProducts\Tables\CompetitorProductsTable;
 use App\Models\CompetitorProduct;
@@ -58,8 +60,8 @@ class CompetitorProductResource extends Resource
     public static function getRelations(): array
     {
         return [
-            \App\Filament\Resources\CompetitorProducts\RelationManagers\ShopEntriesRelationManager::class,
-            \App\Filament\Resources\CompetitorProducts\RelationManagers\RatingsRelationManager::class,
+            ShopEntriesRelationManager::class,
+            RatingsRelationManager::class,
         ];
     }
 

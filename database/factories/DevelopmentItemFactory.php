@@ -2,7 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
 use App\Models\DevelopmentItem;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,8 +21,8 @@ class DevelopmentItemFactory extends Factory
     {
         return [
             'name' => fake()->words(3, true),
-            'category_id' => \App\Models\Category::factory(),
-            'user_id' => \App\Models\User::factory(),
+            'category_id' => Category::factory(),
+            'user_id' => User::factory(),
             'status' => fake()->randomElement(['idea', 'in_progress', 'concept_confirmed', 'tech_sheet_created', 'sample_received']),
             'description' => fake()->paragraph(),
             'materials' => fake()->randomElements(['Polyester', 'Lycra', 'Nylon'], 2),

@@ -2,6 +2,7 @@
 
 namespace App\Filament\Widgets;
 
+use App\Filament\Resources\CompetitorProducts\CompetitorProductResource;
 use App\Models\CompetitorProduct;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
@@ -31,7 +32,7 @@ class UnbewerteteProdukteWidget extends BaseWidget
                 TextColumn::make('name')
                     ->label('Produkt')
                     ->weight('bold')
-                    ->url(fn ($record) => \App\Filament\Resources\CompetitorProducts\CompetitorProductResource::getUrl('edit', ['record' => $record])),
+                    ->url(fn ($record) => CompetitorProductResource::getUrl('edit', ['record' => $record])),
                 TextColumn::make('brand.name')
                     ->label('Marke')
                     ->badge()

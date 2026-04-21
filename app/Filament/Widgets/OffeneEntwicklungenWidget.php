@@ -3,6 +3,7 @@
 namespace App\Filament\Widgets;
 
 use App\Enums\DevelopmentStatus;
+use App\Filament\Resources\DevelopmentItems\DevelopmentItemResource;
 use App\Models\DevelopmentItem;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
@@ -30,7 +31,7 @@ class OffeneEntwicklungenWidget extends BaseWidget
                 TextColumn::make('name')
                     ->label('Name')
                     ->weight('bold')
-                    ->url(fn ($record) => \App\Filament\Resources\DevelopmentItems\DevelopmentItemResource::getUrl('edit', ['record' => $record])),
+                    ->url(fn ($record) => DevelopmentItemResource::getUrl('edit', ['record' => $record])),
                 TextColumn::make('status')
                     ->label('Status')
                     ->badge()

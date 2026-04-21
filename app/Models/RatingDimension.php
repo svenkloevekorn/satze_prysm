@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Database\Factories\RatingDimensionFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -9,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 #[Fillable(['name', 'description', 'sort_order', 'is_active'])]
 class RatingDimension extends Model
 {
-    /** @use HasFactory<\Database\Factories\RatingDimensionFactory> */
+    /** @use HasFactory<RatingDimensionFactory> */
     use HasFactory;
 
     protected function casts(): array

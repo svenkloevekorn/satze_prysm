@@ -202,3 +202,15 @@ Siehe Erledigt-Bereich unten.
 - [x] Regression-Test für JSON-Bug
 - [x] **58 Tests grün** (7 neue, davon 6 für Widgets + 1 Regression-Test)
 - [x] Test-Doku erweitert: Phase 6 mit 10+ manuellen Test-Schritten
+
+### Top-5-Polish *(2026-04-21)*
+
+- [x] **README.md** – vollständige Install- + Nutzungs-Doku (statt Laravel-Default)
+- [x] **docs/user-guide.md** – Endnutzer-Handbuch mit 5 Workflows
+- [x] **Laravel Pint** (`pint.json`) – automatisches Code-Formatting
+- [x] **PHPStan / Larastan** auf Level 5 – 0 Fehler, `@property`-Docblock für DevelopmentItem
+- [x] **GitHub Actions CI-Workflow** (`.github/workflows/ci.yml`) – Pint + PHPStan + Pest bei Push/PR
+- [x] **11 Edit-Seiten-Smoketests** (`AllEditPagesSmokeTest`) – fängt JSON/Query-Bugs systematisch ab
+- [x] **Empty-States** in den großen Tabellen (CompetitorProduct, SupplierProduct, Supplier, DevelopmentItem, FinalProduct)
+- [x] **Bulk-Status-Action** für DevelopmentItems (mehrere Items gleichzeitig auf neuen Status setzen)
+- [x] **70 Tests grün** (12 neue: 11 Smoketests + 1 Bulk-Action)

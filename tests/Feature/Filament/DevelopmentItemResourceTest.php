@@ -9,11 +9,13 @@ use App\Models\Category;
 use App\Models\CompetitorProduct;
 use App\Models\DevelopmentItem;
 use App\Models\FinalProduct;
+use App\Models\Rating;
 use App\Models\SupplierProduct;
 use App\Models\User;
-use Spatie\Permission\Models\Role;
 
 use function Pest\Livewire\livewire;
+
+use Spatie\Permission\Models\Role;
 
 beforeEach(function () {
     $role = Role::firstOrCreate(['name' => 'super_admin', 'guard_name' => 'web']);
@@ -102,7 +104,7 @@ it('zeigt Finale-Produkte-Liste an', function () {
 it('kann Bewertungen an ein FinalProduct haengen', function () {
     $product = FinalProduct::factory()->create();
 
-    \App\Models\Rating::factory()->create([
+    Rating::factory()->create([
         'ratable_type' => 'final_product',
         'ratable_id' => $product->id,
         'score' => 9,
@@ -126,10 +128,23 @@ it('kann Entwicklungs-Item bearbeiten', function () {
 it('laedt Edit-Seite auch wenn Wettbewerbs-/Lieferantenprodukte existieren (JSON-Fix)', function () {
     // Regression: Postgres konnte SELECT DISTINCT auf Tabellen mit JSON-Spalten
     // nicht ausfuehren – das brach die Edit-Seite. Fix: Select nur id+name.
-    \App\Models\CompetitorProduct::factory()->count(3)->create();
-    \App\Models\SupplierProduct::factory()->count(3)->create();
+    CompetitorProduct::factory()->count(3)->create();
+    SupplierProduct::factory()->count(3)->create();
     $item = DevelopmentItem::factory()->create();
 
     livewire(EditDevelopmentItem::class, ['record' => $item->getRouteKey()])
         ->assertSuccessful();
+});
+
+it('aendert den Status mehrerer Items per Bulk-Action', function () {
+    $items = DevelopmentItem::factory()->count(3)->create(['status' => DevelopmentStatus::Idea]);
+
+    livewire(ListDevelopmentItems::class)
+        ->callTableBulkAction('changeStatus', $items, data: [
+            'status' => DevelopmentStatus::InProgress->value,
+        ]);
+
+    foreach ($items as $item) {
+        expect($item->fresh()->status)->toBe(DevelopmentStatus::InProgress);
+    }
 });

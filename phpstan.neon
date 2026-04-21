@@ -1,0 +1,15 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+
+parameters:
+    paths:
+        - app
+        - database
+
+    level: 5
+
+    excludePaths:
+        - app/Filament/Resources/**/Pages/*
+        - database/migrations/*
+
+    reportUnmatchedIgnoredErrors: false

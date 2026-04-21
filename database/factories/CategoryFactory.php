@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 /**
  * @extends Factory<Category>
@@ -21,7 +22,7 @@ class CategoryFactory extends Factory
 
         return [
             'name' => ucfirst($name),
-            'slug' => \Illuminate\Support\Str::slug($name),
+            'slug' => Str::slug($name),
             'description' => fake()->sentence(),
             'is_active' => true,
             'sort_order' => fake()->numberBetween(1, 100),

@@ -2,10 +2,11 @@
 
 namespace App\Filament\Resources\Categories\Schemas;
 
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Schema;
+use Illuminate\Support\Str;
 
 class CategoryForm
 {
@@ -18,7 +19,7 @@ class CategoryForm
                     ->required()
                     ->maxLength(255)
                     ->live(onBlur: true)
-                    ->afterStateUpdated(fn ($state, $set) => $set('slug', \Illuminate\Support\Str::slug((string) $state))),
+                    ->afterStateUpdated(fn ($state, $set) => $set('slug', Str::slug((string) $state))),
                 TextInput::make('slug')
                     ->label('Slug (URL-Kürzel)')
                     ->required()

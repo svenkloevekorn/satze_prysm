@@ -5,6 +5,7 @@ namespace App\Filament\Resources\SupplierProducts;
 use App\Filament\Resources\SupplierProducts\Pages\CreateSupplierProduct;
 use App\Filament\Resources\SupplierProducts\Pages\EditSupplierProduct;
 use App\Filament\Resources\SupplierProducts\Pages\ListSupplierProducts;
+use App\Filament\Resources\SupplierProducts\RelationManagers\RatingsRelationManager;
 use App\Filament\Resources\SupplierProducts\Schemas\SupplierProductForm;
 use App\Filament\Resources\SupplierProducts\Tables\SupplierProductsTable;
 use App\Models\SupplierProduct;
@@ -58,7 +59,7 @@ class SupplierProductResource extends Resource
     public static function getRelations(): array
     {
         return [
-            \App\Filament\Resources\SupplierProducts\RelationManagers\RatingsRelationManager::class,
+            RatingsRelationManager::class,
         ];
     }
 

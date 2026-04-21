@@ -8,6 +8,7 @@ use App\Models\CompetitorProduct;
 use App\Models\ProductShopEntry;
 use App\Models\Shop;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class CompetitorProductSeeder extends Seeder
 {
@@ -73,7 +74,7 @@ class CompetitorProductSeeder extends Seeder
                 ProductShopEntry::firstOrCreate(
                     ['competitor_product_id' => $product->id, 'shop_id' => $shop->id],
                     [
-                        'product_url' => 'https://example.com/'.\Illuminate\Support\Str::slug($data['name']),
+                        'product_url' => 'https://example.com/'.Str::slug($data['name']),
                         'observed_price' => $data['price_min'] + ($i * 5),
                         'observed_at' => now()->subDays($i * 7),
                         'notes' => $i === 0 ? 'Aktuelle Beobachtung' : 'Vor einer Woche',

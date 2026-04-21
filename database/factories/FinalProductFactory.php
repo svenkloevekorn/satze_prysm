@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
 use App\Models\FinalProduct;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -20,7 +21,7 @@ class FinalProductFactory extends Factory
         $cost = fake()->randomFloat(2, 15, 80);
 
         return [
-            'category_id' => \App\Models\Category::factory(),
+            'category_id' => Category::factory(),
             'name' => fake()->words(3, true),
             'sku' => 'STZ-'.strtoupper(fake()->unique()->bothify('??###')),
             'description' => fake()->sentence(),

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\RatingType;
+use Database\Factories\RatingFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -23,7 +24,7 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 ])]
 class Rating extends Model
 {
-    /** @use HasFactory<\Database\Factories\RatingFactory> */
+    /** @use HasFactory<RatingFactory> */
     use HasFactory;
 
     public function ratable(): MorphTo

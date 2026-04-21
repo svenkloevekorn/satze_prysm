@@ -2,7 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\CompetitorProduct;
 use App\Models\Rating;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,9 +21,9 @@ class RatingFactory extends Factory
     {
         return [
             'ratable_type' => 'competitor_product',
-            'ratable_id' => \App\Models\CompetitorProduct::factory(),
+            'ratable_id' => CompetitorProduct::factory(),
             'rating_dimension_id' => null,
-            'user_id' => \App\Models\User::factory(),
+            'user_id' => User::factory(),
             'type' => fake()->randomElement(['internal', 'external']),
             'score' => fake()->numberBetween(1, 10),
             'comment' => fake()->sentence(),

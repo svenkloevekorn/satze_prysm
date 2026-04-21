@@ -5,9 +5,10 @@ use App\Filament\Resources\Categories\Pages\EditCategory;
 use App\Filament\Resources\Categories\Pages\ListCategories;
 use App\Models\Category;
 use App\Models\User;
-use Spatie\Permission\Models\Role;
 
 use function Pest\Livewire\livewire;
+
+use Spatie\Permission\Models\Role;
 
 beforeEach(function () {
     $role = Role::firstOrCreate(['name' => 'super_admin', 'guard_name' => 'web']);

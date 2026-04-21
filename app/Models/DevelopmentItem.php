@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\DevelopmentStatus;
+use Database\Factories\DevelopmentItemFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -12,6 +13,14 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
+/**
+ * @property DevelopmentStatus $status
+ * @property int $id
+ * @property ?string $name
+ * @property ?int $category_id
+ * @property ?string $description
+ * @property ?float $target_price
+ */
 #[Fillable([
     'name',
     'category_id',
@@ -27,8 +36,9 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 ])]
 class DevelopmentItem extends Model implements HasMedia
 {
-    /** @use HasFactory<\Database\Factories\DevelopmentItemFactory> */
+    /** @use HasFactory<DevelopmentItemFactory> */
     use HasFactory;
+
     use InteractsWithMedia;
 
     public function category(): BelongsTo
