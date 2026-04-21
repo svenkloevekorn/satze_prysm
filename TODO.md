@@ -72,6 +72,52 @@ Siehe Erledigt-Bereich unten.
 
 ---
 
+## 🎯 Bewertungssystem – Ausbau (geplant, nächste Runde)
+
+### A) Multi-Dimension-Bewertung in einem Formular
+
+**Aktuell:** Eine `Rating`-Zeile = eine Dimension. Wenn ich ein Produkt „komplett"
+bewerten will, muss ich 5× auf „Bewertung hinzufügen" klicken (Design, Material,
+Verarbeitung, Performance, Preis-Leistung).
+
+**Gewünscht:** In EINEM Bewertungs-Formular alle aktiven Dimensionen auf einmal
+bewerten. Pro Dimension ein Score-Feld (1–10) + optional Kommentar.
+Beim Speichern werden mehrere Rating-Zeilen erzeugt.
+
+**Umsetzungs-Skizze:**
+- [ ] Neues Feld in `ratings`: `session_id` (UUID) – gruppiert zusammen-angelegte Bewertungen
+- [ ] Neues Filament-Form-Pattern „Multi-Rating": Repeater mit vorbefüllten Dimensionen
+- [ ] Button „Alle Dimensionen bewerten" im Produkt-Detail neben „Bewertung hinzufügen"
+- [ ] Oder: ein erweitertes Formular mit einer Spalte pro Dimension
+- [ ] Tests: mehrere Ratings aus einem Submit anlegen
+
+### B) Qualitätskriterien als Checkliste aktiv nutzen
+
+**Aktuell:** Qualitätskriterien sind nur eine Stammdaten-Liste mit Kategorie-Zuordnung.
+Sie zeigen dokumentarisch „worauf achten bei Kategorie X", aber sind nicht mit
+Produkten oder Bewertungen verknüpft.
+
+**Gewünscht:** Bei einem Produkt (Wettbewerber/Lieferant/Final/Entwicklung) sollen
+die relevanten Qualitätskriterien (via Kategorie) als **Checkliste** sichtbar
+sein. Jedes Kriterium kann dann geprüft werden.
+
+**Umsetzungs-Skizze:**
+- [ ] Neue Tabelle `quality_checks` (polymorph) mit Feldern:
+  `checkable_type`, `checkable_id`, `quality_criterion_id`, `status`
+  (pass/fail/n.a.), `comment`, `user_id`, `checked_at`
+- [ ] Trait `HasQualityChecks` (analog zu `HasRatings`)
+- [ ] RelationManager „Qualitäts-Checkliste" in Produkt-Resources:
+  zeigt alle Kriterien der Kategorie, User setzt pass/fail + Kommentar
+- [ ] Integration mit Entwicklungs-Items (bei Status „Sample erhalten" prüfen)
+- [ ] Dashboard-Widget „Qualitäts-Score" pro Produkt (% bestanden)
+- [ ] Tests: Kriterien aus Kategorie ziehen, Checks anlegen, Aggregate berechnen
+
+**Reihenfolge:** Erst A (Multi-Dimension), danach B (Checkliste). Beide
+Features bauen nicht aufeinander auf, sind aber beide Ausbauten am Bewertungs-/
+Qualitäts-Bereich.
+
+---
+
 ## 💡 Ideen / Backlog (post-MVP)
 
 - Variantenmanagement

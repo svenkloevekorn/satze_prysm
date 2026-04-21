@@ -40,15 +40,17 @@
 
 ## 🔜 Was als nächstes ansteht
 
-### Vor Phase 7 noch offen
+### Priorität 1: Bewertungssystem ausbauen (in TODO.md detailliert)
 
-1. **Navigation-Umstrukturierung halb fertig**
-   - ✅ `Brand` bereits verschoben nach „Marktanalyse" (lokal geändert, noch nicht committed)
-   - ✅ `Shop` bereits verschoben nach „Marktanalyse"
-   - ✅ `RatingDimension` sort 4→2
-   - ✅ `QualityCriterion` sort 5→3
-   - ⏳ **Prüfen ob alles passt und committen**
-   - 💡 Die User-Idee: Stammdaten = nur übergreifende Entitäten; Marken & Shops nur Wettbewerb → in Marktanalyse
+**A) Multi-Dimension-Bewertung:** In EINEM Formular alle Dimensionen auf einmal
+bewerten (Design + Material + Performance + …). Aktuell muss man pro Dimension
+einzeln klicken. Details unter `TODO.md` → „Bewertungssystem – Ausbau".
+
+**B) Qualitätskriterien als aktive Checkliste:** Bisher nur Doku-Liste. Ziel:
+pro Produkt eine abhakbare Checkliste der Kriterien aus der zugehörigen
+Kategorie. Details unter `TODO.md` → „Bewertungssystem – Ausbau".
+
+**Reihenfolge:** erst A, dann B.
 
 ### Phase 7 – Deployment Mittwald
 
