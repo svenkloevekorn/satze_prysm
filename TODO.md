@@ -17,14 +17,9 @@ Siehe Erledigt-Bereich unten.
 
 ---
 
-## 🟡 Phase 2 – Modul 1: Market Research
+## 🟢 Phase 2 – Modul 1: Market Research *(erledigt)*
 
-- [ ] Migration + Model: `CompetitorProduct`
-- [ ] Migration: `product_shop_entries` (Shop ↔ Produkt, mit Preis + Datum)
-- [ ] Migration: polymorphe `attachments` Tabelle
-- [ ] Filament-Resource: `CompetitorProduct` inkl. Bilder, Shop-Einträge, Pos/Neg
-- [ ] CSV-Import für CompetitorProducts
-- [ ] Tests
+Siehe Erledigt-Bereich unten.
 
 ---
 
@@ -126,3 +121,20 @@ Siehe Erledigt-Bereich unten.
 - [x] Filter, Suche, deutsche Labels überall
 - [x] **14 Tests grün** (Category-Resource + Smoke-Tests aller 4 neuen Resources)
 - [x] Doku angelegt: `docs/MANUELLE-TESTS.md` für eigene Browser-Tests
+
+### Phase 2 – Modul 1: Market Research *(2026-04-21)*
+
+- [x] Migration + Model: `CompetitorProduct` (mit Marken/Kategorie-Relation, JSON für Materialien/Farben/Größen, Preisrahmen, Bewertung, Pos/Neg)
+- [x] Migration + Model: `ProductShopEntry` (Shop ↔ Produkt mit Preis + Datum + URL + Notiz)
+- [x] Filament-Resource: `CompetitorProduct` mit **4-Tab-Formular** (Allgemein, Eigenschaften, Preis & Bewertung, Bilder)
+- [x] **RelationManager** „Shop-Einträge" innerhalb des Produkt-Detailviews
+- [x] **Bilder-Upload** mit Spatie MediaLibrary (max 10 Bilder, Drag-Sort, Image-Editor)
+- [x] **CSV-Import** mit Auto-Anlegen von Marken/Kategorien
+- [x] Beispiel-CSV unter `docs/beispiel-imports/wettbewerbsprodukte-beispiel.csv`
+- [x] Filter: Marke, Kategorie, Preis-Spanne
+- [x] Tabelle: Thumbnail, Marke/Kategorie als Badges, Preis als €, Bewertung als x/10, Anzahl Shops
+- [x] 3 Demo-Wettbewerbsprodukte vorgeseedet (Castelli, Rapha, Assos) mit je 2 Shop-Einträgen
+- [x] Filament-Imports/Exports/Failed-Imports Tabellen migriert
+- [x] Navigation-Gruppe „Marktanalyse"
+- [x] **21 Tests grün** (7 neue für CompetitorProduct)
+- [x] Test-Doku erweitert: Phase 2 mit 25+ manuellen Test-Schritten

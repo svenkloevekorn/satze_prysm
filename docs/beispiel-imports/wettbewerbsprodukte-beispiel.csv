@@ -1,0 +1,4 @@
+name,brand,category,description,materials,colors,sizes,price_min,price_max,overall_rating,positives,negatives
+"Gore C5 Trail Light Jersey","Gore Wear","Cycling Jerseys","Leichtes Trail-Trikot","Polyester,Elasthan","Schwarz,Gelb","S,M,L,XL",69.99,89.99,7,"Gut belüftet, robust","Schnitt eng"
+"Pearl Izumi Quest Bib","Pearl Izumi","Bib Shorts","Einsteiger-Bib","Nylon,Lycra","Schwarz","S,M,L",49.99,69.99,6,"Solides Polster, fairer Preis","Material relativ dick"
+"Salomon Sense Aero Tee","Salomon","Running Shirts","Ultraleichtes Lauf-Shirt","Polyester","Weiß,Grün","S,M,L,XL",39.99,49.99,8,"Sehr leicht, schnelltrocknend","Etwas durchsichtig"

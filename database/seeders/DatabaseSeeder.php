@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
             RatingDimensionSeeder::class,
             ShopSeeder::class,
             QualityCriterionSeeder::class,
+            CompetitorProductSeeder::class,
         ]);
     }
 }

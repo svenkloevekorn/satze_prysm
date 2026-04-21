@@ -193,9 +193,77 @@ Wenn ich (Claude) eine neue Phase abgeschlossen habe, gehe so vor:
 
 ---
 
+## ✅ Phase 2 – Marktanalyse (Wettbewerbsprodukte) testen
+
+**Pfad im Menü:** Marktanalyse → Wettbewerbsprodukte
+
+> Dies ist das erste „große" Modul mit Tabs, Bildern, Relationen und CSV-Import. Bitte testet es besonders gründlich.
+
+### 🔹 6. Wettbewerbsprodukt anlegen (Tab-Formular)
+
+| # | Was tun? | Erwartung |
+|---|---|---|
+| 6.1 | Liste öffnen | 3 vorgeseedete Produkte sichtbar (Castelli Climber, Rapha Pro Team Bib, Assos Mille GT) |
+| 6.2 | Spalte „Shops" | Zeigt Anzahl der Shop-Einträge pro Produkt (sollte 2 sein) |
+| 6.3 | Klick „Neues Wettbewerbsprodukt" | Formular mit **4 Tabs** öffnet sich: Allgemein, Eigenschaften, Preis & Bewertung, Bilder |
+| 6.4 | Tab „Allgemein": Name leer lassen → Speichern | Validierungsfehler („required") |
+| 6.5 | Name „Test Produkt" + Kategorie auswählen | Pflichtfelder erfüllt |
+| 6.6 | Im Marken-Dropdown: „Erstellen" klicken → neue Marke „Mavic" anlegen | Marke wird im Dropdown sofort verfügbar |
+| 6.7 | Tab „Eigenschaften": Material „Polyester" eintippen + Komma | Tag wird erstellt |
+| 6.8 | Mehrere Größen tippen: S, M, L | Drei Tags entstehen |
+| 6.9 | Tab „Preis & Bewertung": Min 50, Max 80, Bewertung 7 | Werden gespeichert |
+| 6.10 | Bewertung 11 eingeben | Validierung blockt (max 10) |
+| 6.11 | Tab „Bilder": JPG-Bild hochladen | Upload startet, Vorschau erscheint |
+| 6.12 | Speichern | Produkt erscheint in der Liste mit Thumbnail |
+
+### 🔹 7. Wettbewerbsprodukt bearbeiten + Shop-Einträge
+
+| # | Was tun? | Erwartung |
+|---|---|---|
+| 7.1 | Eines der Demo-Produkte bearbeiten | Edit-Form öffnet sich, Felder vorbefüllt |
+| 7.2 | Unter dem Formular: **„Shop-Einträge"** Tabelle sichtbar | Zwei Einträge mit Shops und Preisen |
+| 7.3 | „Shop-Eintrag hinzufügen" → Shop wählen, URL + Preis + Datum eintragen | Wird gespeichert |
+| 7.4 | Klick auf URL eines Shop-Eintrags | Öffnet in neuem Tab |
+| 7.5 | Shop-Eintrag löschen | Bestätigung → weg |
+
+### 🔹 8. Filter & Suche
+
+| # | Was tun? | Erwartung |
+|---|---|---|
+| 8.1 | Suche nach „Castelli" | Nur Castelli-Produkte sichtbar |
+| 8.2 | Filter „Marke" → Rapha auswählen | Nur Rapha-Produkte |
+| 8.3 | Filter „Kategorie" → „Cycling Jerseys" | Nur Trikots |
+| 8.4 | Filter „Preis": von 100, bis 200 | Nur Produkte in der Preisspanne |
+| 8.5 | Spalte „Preis bis" ein-/ausblenden | Funktioniert |
+| 8.6 | Sortierung nach „Bewertung" | Höchste zuerst (10), niedrigste zuletzt |
+
+### 🔹 9. CSV-Import
+
+| # | Was tun? | Erwartung |
+|---|---|---|
+| 9.1 | Klick „CSV-Import" oben rechts | Modal öffnet sich |
+| 9.2 | CSV-Datei hochladen: `docs/beispiel-imports/wettbewerbsprodukte-beispiel.csv` | Spalten werden automatisch erkannt |
+| 9.3 | Spalten-Mapping prüfen (sollte stimmen) | Bestätigen |
+| 9.4 | Import starten | Notification: „3 Zeilen importiert" |
+| 9.5 | Liste neu laden | Drei neue Produkte: Gore C5, Pearl Izumi Quest, Salomon Sense |
+| 9.6 | Eines der importierten Produkte öffnen | Marke + Kategorie sind verlinkt, Materialien als Tags |
+
+> 💡 **Wichtig:** Marken und Kategorien, die in der CSV neu vorkommen, werden **automatisch angelegt** (z.B. „Gore Wear", „Pearl Izumi", „Salomon").
+
+### 🔹 10. Bilder-Verwaltung
+
+| # | Was tun? | Erwartung |
+|---|---|---|
+| 10.1 | Produkt mit Bildern öffnen → Tab „Bilder" | Vorschauen sichtbar |
+| 10.2 | Bilder per Drag & Drop umsortieren | Reihenfolge bleibt erhalten |
+| 10.3 | Bild bearbeiten (Stift-Icon) → zuschneiden | Crop-Editor öffnet sich |
+| 10.4 | Bild löschen | Verschwindet aus Vorschau |
+| 10.5 | Mehr als 10 Bilder hochladen versuchen | Wird blockiert (Max 10) |
+
+---
+
 ## 🌍 Spätere Phasen *(Platzhalter)*
 
-### Phase 2 – Wettbewerbsprodukte *(folgt)*
 ### Phase 3 – Lieferantenverwaltung *(folgt)*
 ### Phase 4 – Bewertungssystem *(folgt)*
 ### Phase 5 – Produkt-Entwicklung *(folgt)*

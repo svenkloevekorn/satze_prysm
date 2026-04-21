@@ -19,6 +19,11 @@ class Category extends Model
         return $this->belongsToMany(QualityCriterion::class);
     }
 
+    public function competitorProducts(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(CompetitorProduct::class);
+    }
+
     protected static function booted(): void
     {
         static::saving(function (Category $category) {
