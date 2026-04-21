@@ -2,12 +2,15 @@
 
 namespace App\Filament\Resources\Ratings\Pages;
 
+use App\Filament\Concerns\RedirectsToIndex;
 use App\Filament\Resources\Ratings\RatingResource;
 use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
 
 class EditRating extends EditRecord
 {
+    use RedirectsToIndex;
+
     protected static string $resource = RatingResource::class;
 
     protected function getHeaderActions(): array

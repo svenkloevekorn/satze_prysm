@@ -10,6 +10,7 @@ parameters:
 
     excludePaths:
         - app/Filament/Resources/**/Pages/*
+        - app/Filament/Concerns/*
         - database/migrations/*
 
     reportUnmatchedIgnoredErrors: false
