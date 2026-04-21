@@ -46,6 +46,7 @@ class CompetitorProductResource extends Resource
     {
         return [
             \App\Filament\Resources\CompetitorProducts\RelationManagers\ShopEntriesRelationManager::class,
+            \App\Filament\Resources\CompetitorProducts\RelationManagers\RatingsRelationManager::class,
         ];
     }
 

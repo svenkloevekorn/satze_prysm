@@ -52,6 +52,10 @@ class SupplierProductsTable
                     ->numeric()
                     ->sortable()
                     ->toggleable(),
+                TextColumn::make('ratings_avg_score')
+                    ->label('⌀ Bewertung')
+                    ->avg('ratings', 'score')
+                    ->formatStateUsing(fn ($state) => $state ? round($state, 1).'/10' : '–'),
                 TextColumn::make('updated_at')
                     ->label('Geändert')
                     ->dateTime('d.m.Y H:i')

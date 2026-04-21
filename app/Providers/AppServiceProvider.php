@@ -17,5 +17,10 @@ class AppServiceProvider extends ServiceProvider
         Gate::before(function ($user, $ability) {
             return $user->hasRole('super_admin') ? true : null;
         });
+
+        \Illuminate\Database\Eloquent\Relations\Relation::morphMap([
+            'competitor_product' => \App\Models\CompetitorProduct::class,
+            'supplier_product' => \App\Models\SupplierProduct::class,
+        ]);
     }
 }

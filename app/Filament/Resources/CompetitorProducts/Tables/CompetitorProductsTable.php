@@ -58,6 +58,14 @@ class CompetitorProductsTable
                     ->label('Shops')
                     ->counts('shopEntries')
                     ->badge(),
+                TextColumn::make('ratings_avg_score')
+                    ->label('⌀ Bewertung')
+                    ->avg('ratings', 'score')
+                    ->formatStateUsing(fn ($state) => $state ? round($state, 1).'/10' : '–'),
+                TextColumn::make('ratings_count')
+                    ->label('# Bew.')
+                    ->counts('ratings')
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
                     ->label('Geändert')
                     ->dateTime('d.m.Y H:i')

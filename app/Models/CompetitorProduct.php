@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\HasRatings;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -28,6 +29,7 @@ class CompetitorProduct extends Model implements HasMedia
 {
     /** @use HasFactory<\Database\Factories\CompetitorProductFactory> */
     use HasFactory;
+    use HasRatings;
     use InteractsWithMedia;
 
     public function brand(): BelongsTo

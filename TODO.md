@@ -29,13 +29,9 @@ Siehe Erledigt-Bereich unten.
 
 ---
 
-## 🟡 Phase 4 – Bewertungssystem
+## 🟢 Phase 4 – Bewertungssystem *(erledigt)*
 
-- [ ] Migration: polymorphe `ratings` Tabelle (ratable_type, ratable_id)
-- [ ] Model `Rating` + Relation zu Dimension
-- [ ] RelationManager in Filament für Ratings
-- [ ] Übersichts-Seite: unbewertete Produkte
-- [ ] Tests
+Siehe Erledigt-Bereich unten.
 
 ---
 
@@ -151,3 +147,19 @@ Siehe Erledigt-Bereich unten.
 - [x] 2 Demo-Lieferanten (Textiles Pro Portugal, Sofia Garments) mit Kontakten & Produkten
 - [x] **31 Tests grün** (10 neue für Supplier-Modul, inkl. Cascade-Delete-Test)
 - [x] Test-Doku erweitert: Phase 3 mit 20+ manuellen Test-Schritten
+
+### Phase 4 – Bewertungssystem *(2026-04-21)*
+
+- [x] Enum `RatingType` (Intern/Extern mit Label + Farbe)
+- [x] Migration + Model: `Rating` (polymorph über `ratable_type` + `ratable_id`, mit Dimension, User, Score 1-10, Kommentar, Pos/Neg, Datum)
+- [x] Trait `App\Models\Concerns\HasRatings` (wiederverwendbar, mit `averageScore()`)
+- [x] Trait eingebunden in `CompetitorProduct` UND `SupplierProduct`
+- [x] Morph-Map registriert (`competitor_product`, `supplier_product` statt voller Klassennamen)
+- [x] Eigenständige Filament-Resource `Rating` („Alle Bewertungen") unter Navigation „Bewertungen"
+- [x] **RelationManager** `RatingsRelationManager` in CompetitorProduct + SupplierProduct
+- [x] Durchschnitts-Score-Spalte in beiden Produkt-Listen (`ratings_avg_score`)
+- [x] Formulare: Art (intern/extern) farbig, Dimension optional (leer = Gesamtbewertung), User automatisch gesetzt
+- [x] Filter: Art, Objekt-Typ, Dimension
+- [x] 5 Demo-Bewertungen vorgeseedet (Castelli 3×, Rapha 1×, Lieferanten-Produkt 1×)
+- [x] **41 Tests grün** (10 neue für Ratings, inkl. polymorphe Relationen, Validierung, AverageScore)
+- [x] Test-Doku erweitert: Phase 4 mit 20+ manuellen Test-Schritten

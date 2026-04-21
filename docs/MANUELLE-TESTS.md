@@ -333,9 +333,72 @@ Wenn ich (Claude) eine neue Phase abgeschlossen habe, gehe so vor:
 
 ---
 
+## ✅ Phase 4 – Bewertungssystem testen
+
+**Menü:** Bewertungen → Alle Bewertungen
+
+> Das Bewertungssystem ist **polymorph**: die gleiche Bewertungs-Logik funktioniert
+> für Wettbewerbsprodukte UND Lieferanten-Produkte (und später Entwicklungsprodukte).
+
+### 🔹 17. Übersicht aller Bewertungen
+
+| # | Was tun? | Erwartung |
+|---|---|---|
+| 17.1 | „Alle Bewertungen" öffnen | Mindestens 5 Bewertungen vorhanden (vorgeseedet) |
+| 17.2 | Spalte „Objekt-Typ" | Zeigt „Wettbewerber" oder „Lieferant" als Badge |
+| 17.3 | Spalte „Dimension" | Entweder Dimension-Name oder „Gesamt" als Platzhalter |
+| 17.4 | Spalte „Art" | **Intern** (blau) oder **Extern** (gelb) farbig |
+| 17.5 | Spalte „Score" | Als „x/10" formatiert |
+| 17.6 | Filter „Art" → nur intern | Nur interne Bewertungen |
+| 17.7 | Filter „Objekt-Typ" → Wettbewerbsprodukt | Nur Bewertungen zu Wettbewerbsprodukten |
+| 17.8 | Filter „Dimension" → „Design" | Nur Design-Bewertungen |
+
+### 🔹 18. Bewertung bei Wettbewerbsprodukt hinzufügen
+
+**Pfad:** Marktanalyse → Wettbewerbsprodukte → (ein Produkt öffnen)
+
+| # | Was tun? | Erwartung |
+|---|---|---|
+| 18.1 | „Castelli Climber Jersey" öffnen | Am unteren Ende **Tab „Bewertungen"** sichtbar |
+| 18.2 | Tab „Bewertungen" öffnen | 3 vorgeseedete Bewertungen (Design, Material, externe Gesamt) |
+| 18.3 | „Bewertung hinzufügen" | Formular öffnet sich **ohne** „Objekt-Typ"-Feld (automatisch gesetzt!) |
+| 18.4 | Art „intern", Dimension „Verarbeitung", Score 9, Kommentar „Nähte super sauber" | Wird gespeichert |
+| 18.5 | Score 11 eingeben | Validierung blockt (1-10) |
+| 18.6 | Neue Bewertung ohne Dimension → leer lassen | Als **Gesamt-Bewertung** gespeichert |
+| 18.7 | Bewertung bearbeiten | Formular vorausgefüllt |
+| 18.8 | Bewertung löschen | Verschwindet |
+
+### 🔹 19. Bewertung bei Lieferanten-Produkt hinzufügen
+
+**Pfad:** Lieferanten → Lieferanten-Produkte → (ein Produkt öffnen) → Tab „Bewertungen"
+
+| # | Was tun? | Erwartung |
+|---|---|---|
+| 19.1 | „Pro Summer Jersey PT-001" öffnen | Tab „Bewertungen" mit 1 vorgeseedete Bewertung |
+| 19.2 | Bewertung hinzufügen (intern, Material, 8, Kommentar) | OK |
+| 19.3 | Zurück zur **Übersicht „Alle Bewertungen"** | Neue Bewertung mit Objekt-Typ „Lieferant" taucht auf |
+
+### 🔹 20. Durchschnitts-Bewertung in Listen
+
+| # | Was tun? | Erwartung |
+|---|---|---|
+| 20.1 | Liste „Wettbewerbsprodukte" | Neue Spalte „⌀ Bewertung" zeigt Schnitt als „x.x/10" |
+| 20.2 | Liste „Lieferanten-Produkte" | Gleiche Spalte vorhanden |
+| 20.3 | Produkt ohne Bewertung | Zeigt „–" |
+
+### 🔹 21. Bewertung über die eigenständige Resource (quer)
+
+| # | Was tun? | Erwartung |
+|---|---|---|
+| 21.1 | „Alle Bewertungen" → „Neu" | **Vollständiges** Formular: Objekt-Typ + Objekt + Bewertung |
+| 21.2 | Objekt-Typ „Wettbewerbsprodukt" wählen | Feld „Objekt" zeigt nur Wettbewerbsprodukte zur Auswahl |
+| 21.3 | Objekt-Typ ändern auf „Lieferanten-Produkt" | Feld „Objekt" leert sich, zeigt jetzt Lieferanten-Produkte |
+| 21.4 | Speichern, zurück zum Produkt → Bewertungen-Tab | Neue Bewertung sichtbar |
+
+---
+
 ## 🌍 Spätere Phasen *(Platzhalter)*
 
-### Phase 4 – Bewertungssystem *(folgt)*
 ### Phase 5 – Produkt-Entwicklung *(folgt)*
 ### Phase 6 – Dashboard & Suche *(folgt)*
 ### Phase 7 – Deployment Mittwald *(folgt)*
