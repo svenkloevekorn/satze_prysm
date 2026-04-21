@@ -1,0 +1,4 @@
+name,supplier,category,description,purchase_price,recommended_retail_price,moq,materials,colors,sizes,notes
+"Winter Jacket WJ-01","Textiles Pro Portugal","Jackets","Gefütterte Winterjacke, wind- und wasserdicht",42.00,149.00,100,"Polyester,Primaloft","Schwarz,Blau,Rot","S,M,L,XL","Wasserdicht bis 10.000mm"
+"Running Short RS-03","Sofia Garments","Running Shorts","Running Short mit innerer Liner",12.00,39.00,200,"Polyester","Schwarz,Grau","S,M,L","Seitentasche integriert"
+"Trail Bag TB-12","Alpine Outdoor Ltd","Bags","Trail-Rucksack 15L mit Trinksystem",28.00,99.00,50,"Nylon,Polyester","Schwarz,Grün","One Size","Inkl. 1.5L Hydration Bladder"

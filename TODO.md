@@ -23,13 +23,9 @@ Siehe Erledigt-Bereich unten.
 
 ---
 
-## 🟡 Phase 3 – Modul 3: Supplier Management
+## 🟢 Phase 3 – Modul 3: Supplier Management *(erledigt)*
 
-- [ ] Migration + Model + Resource: `Supplier`
-- [ ] Migration + Model + Resource: `SupplierContact` (Relation zu Supplier)
-- [ ] Migration + Model + Resource: `SupplierProduct`
-- [ ] CSV-Import für SupplierProducts
-- [ ] Tests
+Siehe Erledigt-Bereich unten.
 
 ---
 
@@ -138,3 +134,20 @@ Siehe Erledigt-Bereich unten.
 - [x] Navigation-Gruppe „Marktanalyse"
 - [x] **21 Tests grün** (7 neue für CompetitorProduct)
 - [x] Test-Doku erweitert: Phase 2 mit 25+ manuellen Test-Schritten
+
+### Phase 3 – Modul 3: Supplier Management *(2026-04-21)*
+
+- [x] Migration + Model: `Supplier` (Name, Land, Adresse, Bewertung 1-10, Notizen, Aktiv)
+- [x] Migration + Model: `SupplierContact` (Name, Email, Telefon, Rolle, Notizen – cascade-delete)
+- [x] Migration + Model: `SupplierProduct` (EK, VK, MOQ, Materialien/Farben/Größen als JSON, Bilder, Notizen)
+- [x] Filament-Resource: `Supplier` mit **2 RelationManagers** (Ansprechpartner + Produkte)
+- [x] Filament-Resource: `SupplierProduct` mit **4-Tab-Formular** (Allgemein, Preis & Konditionen, Eigenschaften, Bilder)
+- [x] Tabelle: Lieferanten mit Counter-Badges (Kontakte + Produkte)
+- [x] Tabelle: Lieferanten-Produkte mit EK/VK/MOQ-Spalten
+- [x] **CSV-Import** für Lieferanten-Produkte (legt Lieferanten + Kategorien automatisch an)
+- [x] Beispiel-CSV unter `docs/beispiel-imports/lieferanten-produkte-beispiel.csv`
+- [x] Filter: Lieferant, Kategorie, Aktiv-Status
+- [x] Navigation-Gruppe „Lieferanten"
+- [x] 2 Demo-Lieferanten (Textiles Pro Portugal, Sofia Garments) mit Kontakten & Produkten
+- [x] **31 Tests grün** (10 neue für Supplier-Modul, inkl. Cascade-Delete-Test)
+- [x] Test-Doku erweitert: Phase 3 mit 20+ manuellen Test-Schritten

@@ -262,9 +262,79 @@ Wenn ich (Claude) eine neue Phase abgeschlossen habe, gehe so vor:
 
 ---
 
+## ✅ Phase 3 – Lieferantenverwaltung testen
+
+**Pfad im Menü:** Lieferanten → Lieferanten / Lieferanten-Produkte
+
+### 🔹 11. Lieferanten anlegen & Stammdaten
+
+| # | Was tun? | Erwartung |
+|---|---|---|
+| 11.1 | Liste „Lieferanten" öffnen | 2 vorgeseedete Firmen: Textiles Pro Portugal (PT, 9/10), Sofia Garments (TR, 7/10) |
+| 11.2 | Spalten „Kontakte" und „Produkte" | Jeweils Anzahl als Badge |
+| 11.3 | Klick „Neu" → Firmenname leer lassen → Speichern | Validierungsfehler „required" |
+| 11.4 | Firmenname „Alpine Outdoor Ltd", Land „IT", Bewertung 11 | Validierung blockt Bewertung >10 |
+| 11.5 | Bewertung auf 8 setzen, Adresse + Notiz eintragen, speichern | Lieferant erscheint in Liste |
+| 11.6 | Filter „Aktiv-Status" → „Nur aktive" | Funktioniert |
+
+### 🔹 12. Ansprechpartner (Contacts RelationManager)
+
+| # | Was tun? | Erwartung |
+|---|---|---|
+| 12.1 | „Textiles Pro Portugal" öffnen | Detail-Seite mit Sections „Stammdaten", „Bewertung & Notizen" und darunter **Ansprechpartner** + **Produkte** |
+| 12.2 | Unter „Ansprechpartner" → „Ansprechpartner hinzufügen" → Name „Paulo", Rolle „Export Manager", Email, Telefon | Wird gespeichert, in Liste |
+| 12.3 | Auf E-Mail in der Tabelle klicken | Copy-Icon → kopiert in Zwischenablage |
+| 12.4 | Ansprechpartner bearbeiten | Form öffnet sich vorbefüllt |
+| 12.5 | E-Mail „nicht-gültig" eintragen | Validierungsfehler |
+| 12.6 | Ansprechpartner löschen | Bestätigung, dann weg |
+
+### 🔹 13. Lieferanten-Produkte (inline im Lieferanten)
+
+| # | Was tun? | Erwartung |
+|---|---|---|
+| 13.1 | Weiter im Lieferanten-Detail: „Produkte des Lieferanten" sichtbar | 1 Produkt (z.B. „Pro Summer Jersey PT-001") mit EK 18.50 €, VK 69 €, MOQ 100 |
+| 13.2 | „Produkt hinzufügen" → Name, Kategorie, EK 20, VK 60, MOQ 50 | Wird gespeichert |
+| 13.3 | Produkt löschen | Verschwindet |
+
+### 🔹 14. Lieferanten-Produkte (als eigener Menüpunkt mit Tabs)
+
+**Pfad:** Lieferanten → Lieferanten-Produkte
+
+| # | Was tun? | Erwartung |
+|---|---|---|
+| 14.1 | Liste öffnen | Alle Lieferanten-Produkte übergreifend sichtbar (mindestens die 2 vorgeseedete) |
+| 14.2 | Klick „Neues Lieferanten-Produkt" | Formular mit **4 Tabs**: Allgemein, Preis & Konditionen, Eigenschaften, Bilder |
+| 14.3 | Tab „Allgemein": Name + Lieferant wählen (Pflichtfelder) | Andere Felder optional |
+| 14.4 | Tab „Preis & Konditionen": EK/VK/MOQ | Werden gespeichert |
+| 14.5 | Tab „Eigenschaften": Materialien/Farben/Größen als Tags | Komma → neuer Tag |
+| 14.6 | Tab „Bilder": 2 Bilder hochladen | Vorschau sichtbar |
+| 14.7 | Filter „Lieferant" → Mehrere auswählen | Zeigt nur Produkte dieser Lieferanten |
+| 14.8 | Filter „Kategorie" | Funktioniert |
+| 14.9 | Sortierung nach EK-Preis | Funktioniert |
+
+### 🔹 15. CSV-Import für Lieferanten-Produkte
+
+| # | Was tun? | Erwartung |
+|---|---|---|
+| 15.1 | Liste „Lieferanten-Produkte" → „CSV-Import" | Modal öffnet sich |
+| 15.2 | Beispieldatei `docs/beispiel-imports/lieferanten-produkte-beispiel.csv` hochladen | Spalten automatisch erkannt |
+| 15.3 | Import starten | Notification: „3 Zeilen importiert" |
+| 15.4 | Liste neu laden | 3 neue Produkte, inkl. *neuer* Lieferant „Alpine Outdoor Ltd" (automatisch angelegt!) |
+| 15.5 | Neu-angelegten Lieferanten öffnen | Ist aktiv, Name übernommen |
+
+> 💡 **Clever:** Auch Lieferanten werden automatisch angelegt, wenn sie in der CSV neu sind — genau wie bei den Wettbewerbsprodukten.
+
+### 🔹 16. Cascade-Delete (wichtig!)
+
+| # | Was tun? | Erwartung |
+|---|---|---|
+| 16.1 | Einen Lieferanten mit 2 Kontakten + 1 Produkt anlegen | OK |
+| 16.2 | Lieferanten löschen → Bestätigen | Kontakte UND Produkte verschwinden mit (Cascade) |
+
+---
+
 ## 🌍 Spätere Phasen *(Platzhalter)*
 
-### Phase 3 – Lieferantenverwaltung *(folgt)*
 ### Phase 4 – Bewertungssystem *(folgt)*
 ### Phase 5 – Produkt-Entwicklung *(folgt)*
 ### Phase 6 – Dashboard & Suche *(folgt)*
