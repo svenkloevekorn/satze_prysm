@@ -72,7 +72,7 @@ Siehe Erledigt-Bereich unten.
 
 ---
 
-## 🎯 Bewertungssystem – Ausbau (geplant, nächste Runde)
+## ✅ Bewertungssystem – Ausbau (erledigt 2026-04-22)
 
 ### A) Multi-Dimension-Bewertung in einem Formular
 
@@ -118,7 +118,7 @@ Qualitäts-Bereich.
 
 ---
 
-## 📦 UI-Ausbau: Produkte nach Kategorie gruppieren (geplant)
+## ✅ Feature C: Listen-Gruppierung (erledigt 2026-04-22)
 
 **Gewünscht:** In den Produkt-Listen (Wettbewerbsprodukte + Finale Produkte) sollen
 die Einträge **nach Kategorie gruppiert** angezeigt werden. Z.B. alle „Cycling Jerseys"
@@ -163,7 +163,7 @@ eigener Farbe + Icon angezeigt. Filter nach Quelle möglich.
 
 ---
 
-## 🖼️ Feature E: Galerie / Medienmanagement (geplant, groß)
+## ✅ Feature E: Galerie / Medienmanagement (erledigt 2026-04-22)
 
 **Ziel:** Zentrale Übersicht über alle verfügbaren Bilder, unabhängig
 von der Quelle (Wettbewerb / eigene / Lieferanten).
@@ -201,7 +201,7 @@ man muss erst ein Produkt/Entwicklungs-Item öffnen, um Bilder zu sehen.
 
 ---
 
-## 📱 Feature F: Influencer & Social Media Monitoring (geplant, groß)
+## 🟡 Feature F: Influencer & Social Media Monitoring (F.1 erledigt 2026-04-22, F.2+F.3 offen)
 
 **Ziel:** Datenbasierte Grundlage für Influencer-Kooperationen schaffen.
 

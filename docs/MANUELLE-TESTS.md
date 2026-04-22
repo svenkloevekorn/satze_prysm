@@ -548,6 +548,81 @@ Setzt Passwort neu und weist die super_admin-Rolle zu. Wird der User nicht gefun
 
 ---
 
+## 🧩 Neue Features (2026-04-22)
+
+### 🔹 34. Listen-Gruppierung (Feature C)
+
+| # | Was tun? | Erwartung |
+|---|---|---|
+| 34.1 | Wettbewerbsprodukte → Button „Gruppieren nach" (über der Tabelle) | Optionen: „Kategorie" / „Marke/Hersteller" / keine |
+| 34.2 | „Kategorie" wählen | Produkte in kollabierbaren Gruppen (1 Gruppe pro Kategorie) |
+| 34.3 | „Marke/Hersteller" wählen | Gruppierung nach Marke (Castelli, Rapha, …) |
+| 34.4 | Lieferanten-Produkte | Optionen: Kategorie / Lieferant |
+| 34.5 | Entwicklungs-Pipeline | Optionen: Kategorie / Status |
+| 34.6 | Finale Produkte | Option: Kategorie |
+
+### 🔹 35. Multi-Dimension-Bewertung (Feature A)
+
+**Pfad:** Wettbewerbsprodukt / Lieferanten-Produkt / Finales Produkt öffnen → Tab „Bewertungen"
+
+| # | Was tun? | Erwartung |
+|---|---|---|
+| 35.1 | Button „Alle Dimensionen bewerten" (zusätzlich zu „Einzelne Bewertung") | Modal öffnet sich |
+| 35.2 | Gemeinsame Felder: Quelle(n) + Bewertet am | OK |
+| 35.3 | Repeater mit einer Zeile pro aktiver Dimension (Design, Material, Verarbeitung, Performance, Preis-Leistung) | 5 Zeilen, Dimension vorgegeben |
+| 35.4 | In 3 Dimensionen Score setzen, 2 leer lassen | OK |
+| 35.5 | „Alle speichern" | Notification „3 Bewertungen angelegt", leere Zeilen ignoriert |
+| 35.6 | Zurück zur Bewertungen-Tabelle | 3 neue Zeilen mit den gesetzten Dimensionen |
+
+### 🔹 36. Medien-Galerie (Feature E)
+
+**Pfad:** Menü → Medien → Medien-Galerie
+
+| # | Was tun? | Erwartung |
+|---|---|---|
+| 36.1 | Galerie öffnen | Grid mit bunten Platzhalter-Bildern (Orange=Wettbewerb, Blau=Lieferant, Grün=Final, Lila=Entwicklung) |
+| 36.2 | Filter „Quelle → Wettbewerbsprodukte" | Nur orange Bilder sichtbar |
+| 36.3 | Filter „Marke → Castelli" | Nur Bilder von Castelli-Produkten |
+| 36.4 | Filter „Lieferant → Textiles Pro Portugal" | Nur Bilder von Textiles Pro |
+| 36.5 | Filter „Kategorie → Cycling Jerseys" | Nur Bilder von Cycling-Jersey-Produkten aus allen Quellen |
+| 36.6 | Filter „Quelle + Kategorie" kombinieren | Beide gleichzeitig aktiv |
+
+### 🔹 37. Qualitäts-Checkliste (Feature B)
+
+**Pfad:** Produkt öffnen → Tab „Qualitäts-Checkliste"
+
+| # | Was tun? | Erwartung |
+|---|---|---|
+| 37.1 | „Castelli Climber Jersey" öffnen → Tab „Qualitäts-Checkliste" | Leere Liste |
+| 37.2 | Button „Checkliste aus Kategorie füllen" → Bestätigen | Notification mit Anzahl; Liste hat Kriterien der Kategorie (Nahtqualität, Atmungsaktivität, Passform, Reflektoren) mit Status „Offen" |
+| 37.3 | Ein Kriterium auf „Bestanden" setzen + Kommentar | Badge grün mit Häkchen |
+| 37.4 | Ein anderes Kriterium auf „Nicht bestanden" + Kommentar | Badge rot mit X |
+| 37.5 | Ein Kriterium auf „Nicht anwendbar" | Badge grau |
+| 37.6 | Erneut „Checkliste aus Kategorie füllen" | Keine Duplikate – bestehende Checks bleiben |
+| 37.7 | Einzelnen Check hinzufügen (mit anderem Kriterium) | OK |
+
+### 🔹 38. Influencer & Social Media (Feature F.1)
+
+**Pfad:** Menü → Social Media → Influencer / Alle Kanäle
+
+| # | Was tun? | Erwartung |
+|---|---|---|
+| 38.1 | Liste „Influencer" | 2 Demo-Influencer (Lisa Cyclista, Marco Trailrunner) mit Kanal-Counter |
+| 38.2 | „Lisa Cyclista" öffnen → Tab „Social-Media-Kanäle" | 2 Kanäle (Instagram, YouTube) mit Follower-Zahlen |
+| 38.3 | „Kanal hinzufügen" → Plattform TikTok, Handle, Follower | Wird gespeichert |
+| 38.4 | Profilbild hochladen | Avatar erscheint in Tabelle |
+| 38.5 | Liste „Alle Kanäle" | 4+ Kanäle mit Plattform-Badges (farbig + Icon) |
+| 38.6 | Sortierung nach Follower | Höchste zuerst |
+| 38.7 | Filter „Plattform → Instagram" | Nur IG-Kanäle |
+| 38.8 | Gruppierung „Plattform" / „Besitzer-Typ" | Funktioniert |
+| 38.9 | Kanal öffnen → Tab „Monitoring-Snapshots" | 1 vorgeseedeter Snapshot |
+| 38.10 | „Snapshot hinzufügen" mit neuem Datum + Zahlen | OK |
+| 38.11 | SocialChannel → „Neu" → Besitzer-Typ wechseln | Besitzer-Dropdown aktualisiert sich (Influencer vs. Marke) |
+
+---
+
 ## 🌍 Spätere Phasen *(Platzhalter)*
 
 ### Phase 7 – Deployment Mittwald *(folgt)*
+### Phase F.2 – Auto-Monitoring Social Channels *(folgt, aus TODO)*
+### Phase F.3 – Analytics & Relevanz-Score *(folgt, aus TODO)*
