@@ -14,6 +14,7 @@ use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\NavigationGroup;
 use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -51,6 +52,15 @@ class AdminPanelProvider extends PanelProvider
                 LetzteAenderungenWidget::class,
                 SocialStatsWidget::class,
                 TopChannelsWidget::class,
+            ])
+            ->navigationGroups([
+                NavigationGroup::make('Marktanalyse')->collapsed(),
+                NavigationGroup::make('Lieferanten')->collapsed(),
+                NavigationGroup::make('Produkt-Entwicklung')->collapsed(),
+                NavigationGroup::make('Bewertungen')->collapsed(),
+                NavigationGroup::make('Medien')->collapsed(),
+                NavigationGroup::make('Social Media')->collapsed(),
+                NavigationGroup::make('System')->collapsed(),
             ])
             ->globalSearchKeyBindings(['command+k', 'ctrl+k'])
             ->middleware([
