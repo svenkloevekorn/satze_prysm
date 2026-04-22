@@ -26,7 +26,7 @@ class QualityCriterionResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Qualitätskriterien';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Stammdaten';
+    protected static string|\UnitEnum|null $navigationGroup = 'System';
 
     protected static ?int $navigationSort = 3;
 

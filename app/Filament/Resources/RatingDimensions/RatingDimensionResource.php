@@ -26,7 +26,7 @@ class RatingDimensionResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Bewertungs-Dimensionen';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Stammdaten';
+    protected static string|\UnitEnum|null $navigationGroup = 'System';
 
     protected static ?int $navigationSort = 2;
 
