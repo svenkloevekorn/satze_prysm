@@ -5,7 +5,9 @@ namespace App\Providers\Filament;
 use App\Filament\Widgets\LetzteAenderungenWidget;
 use App\Filament\Widgets\LetzteBewertungenWidget;
 use App\Filament\Widgets\OffeneEntwicklungenWidget;
+use App\Filament\Widgets\SocialStatsWidget;
 use App\Filament\Widgets\StatsOverview;
+use App\Filament\Widgets\TopChannelsWidget;
 use App\Filament\Widgets\UnbewerteteProdukteWidget;
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use Filament\Http\Middleware\Authenticate;
@@ -47,6 +49,8 @@ class AdminPanelProvider extends PanelProvider
                 UnbewerteteProdukteWidget::class,
                 LetzteBewertungenWidget::class,
                 LetzteAenderungenWidget::class,
+                SocialStatsWidget::class,
+                TopChannelsWidget::class,
             ])
             ->globalSearchKeyBindings(['command+k', 'ctrl+k'])
             ->middleware([
