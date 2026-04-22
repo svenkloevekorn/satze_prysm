@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Spatie\Activitylog\Models\Concerns\LogsActivity;
+use Spatie\Activitylog\Support\LogOptions;
 
 #[Fillable([
     'owner_type',
@@ -28,6 +30,8 @@ class SocialChannel extends Model
 {
     /** @use HasFactory<SocialChannelFactory> */
     use HasFactory;
+
+    use LogsActivity;
 
     public function owner(): MorphTo
     {
@@ -56,5 +60,13 @@ class SocialChannel extends Model
             'categories' => 'array',
             'is_active' => 'boolean',
         ];
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logFillable()
+            ->logOnlyDirty()
+            ->dontLogEmptyChanges();
     }
 }

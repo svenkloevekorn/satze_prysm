@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Influencers;
 
+use App\Filament\RelationManagers\ActivitiesRelationManager;
 use App\Filament\Resources\Influencers\Pages\CreateInfluencer;
 use App\Filament\Resources\Influencers\Pages\EditInfluencer;
 use App\Filament\Resources\Influencers\Pages\ListInfluencers;
@@ -47,6 +48,7 @@ class InfluencerResource extends Resource
     {
         return [
             ChannelsRelationManager::class,
+            ActivitiesRelationManager::class,
         ];
     }
 

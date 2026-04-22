@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\FinalProducts;
 
+use App\Filament\RelationManagers\ActivitiesRelationManager;
 use App\Filament\Resources\FinalProducts\Pages\CreateFinalProduct;
 use App\Filament\Resources\FinalProducts\Pages\EditFinalProduct;
 use App\Filament\Resources\FinalProducts\Pages\ListFinalProducts;
@@ -39,12 +40,17 @@ class FinalProductResource extends Resource
         return ['name', 'sku', 'category.name'];
     }
 
+    /**
+     * @return array<string, string>
+     */
     public static function getGlobalSearchResultDetails($record): array
     {
-        return [
-            'SKU' => $record->sku,
-            'Kategorie' => $record->category?->name,
+        $details = [
+            'SKU' => (string) ($record->sku ?? ''),
+            'Kategorie' => (string) ($record->category->name ?? ''),
         ];
+
+        return array_filter($details, static fn (string $v): bool => $v !== '');
     }
 
     public static function form(Schema $schema): Schema
@@ -62,6 +68,7 @@ class FinalProductResource extends Resource
         return [
             RatingsRelationManager::class,
             QualityChecksRelationManager::class,
+            ActivitiesRelationManager::class,
         ];
     }
 

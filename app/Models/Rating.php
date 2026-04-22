@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Spatie\Activitylog\Models\Concerns\LogsActivity;
+use Spatie\Activitylog\Support\LogOptions;
 
 #[Fillable([
     'ratable_type',
@@ -27,6 +29,8 @@ class Rating extends Model
 {
     /** @use HasFactory<RatingFactory> */
     use HasFactory;
+
+    use LogsActivity;
 
     public function ratable(): MorphTo
     {
@@ -50,5 +54,13 @@ class Rating extends Model
             'sources' => AsEnumCollection::of(RatingSource::class),
             'rated_at' => 'date',
         ];
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logFillable()
+            ->logOnlyDirty()
+            ->dontLogEmptyChanges();
     }
 }

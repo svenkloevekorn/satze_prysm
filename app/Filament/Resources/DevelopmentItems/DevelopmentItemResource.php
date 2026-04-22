@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\DevelopmentItems;
 
+use App\Filament\RelationManagers\ActivitiesRelationManager;
 use App\Filament\Resources\DevelopmentItems\Pages\CreateDevelopmentItem;
 use App\Filament\Resources\DevelopmentItems\Pages\EditDevelopmentItem;
 use App\Filament\Resources\DevelopmentItems\Pages\ListDevelopmentItems;
@@ -38,12 +39,17 @@ class DevelopmentItemResource extends Resource
         return ['name', 'category.name'];
     }
 
+    /**
+     * @return array<string, string>
+     */
     public static function getGlobalSearchResultDetails($record): array
     {
-        return [
-            'Status' => $record->status?->label(),
-            'Kategorie' => $record->category?->name,
+        $details = [
+            'Status' => (string) ($record->status?->label() ?? ''),
+            'Kategorie' => (string) ($record->category->name ?? ''),
         ];
+
+        return array_filter($details, static fn (string $v): bool => $v !== '');
     }
 
     public static function form(Schema $schema): Schema
@@ -60,6 +66,7 @@ class DevelopmentItemResource extends Resource
     {
         return [
             QualityChecksRelationManager::class,
+            ActivitiesRelationManager::class,
         ];
     }
 

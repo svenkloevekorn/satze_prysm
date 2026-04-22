@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Spatie\Activitylog\Models\Concerns\LogsActivity;
+use Spatie\Activitylog\Support\LogOptions;
 
 #[Fillable([
     'checkable_type',
@@ -23,6 +25,8 @@ class QualityCheck extends Model
 {
     /** @use HasFactory<QualityCheckFactory> */
     use HasFactory;
+
+    use LogsActivity;
 
     public function checkable(): MorphTo
     {
@@ -45,5 +49,13 @@ class QualityCheck extends Model
             'status' => QualityCheckStatus::class,
             'checked_at' => 'date',
         ];
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logFillable()
+            ->logOnlyDirty()
+            ->dontLogEmptyChanges();
     }
 }

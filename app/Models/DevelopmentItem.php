@@ -11,6 +11,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Spatie\Activitylog\Models\Concerns\LogsActivity;
+use Spatie\Activitylog\Support\LogOptions;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
@@ -42,6 +44,7 @@ class DevelopmentItem extends Model implements HasMedia
 
     use HasQualityChecks;
     use InteractsWithMedia;
+    use LogsActivity;
 
     public function category(): BelongsTo
     {
@@ -103,5 +106,13 @@ class DevelopmentItem extends Model implements HasMedia
             'target_price' => 'decimal:2',
             'deadline' => 'date',
         ];
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logFillable()
+            ->logOnlyDirty()
+            ->dontLogEmptyChanges();
     }
 }

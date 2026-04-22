@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Spatie\Activitylog\Models\Concerns\LogsActivity;
+use Spatie\Activitylog\Support\LogOptions;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
@@ -30,6 +32,7 @@ class FinalProduct extends Model implements HasMedia
     use HasQualityChecks;
     use HasRatings;
     use InteractsWithMedia;
+    use LogsActivity;
 
     public function developmentItem(): BelongsTo
     {
@@ -48,5 +51,13 @@ class FinalProduct extends Model implements HasMedia
             'retail_price' => 'decimal:2',
             'launched_at' => 'date',
         ];
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logFillable()
+            ->logOnlyDirty()
+            ->dontLogEmptyChanges();
     }
 }

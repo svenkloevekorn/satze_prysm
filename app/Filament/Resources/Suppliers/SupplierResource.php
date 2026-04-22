@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Suppliers;
 
+use App\Filament\RelationManagers\ActivitiesRelationManager;
 use App\Filament\Resources\Suppliers\Pages\CreateSupplier;
 use App\Filament\Resources\Suppliers\Pages\EditSupplier;
 use App\Filament\Resources\Suppliers\Pages\ListSuppliers;
@@ -39,12 +40,17 @@ class SupplierResource extends Resource
         return ['name', 'country'];
     }
 
+    /**
+     * @return array<string, string>
+     */
     public static function getGlobalSearchResultDetails($record): array
     {
-        return [
-            'Land' => $record->country,
-            'Bewertung' => $record->rating ? "{$record->rating}/10" : null,
+        $details = [
+            'Land' => (string) ($record->country ?? ''),
+            'Bewertung' => $record->rating ? "{$record->rating}/10" : '',
         ];
+
+        return array_filter($details, static fn (string $v): bool => $v !== '');
     }
 
     public static function form(Schema $schema): Schema
@@ -62,6 +68,7 @@ class SupplierResource extends Resource
         return [
             ContactsRelationManager::class,
             ProductsRelationManager::class,
+            ActivitiesRelationManager::class,
         ];
     }
 
