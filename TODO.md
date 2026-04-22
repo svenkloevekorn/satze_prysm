@@ -370,6 +370,11 @@ Marke und Tool klar unterschieden werden.
    - Entitäten: Trend, TrendObservation
    - Manuelle Pflege + CSV-Import später
    - APIs (Google Trends, TikTok) in Phase F.2-ähnlichen Satellit
+10. [ ] **User-Impersonation** (Support-Feature)
+   - `stechstudio/filament-impersonate` installieren
+   - Aktion „Als diesen Benutzer einloggen" in UserResource
+   - Nur für `super_admin`-Rolle erlauben
+   - Prominentes Banner beim Impersonation („Du bist als X eingeloggt · Zurückwechseln")
 
 ### 🟡 Auf externe Abhängigkeit (Shop/ERP) wartend
 

@@ -98,6 +98,7 @@
     <div>
       <div class="text-xs font-semibold uppercase tracking-wider text-stone-400 mb-2">Verwaltung</div>
       <div class="space-y-0.5">
+        <a href="#a-profil" class="toc-link block px-3 py-1.5 rounded-md hover:bg-stone-100 dark:hover:bg-stone-800 transition">Mein Profil &amp; 2FA</a>
         <a href="#a-benutzer" class="toc-link block px-3 py-1.5 rounded-md hover:bg-stone-100 dark:hover:bg-stone-800 transition">Benutzer</a>
         <a href="#a-rollen" class="toc-link block px-3 py-1.5 rounded-md hover:bg-stone-100 dark:hover:bg-stone-800 transition">Rollen &amp; Rechte</a>
         <a href="#a-stammdaten" class="toc-link block px-3 py-1.5 rounded-md hover:bg-stone-100 dark:hover:bg-stone-800 transition">Stammdaten</a>
@@ -483,6 +484,42 @@
     </div>
   </section>
 
+  <!-- MEIN PROFIL -->
+  <section id="a-profil" class="scroll-mt-20">
+    <h3 class="text-2xl font-bold mb-1">Mein Profil &amp; 2FA</h3>
+    <p class="text-stone-600 dark:text-stone-300 mb-4">Oben rechts auf deinen Namen / Avatar klicken → <strong>„Mein Profil"</strong>. Hier pflegst du deinen eigenen Zugang.</p>
+    <div class="grid md:grid-cols-2 gap-3 mb-6">
+      <div class="p-4 rounded-xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800">
+        <div class="font-semibold mb-1">Persönliche Daten</div>
+        <p class="text-sm text-stone-500 dark:text-stone-400">Name &amp; E-Mail-Adresse ändern.</p>
+      </div>
+      <div class="p-4 rounded-xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800">
+        <div class="font-semibold mb-1">Passwort</div>
+        <p class="text-sm text-stone-500 dark:text-stone-400">Aktuelles + neues Passwort eingeben. Mindestens 8 Zeichen.</p>
+      </div>
+      <div class="p-4 rounded-xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800">
+        <div class="font-semibold mb-1">Browser-Sitzungen</div>
+        <p class="text-sm text-stone-500 dark:text-stone-400">Sieh alle Geräte, auf denen du aktuell eingeloggt bist. Mit einem Klick auf allen anderen Geräten ausloggen.</p>
+      </div>
+      <div class="p-4 rounded-xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800">
+        <div class="font-semibold mb-1">2-Faktor-Authentifizierung</div>
+        <p class="text-sm text-stone-500 dark:text-stone-400">Per Authenticator-App (Google Authenticator, 1Password, Authy …) zusätzlichen Schutz für deinen Account aktivieren.</p>
+      </div>
+    </div>
+    <h4 class="font-semibold text-lg mb-3">2FA aktivieren – Schritt für Schritt</h4>
+    <ol class="space-y-3">
+      <li class="flex gap-4"><span class="step-number">1</span><div>„Mein Profil" → Abschnitt <strong>Two Factor Authentication</strong> → Button <strong>„Enable 2FA"</strong></div></li>
+      <li class="flex gap-4"><span class="step-number">2</span><div>Aktuelles Passwort bestätigen, dann erscheint ein <strong>QR-Code</strong></div></li>
+      <li class="flex gap-4"><span class="step-number">3</span><div>QR-Code in deiner Authenticator-App scannen – die App zeigt jetzt einen 6-stelligen Code, der alle 30 Sekunden wechselt</div></li>
+      <li class="flex gap-4"><span class="step-number">4</span><div>Aktuellen Code aus der App eingeben → <strong>Bestätigen</strong></div></li>
+      <li class="flex gap-4"><span class="step-number">5</span><div><strong>Recovery-Codes</strong> speichern (Passwort-Manager, Safe). Brauchst du, falls dein Handy verloren geht.</div></li>
+    </ol>
+    <div class="mt-6 p-4 rounded-xl bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500">
+      <div class="text-sm font-semibold text-blue-700 dark:text-blue-300 mb-1">🔐 Ab jetzt</div>
+      <div class="text-sm text-blue-900/80 dark:text-blue-100/80">Beim Login wirst du nach dem Passwort zusätzlich nach dem 6-stelligen Code aus der App gefragt. Nur dann kommst du rein.</div>
+    </div>
+  </section>
+
   <!-- BENUTZER -->
   <section id="a-benutzer" class="scroll-mt-20">
     <h3 class="text-2xl font-bold mb-1">Benutzer verwalten</h3>
@@ -570,7 +607,7 @@
       <p class="text-stone-600 dark:text-stone-300 mb-3">Technischer Ansprechpartner für Prysm:</p>
       <div class="font-medium">Sven Kloevekorn</div>
       <a href="mailto:sven.kloevekorn@marbet.com" class="text-brand-600 dark:text-brand-400 hover:underline">sven.kloevekorn@marbet.com</a>
-      <p class="text-xs text-stone-400 mt-6">Letzte Aktualisierung: 2026-04-22 · Benutzer-Management ergänzt</p>
+      <p class="text-xs text-stone-400 mt-6">Letzte Aktualisierung: 2026-04-22 · Mein Profil + 2FA ergänzt</p>
     </div>
   </section>
 
