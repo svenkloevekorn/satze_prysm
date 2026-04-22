@@ -74,10 +74,11 @@ class CompetitorProductForm
                                     ]),
                             ]),
 
-                        Tab::make('Preis & Bewertung')
+                        Tab::make('Preis')
                             ->icon('heroicon-o-currency-euro')
                             ->schema([
                                 Section::make('Preisrahmen')
+                                    ->description('Bewertungen (Score, Stärken, Schwächen) werden unten im Reiter „Bewertungen" gepflegt — mit Dimensionen, Quellen und History.')
                                     ->columns(2)
                                     ->schema([
                                         TextInput::make('price_min')
@@ -90,23 +91,6 @@ class CompetitorProductForm
                                             ->numeric()
                                             ->step(0.01)
                                             ->prefix('€'),
-                                    ]),
-                                Section::make('Allgemeine Bewertung')
-                                    ->schema([
-                                        TextInput::make('overall_rating')
-                                            ->label('Gesamt-Bewertung (1-10)')
-                                            ->numeric()
-                                            ->minValue(1)
-                                            ->maxValue(10)
-                                            ->suffix('/10'),
-                                        Textarea::make('positives')
-                                            ->label('👍 Positive Punkte')
-                                            ->rows(4)
-                                            ->columnSpanFull(),
-                                        Textarea::make('negatives')
-                                            ->label('👎 Negative Punkte')
-                                            ->rows(4)
-                                            ->columnSpanFull(),
                                     ]),
                             ]),
 

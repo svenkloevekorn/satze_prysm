@@ -22,9 +22,6 @@ use Spatie\MediaLibrary\InteractsWithMedia;
     'sizes',
     'price_min',
     'price_max',
-    'overall_rating',
-    'positives',
-    'negatives',
 ])]
 class CompetitorProduct extends Model implements HasMedia
 {
@@ -57,7 +54,6 @@ class CompetitorProduct extends Model implements HasMedia
             'sizes' => 'array',
             'price_min' => 'decimal:2',
             'price_max' => 'decimal:2',
-            'overall_rating' => 'integer',
         ];
     }
 }

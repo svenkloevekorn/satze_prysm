@@ -38,7 +38,6 @@ it('legt ein neues Wettbewerbsprodukt an', function () {
             'category_id' => $category->id,
             'price_min' => 49.99,
             'price_max' => 79.99,
-            'overall_rating' => 8,
         ])
         ->call('create')
         ->assertHasNoFormErrors();

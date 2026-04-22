@@ -53,10 +53,6 @@ class CompetitorProductsTable
                     ->money('EUR')
                     ->sortable()
                     ->toggleable(),
-                TextColumn::make('overall_rating')
-                    ->label('Bewertung')
-                    ->formatStateUsing(fn ($state) => $state ? "{$state}/10" : '–')
-                    ->sortable(),
                 TextColumn::make('shop_entries_count')
                     ->label('Shops')
                     ->counts('shopEntries')
@@ -68,7 +64,8 @@ class CompetitorProductsTable
                 TextColumn::make('ratings_count')
                     ->label('# Bew.')
                     ->counts('ratings')
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->badge()
+                    ->color('info'),
                 TextColumn::make('updated_at')
                     ->label('Geändert')
                     ->dateTime('d.m.Y H:i')

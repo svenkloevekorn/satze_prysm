@@ -30,9 +30,9 @@ class CompetitorProductExporter extends Exporter
                 ->state(fn ($record) => is_array($record->sizes) ? implode(', ', $record->sizes) : $record->sizes),
             ExportColumn::make('price_min')->label('Mindestpreis'),
             ExportColumn::make('price_max')->label('Höchstpreis'),
-            ExportColumn::make('overall_rating')->label('Bewertung (1-10)'),
-            ExportColumn::make('positives')->label('Positive Punkte'),
-            ExportColumn::make('negatives')->label('Negative Punkte'),
+            ExportColumn::make('ratings_avg_score')
+                ->label('⌀ Bewertung (1-10)')
+                ->state(fn ($record) => $record->averageScore()),
             ExportColumn::make('created_at')->label('Erstellt am'),
             ExportColumn::make('updated_at')->label('Geändert am'),
         ];

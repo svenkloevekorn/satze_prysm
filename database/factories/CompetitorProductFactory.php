@@ -31,9 +31,6 @@ class CompetitorProductFactory extends Factory
             'sizes' => ['S', 'M', 'L', 'XL'],
             'price_min' => $min,
             'price_max' => $min + fake()->numberBetween(10, 50),
-            'overall_rating' => fake()->numberBetween(1, 10),
-            'positives' => fake()->sentence(),
-            'negatives' => fake()->sentence(),
         ];
     }
 }

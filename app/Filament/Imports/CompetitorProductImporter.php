@@ -60,14 +60,6 @@ class CompetitorProductImporter extends Importer
                 ->label('Höchstpreis')
                 ->numeric()
                 ->rules(['nullable', 'numeric']),
-            ImportColumn::make('overall_rating')
-                ->label('Bewertung (1-10)')
-                ->integer()
-                ->rules(['nullable', 'integer', 'min:1', 'max:10']),
-            ImportColumn::make('positives')
-                ->label('Positive Punkte'),
-            ImportColumn::make('negatives')
-                ->label('Negative Punkte'),
         ];
     }
 

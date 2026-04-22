@@ -32,9 +32,6 @@ class CompetitorProductSeeder extends Seeder
                 'sizes' => ['S', 'M', 'L', 'XL'],
                 'price_min' => 89.00,
                 'price_max' => 119.00,
-                'overall_rating' => 8,
-                'positives' => 'Sehr atmungsaktiv, leichtes Material, gute Passform',
-                'negatives' => 'Etwas teuer, Reißverschluss könnte robuster sein',
             ],
             [
                 'name' => 'Rapha Pro Team Bib Shorts II',
@@ -46,9 +43,6 @@ class CompetitorProductSeeder extends Seeder
                 'sizes' => ['XS', 'S', 'M', 'L', 'XL'],
                 'price_min' => 220.00,
                 'price_max' => 260.00,
-                'overall_rating' => 9,
-                'positives' => 'Hervorragender Komfort auch auf langen Touren',
-                'negatives' => 'Premium-Preis',
             ],
             [
                 'name' => 'Assos Mille GT Jersey',
@@ -60,9 +54,6 @@ class CompetitorProductSeeder extends Seeder
                 'sizes' => ['S', 'M', 'L'],
                 'price_min' => 110.00,
                 'price_max' => 140.00,
-                'overall_rating' => 7,
-                'positives' => 'Solide Verarbeitung, vielseitig einsetzbar',
-                'negatives' => 'Schnitt fällt klein aus',
             ],
         ];
 
