@@ -255,6 +255,39 @@ man muss erst ein Produkt/Entwicklungs-Item öffnen, um Bilder zu sehen.
 
 ---
 
+## 🏷️ NAMING FIX (höchste Prio – Refactoring-Task)
+
+**Problem:** Die Software heißt aktuell „Staeze PM" — aber **„Staeze" ist die
+Marke** (Sportbekleidung), nicht das Tool. Muss umbenannt werden, damit
+Marke und Tool klar unterschieden werden.
+
+**Vorschlag-Optionen:** Pulse / BrandBrain / Fluxo / Basis / Radar
+(Empfehlung: **Pulse** – kurz, Dashboard-Gefühl)
+
+**Refactoring-Umfang (wenn Name entschieden ist):**
+- [ ] `.env` und `.env.example`: `APP_NAME="<Name>"`
+- [ ] `README.md` Titel + alle Texte
+- [ ] `CLAUDE.md`, `PLAN.md`, `TODO.md`, `SESSION-STATE.md`
+- [ ] `docs/*.md` (MANUELLE-TESTS, user-guide, STRATEGIE-ROADMAP)
+- [ ] `docs/checkliste.html` (Titel, Storage-Key `staeze-pm-checkliste-v1`)
+- [ ] Artisan-Befehle:
+  * `staeze:reset-admin` → `<kurz>:reset-admin`
+  * `staeze:fetch-channel-metrics` → `<kurz>:fetch-channel-metrics`
+- [ ] Session-Cookie-Name in `config/session.php` (aktuell `staeze-pm-session`)
+- [ ] Cache-Prefix in `config/cache.php` (aktuell `staeze-pm-cache`)
+- [ ] Mail-Absender-Defaults
+- [ ] Admin-Panel-Title (Filament `$brandName`)
+- [ ] Playwright-/Test-Fixtures falls vorhanden
+- [ ] Commit-Message: "refactor: rename application Staeze PM → <Name>"
+
+**Nicht ändern:**
+- Marken-Namen in Demo-Daten (Seeder: „Staeze Pro Summer Jersey v1" bleibt –
+  das ist die ECHTE Marke, das ist korrekt)
+- Git-Repo-Name + Ordnername (Ordner heißt `STZ_staeze-produktmanagement` –
+  kann bleiben oder auch umbenannt werden, User-Entscheidung)
+
+---
+
 ## 🗺️ Strategische Roadmap
 
 **Siehe `docs/STRATEGIE-ROADMAP.md`** – umfassendes Dokument mit:
@@ -289,35 +322,78 @@ man muss erst ein Produkt/Entwicklungs-Item öffnen, um Bilder zu sehen.
 
 ---
 
-## 💡 Ideen / Backlog (post-MVP)
+## 🚀 Offene Aufgaben – priorisiert
 
-**Kern-Erweiterungen (in Roadmap-Phase 1-2):**
-- Variantenmanagement (Größen × Farben × SKUs)
-- Audit Log / Historie je Objekt (spatie/laravel-activitylog)
-- Globales Tagging-System
-- Bulk-Edit für Produkte
-- Import-Historie
+### ⏸️ Wartet auf User
 
-**Satelliten-Software (in Roadmap-Phase 2+):**
-- Shop-Sync-Bridge (Shopware/Shopify ↔ Staeze PM)
-- Kampagnen-Manager für Influencer-Kooperationen
-- Retouren-Intelligence (ERP → Qualitätsmanagement)
-- Marketing-Kalender
-- Trend-Radar (Google Trends, TikTok, Hashtags)
-- Nachhaltigkeits-Tracker (CO2, Recycling)
-- B2B-Wholesale-Portal
-- PIM-Export für Marktplätze (Amazon, Zalando)
-- Lieferanten-Portal (externer Login)
-- Mobile-App für Qualitätscheck (QR-Code)
-- Kunden-Feedback-Ingestion (Shop-Reviews → Ratings)
+- [ ] **Software-Name entscheiden** (Pulse / BrandBrain / Fluxo / Basis / Radar / eigener)
+- [ ] **Shop-Entscheidung:** Shopware 6 oder Shopify?
+- [ ] **Phase 7 Deployment:** GitHub-Repo anlegen + Mittwald-Server vorbereiten
+  (SSH, PostgreSQL 16+, PHP 8.3+, Domain)
 
-**Advanced (Roadmap-Phase 4-6):**
-- KI-Trendanalyse (LLM auf Kundenfeedback-Cluster)
-- KI-Produktvorschläge (Markt × Lieferanten-Kapazität)
-- Bild-Analyse für automatische Qualitätsbewertung
-- Mehrsprachigkeit DE/EN
-- Externe Bewertungs-APIs (Amazon, Trustpilot)
-- API (REST/GraphQL) für externe Integration
+### 🔥 Direkt machbar – keine externen Abhängigkeiten (empfohlene Reihenfolge)
+
+1. [ ] **Admin-Settings-Modul** (siehe oben – hoch priorisiert)
+   - API-Keys verschlüsselt
+   - Feature-Toggles
+   - Default-Werte
+2. [ ] **Variantenmanagement-Basis** (Voraussetzung Shop-Anbindung)
+   - Neue Tabelle `product_variants` (größen × farben × SKU × Preis-override)
+   - Polymorph an CompetitorProduct + FinalProduct + SupplierProduct
+   - SKU-Generator (Präfix + auto-Inkrement)
+   - Lagerstatus-Feld (nur Final: Stück aktuell/reserviert)
+3. [ ] **Audit Log / Historie** (Compliance + Debugging)
+   - `spatie/laravel-activitylog` installieren
+   - Trait `LogsActivity` auf alle wichtigen Models
+   - RelationManager „Änderungshistorie" in Edit-Pages
+4. [ ] **Globales Tagging-System**
+   - `spatie/laravel-tags` installieren
+   - Tags auf Produkte, Entwicklungs-Items, Influencer, Media
+   - Filter & Bulk-Tagging in Tabellen
+5. [ ] **Import-Historie & Bulk-Edit**
+   - Dashboard-Widget „Letzte Imports"
+   - Link zu Failed-Rows
+   - Bulk-Action „Preis ändern" / „Status setzen" in Produkt-Tabellen
+6. [ ] **Kampagnen-Manager** (Roadmap 5.2.2 – baut auf Influencer-Modul auf)
+   - Entitäten: Campaign, CampaignSlot, Briefing, Deliverable
+   - Status-Workflow: Anfrage → Zusage → Briefing → Live → Abgerechnet
+   - Produkt-Zuordnung + Influencer-Zuordnung
+7. [ ] **Marketing-Kalender**
+   - Content-Planung (Social-Posts, Newsletter-Entwürfe, PR)
+   - Verknüpfung mit Produkt-Launches + Kampagnen
+   - Freigabe-Workflow
+   - Filament-Kalender-View
+8. [ ] **Nachhaltigkeits-Tracker**
+   - Felder am Produkt: CO2, Recycling-Anteil, Zertifikate
+   - Supplier-Scoring erweitern (Fair-Trade, BSCI)
+9. [ ] **Trend-Radar-Struktur** (ohne externe APIs)
+   - Entitäten: Trend, TrendObservation
+   - Manuelle Pflege + CSV-Import später
+   - APIs (Google Trends, TikTok) in Phase F.2-ähnlichen Satellit
+
+### 🟡 Auf externe Abhängigkeit (Shop/ERP) wartend
+
+10. [ ] **Shop-Sync-Bridge** – wenn Shop-Entscheidung da ist
+11. [ ] **Retouren-Intelligence** – sobald ERP angebunden
+12. [ ] **Kunden-Feedback-Ingestion** – wenn Shop läuft (Shop-Reviews → Ratings)
+
+### 🟠 Größere Vorhaben (aus Strategie-Roadmap)
+
+- [ ] Lieferanten-Portal (externer Login, eigene Filament-Instanz)
+- [ ] Mobile-App für Qualitätscheck (QR-Code, offline-fähig)
+- [ ] B2B-Wholesale-Portal
+- [ ] PIM-Export für Marktplätze (Amazon, Zalando)
+
+### 🧠 Advanced (Roadmap-Phase 4-6)
+
+- [ ] F.2 echte Platform-APIs (Instagram Graph, TikTok Business, YouTube Data)
+  – aktuell läuft SimulatedFetcher
+- [ ] KI-Trendanalyse (LLM auf Kundenfeedback-Cluster)
+- [ ] KI-Produktvorschläge
+- [ ] Bild-Analyse für automatische Qualitätsbewertung
+- [ ] Mehrsprachigkeit DE/EN (Backend + Content)
+- [ ] Externe Bewertungs-APIs (Amazon, Trustpilot)
+- [ ] Öffentliche API (REST/GraphQL)
 
 ---
 
