@@ -24,7 +24,10 @@ class RatingFactory extends Factory
             'ratable_id' => CompetitorProduct::factory(),
             'rating_dimension_id' => null,
             'user_id' => User::factory(),
-            'type' => fake()->randomElement(['internal', 'external']),
+            'sources' => fake()->randomElements(
+                ['product_ordered', 'product_worn', 'product_seen_online', 'story', 'forum_posts'],
+                fake()->numberBetween(1, 2),
+            ),
             'score' => fake()->numberBetween(1, 10),
             'comment' => fake()->sentence(),
             'positives' => fake()->sentence(),

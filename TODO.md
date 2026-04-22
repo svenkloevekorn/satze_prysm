@@ -152,35 +152,14 @@ wählen können. Filament-Syntax:
 
 ---
 
-## 🔍 Bewertungs-Quellen erweitern (geplant)
+## ✅ Bewertungs-Quellen (erledigt 2026-04-22, ersetzt intern/extern)
 
-**Gewünscht:** Zusätzliche Auswahl bei der Bewertung, woher die Einschätzung
-stammt. Als **Multiple-Select** (mehrere Quellen pro Bewertung möglich).
+Alte `type`-Spalte (intern/extern) **ersetzt durch Multi-Select `sources`**:
+- Product ordered / Product worn / Product seen online / Story / Forum posts
 
-**Neue Quellen-Optionen:**
-- Product ordered (Produkt selbst bestellt)
-- Product worn (Produkt getragen/getestet)
-- Product seen online (online gesehen, nicht angefasst)
-- Story (persönliche Geschichte / Erfahrungsbericht)
-- Forum posts (Meinungen aus Foren aggregiert)
-
-**❓ Offene Frage:** Sollen diese die aktuelle intern/extern-Unterscheidung
-**ersetzen** oder **ergänzen**?
-- Variante A (ersetzen): `type` wird Multi-Select mit diesen 5 Werten
-- Variante B (ergänzen): neues Feld `sources` (JSON-Array) zusätzlich zu `type`
-  → ermöglicht z.B. `type=external` + `sources=[forum_posts, product_seen_online]`
-
-**Empfehlung:** Variante B — intern/extern ist eine grobe Kategorisierung
-(Meine Meinung vs. Andere), die neuen Punkte sind konkrete Quellen dazu.
-
-**Umsetzungs-Skizze (Variante B):**
-- [ ] Migration: Spalte `sources` (JSON-Array) in `ratings`
-- [ ] Enum `RatingSource` mit 5 Werten + `label()` + `icon()`
-- [ ] Rating-Model: cast `sources` als Array, Relation-Methode für Label-Aggregation
-- [ ] Filament-Formular: Multi-Select `sources` mit Enum-Optionen
-- [ ] Tabelle: Quellen als Badges anzeigen
-- [ ] Filter: „Quelle enthält …" (für Analyse später)
-- [ ] Tests: mehrere Quellen speichern, Filter testen
+Eine Bewertung kann jetzt **mehrere Quellen** gleichzeitig haben (z.B.
+`['product_worn', 'product_ordered']`). Quellen werden als Badges mit
+eigener Farbe + Icon angezeigt. Filter nach Quelle möglich.
 
 ---
 

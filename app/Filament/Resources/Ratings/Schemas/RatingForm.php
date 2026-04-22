@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources\Ratings\Schemas;
 
-use App\Enums\RatingType;
+use App\Enums\RatingSource;
 use App\Models\CompetitorProduct;
 use App\Models\FinalProduct;
 use App\Models\SupplierProduct;
@@ -51,12 +51,14 @@ class RatingForm
 
         $fields[] = Section::make('Bewertung')
             ->schema([
-                Grid::make(3)->schema([
-                    Select::make('type')
-                        ->label('Art')
-                        ->options(RatingType::options())
-                        ->default(RatingType::Internal->value)
-                        ->required(),
+                Select::make('sources')
+                    ->label('Quelle(n) der Bewertung')
+                    ->multiple()
+                    ->options(RatingSource::options())
+                    ->required()
+                    ->helperText('Woher kommt diese Einschätzung? Mehrfach-Auswahl möglich.')
+                    ->columnSpanFull(),
+                Grid::make(2)->schema([
                     Select::make('rating_dimension_id')
                         ->label('Dimension')
                         ->relationship('dimension', 'name', fn ($query) => $query->where('is_active', true))

@@ -2,7 +2,7 @@
 
 namespace App\Filament\Widgets;
 
-use App\Enums\RatingType;
+use App\Enums\RatingSource;
 use App\Models\Rating;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
@@ -37,11 +37,13 @@ class LetzteBewertungenWidget extends BaseWidget
                     ->label('Dimension')
                     ->badge()
                     ->placeholder('Gesamt'),
-                TextColumn::make('type')
-                    ->label('Art')
+                TextColumn::make('sources')
+                    ->label('Quellen')
                     ->badge()
-                    ->formatStateUsing(fn (RatingType $state) => $state->label())
-                    ->color(fn (RatingType $state) => $state->color()),
+                    ->formatStateUsing(fn (RatingSource $state) => $state->label())
+                    ->color(fn (RatingSource $state) => $state->color())
+                    ->icon(fn (RatingSource $state) => $state->icon())
+                    ->placeholder('–'),
                 TextColumn::make('score')
                     ->label('Score')
                     ->formatStateUsing(fn (int $state) => "{$state}/10"),

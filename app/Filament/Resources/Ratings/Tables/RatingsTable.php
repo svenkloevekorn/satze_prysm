@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources\Ratings\Tables;
 
-use App\Enums\RatingType;
+use App\Enums\RatingSource;
 use App\Models\CompetitorProduct;
 use App\Models\FinalProduct;
 use App\Models\SupplierProduct;
@@ -39,11 +39,13 @@ class RatingsTable
                     ->label('Dimension')
                     ->badge()
                     ->placeholder('Gesamt'),
-                TextColumn::make('type')
-                    ->label('Art')
+                TextColumn::make('sources')
+                    ->label('Quellen')
                     ->badge()
-                    ->formatStateUsing(fn (RatingType $state) => $state->label())
-                    ->color(fn (RatingType $state) => $state->color()),
+                    ->formatStateUsing(fn (RatingSource $state) => $state->label())
+                    ->color(fn (RatingSource $state) => $state->color())
+                    ->icon(fn (RatingSource $state) => $state->icon())
+                    ->placeholder('–'),
                 TextColumn::make('score')
                     ->label('Score')
                     ->formatStateUsing(fn (int $state) => "{$state}/10")
@@ -57,9 +59,15 @@ class RatingsTable
                     ->sortable(),
             ])
             ->filters([
-                SelectFilter::make('type')
-                    ->label('Art')
-                    ->options(RatingType::options()),
+                SelectFilter::make('sources')
+                    ->label('Quelle')
+                    ->options(RatingSource::options())
+                    ->query(function ($query, array $data) {
+                        return $query->when(
+                            $data['value'] ?? null,
+                            fn ($q, $val) => $q->whereJsonContains('sources', $val),
+                        );
+                    }),
                 SelectFilter::make('ratable_type')
                     ->label('Objekt-Typ')
                     ->options([

@@ -1,6 +1,6 @@
 <?php
 
-use App\Enums\RatingType;
+use App\Enums\RatingSource;
 use App\Filament\Resources\CompetitorProducts\Pages\EditCompetitorProduct;
 use App\Filament\Resources\CompetitorProducts\RelationManagers\RatingsRelationManager as CompetitorRatingsRM;
 use App\Filament\Resources\Ratings\Pages\CreateRating;
@@ -36,7 +36,7 @@ it('legt eine Bewertung über die eigenständige Resource an', function () {
         ->fillForm([
             'ratable_type' => 'competitor_product',
             'ratable_id' => $product->id,
-            'type' => RatingType::Internal->value,
+            'sources' => [RatingSource::ProductWorn->value],
             'score' => 8,
             'comment' => 'Test Kommentar',
         ])
@@ -114,14 +114,28 @@ it('zeigt Bewertungen im SupplierProduct-RelationManager', function () {
     ])->assertSuccessful();
 });
 
-it('unterscheidet zwischen internen und externen Bewertungen', function () {
+it('speichert und filtert Bewertungen nach Quellen (Multi-Select)', function () {
     $product = CompetitorProduct::factory()->create();
 
-    Rating::factory()->create(['ratable_type' => 'competitor_product', 'ratable_id' => $product->id, 'type' => 'internal']);
-    Rating::factory()->create(['ratable_type' => 'competitor_product', 'ratable_id' => $product->id, 'type' => 'external']);
+    Rating::factory()->create([
+        'ratable_type' => 'competitor_product',
+        'ratable_id' => $product->id,
+        'sources' => ['product_worn', 'product_ordered'],
+    ]);
+    Rating::factory()->create([
+        'ratable_type' => 'competitor_product',
+        'ratable_id' => $product->id,
+        'sources' => ['forum_posts'],
+    ]);
 
-    expect($product->ratings()->where('type', 'internal')->count())->toBe(1);
-    expect($product->ratings()->where('type', 'external')->count())->toBe(1);
+    // Filter: Bewertungen mit Quelle "product_worn"
+    expect($product->ratings()->whereJsonContains('sources', 'product_worn')->count())->toBe(1);
+    expect($product->ratings()->whereJsonContains('sources', 'forum_posts')->count())->toBe(1);
+    expect($product->ratings)->toHaveCount(2);
+
+    // Die erste Bewertung hat beide Quellen
+    $first = $product->ratings()->whereJsonContains('sources', 'product_worn')->first();
+    expect($first->sources)->toHaveCount(2);
 });
 
 it('erlaubt Bewertung mit oder ohne Dimension', function () {

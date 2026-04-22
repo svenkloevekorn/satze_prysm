@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use App\Enums\RatingType;
+use App\Enums\RatingSource;
 use Database\Factories\RatingFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Casts\AsEnumCollection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -15,7 +16,7 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
     'ratable_id',
     'rating_dimension_id',
     'user_id',
-    'type',
+    'sources',
     'score',
     'comment',
     'positives',
@@ -46,7 +47,7 @@ class Rating extends Model
     {
         return [
             'score' => 'integer',
-            'type' => RatingType::class,
+            'sources' => AsEnumCollection::of(RatingSource::class),
             'rated_at' => 'date',
         ];
     }
