@@ -55,8 +55,13 @@ Finale-Produkte-Listen umschaltbare Gruppierung nach Kategorie oder Hersteller/M
 (Wettbewerb: `brand.name`, Lieferant: `supplier.name`). Filament `->groups()`.
 Details unter `TODO.md` → „UI-Ausbau: Produkte nach Kategorie gruppieren".
 
-**Reihenfolge:** erst A, dann B, dann C (C ist vergleichsweise klein und
-könnte auch zwischenrein als Quick-Win).
+**D) Bewertungs-Quellen erweitern:** Multi-Select-Feld `sources` bei Bewertungen
+mit 5 Quellen: Product ordered, Product worn, Product seen online, Story,
+Forum posts. ❓ Offene Frage: ersetzen oder ergänzen zu intern/extern?
+Details unter `TODO.md` → „Bewertungs-Quellen erweitern".
+
+**Reihenfolge:** erst A, dann B, dann C (C + D sind kleine Quick-Wins und
+könnten auch zwischenrein kommen).
 
 ### Phase 7 – Deployment Mittwald
 
