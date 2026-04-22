@@ -13,6 +13,7 @@ use Spatie\Activitylog\Models\Concerns\LogsActivity;
 use Spatie\Activitylog\Support\LogOptions;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\Tags\HasTags;
 
 #[Fillable([
     'development_item_id',
@@ -31,6 +32,7 @@ class FinalProduct extends Model implements HasMedia
 
     use HasQualityChecks;
     use HasRatings;
+    use HasTags;
     use InteractsWithMedia;
     use LogsActivity;
 

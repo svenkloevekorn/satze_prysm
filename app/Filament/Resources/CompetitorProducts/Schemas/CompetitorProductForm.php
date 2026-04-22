@@ -4,6 +4,7 @@ namespace App\Filament\Resources\CompetitorProducts\Schemas;
 
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Forms\Components\SpatieTagsInput;
 use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -72,6 +73,10 @@ class CompetitorProductForm
                                             ->placeholder('Größe eingeben + Enter')
                                             ->splitKeys([',', 'Tab']),
                                     ]),
+                                SpatieTagsInput::make('tags')
+                                    ->label('Tags (frei)')
+                                    ->placeholder('z.B. Best-Seller, Neu, Trend')
+                                    ->columnSpanFull(),
                             ]),
 
                         Tab::make('Preis')

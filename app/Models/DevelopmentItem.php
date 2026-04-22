@@ -15,6 +15,7 @@ use Spatie\Activitylog\Models\Concerns\LogsActivity;
 use Spatie\Activitylog\Support\LogOptions;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\Tags\HasTags;
 
 /**
  * @property DevelopmentStatus $status
@@ -43,6 +44,7 @@ class DevelopmentItem extends Model implements HasMedia
     use HasFactory;
 
     use HasQualityChecks;
+    use HasTags;
     use InteractsWithMedia;
     use LogsActivity;
 
