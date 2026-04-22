@@ -333,7 +333,7 @@ Marke und Tool klar unterschieden werden.
 
 ### 🔥 Direkt machbar – keine externen Abhängigkeiten (empfohlene Reihenfolge)
 
-1. [ ] **Admin-Settings-Modul** (siehe oben – hoch priorisiert)
+1. [x] **Admin-Settings-Modul** (siehe oben – hoch priorisiert) ✅ 2026-04-22
    - API-Keys verschlüsselt
    - Feature-Toggles
    - Default-Werte
@@ -342,11 +342,11 @@ Marke und Tool klar unterschieden werden.
    - Polymorph an CompetitorProduct + FinalProduct + SupplierProduct
    - SKU-Generator (Präfix + auto-Inkrement)
    - Lagerstatus-Feld (nur Final: Stück aktuell/reserviert)
-3. [ ] **Audit Log / Historie** (Compliance + Debugging)
+3. [x] **Audit Log / Historie** (Compliance + Debugging) ✅ 2026-04-22
    - `spatie/laravel-activitylog` installieren
    - Trait `LogsActivity` auf alle wichtigen Models
    - RelationManager „Änderungshistorie" in Edit-Pages
-4. [ ] **Globales Tagging-System**
+4. [x] **Globales Tagging-System** ✅ 2026-04-22
    - `spatie/laravel-tags` installieren
    - Tags auf Produkte, Entwicklungs-Items, Influencer, Media
    - Filter & Bulk-Tagging in Tabellen
@@ -363,7 +363,7 @@ Marke und Tool klar unterschieden werden.
    - Verknüpfung mit Produkt-Launches + Kampagnen
    - Freigabe-Workflow
    - Filament-Kalender-View
-8. [ ] **Nachhaltigkeits-Tracker**
+8. [x] **Nachhaltigkeits-Tracker** ✅ 2026-04-22
    - Felder am Produkt: CO2, Recycling-Anteil, Zertifikate
    - Supplier-Scoring erweitern (Fair-Trade, BSCI)
 9. [ ] **Trend-Radar-Struktur** (ohne externe APIs)
@@ -398,6 +398,28 @@ Marke und Tool klar unterschieden werden.
 ---
 
 ## ✅ Erledigt
+
+### Phase 8 – Querschnittsfunktionen *(2026-04-22)*
+
+- [x] **Feature 1 – Admin-Settings-Modul:**
+  - `spatie/laravel-settings` + Settings-Klassen `IntegrationsSettings`, `FeatureSettings`, `DefaultsSettings`
+  - Filament-Page „Einstellungen" mit 3 Tabs (Integrationen/Features/Defaults)
+  - API-Keys verschlüsselt in DB (encrypted Cast)
+- [x] **Feature 3 – Audit Log:**
+  - `spatie/laravel-activitylog` installiert
+  - Trait `LogsActivity` auf allen Haupt-Models (CompetitorProduct, SupplierProduct, FinalProduct, DevelopmentItem, Supplier, Brand, Influencer, SocialChannel etc.)
+  - RelationManager „Änderungshistorie" in allen relevanten Edit-Pages (Read-Only, farbige Event-Badges)
+- [x] **Feature 4 – Globales Tagging:**
+  - `spatie/laravel-tags` + `filament/spatie-laravel-tags-plugin`
+  - Tags auf CompetitorProduct, SupplierProduct, FinalProduct, DevelopmentItem, Influencer
+  - `SpatieTagsInput` in Forms, `SpatieTagsColumn` (toggleable) in Tables
+- [x] **Feature 7 – Nachhaltigkeits-Tracker:**
+  - Migration mit Feldern `co2_kg`, `recycled_content_pct`, `certifications` (JSON) auf allen 4 Produkt-Tabellen
+  - `sustainability_score` (1-10) + `certifications` auf `suppliers`
+  - Neuer Tab „Nachhaltigkeit" in allen Produkt-Formularen, Section im Supplier-Formular
+  - Toggleable Tabellen-Spalten (CO₂, Recycled) in allen Produkt-Listen
+  - **86 Tests grün** (1 neuer Test für Nachhaltigkeits-Felder)
+- [x] Dokumentation: `docs/MANUELLE-TESTS.md` Phase 8 (Tests 39–42), `docs/checkliste.html` Abschnitte Feature 1/3/4/7
 
 ### Phase 0 – Fundament *(2026-04-21)*
 

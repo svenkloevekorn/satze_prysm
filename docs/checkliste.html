@@ -564,6 +564,37 @@
   <div class="item"><input type="checkbox" id="f3-2"><label for="f3-2">Dashboard: Widget „Top-Kanäle nach Engagement" mit Top-5 + Relevanz-Score</label></div>
   <div class="item"><input type="checkbox" id="f3-3"><label for="f3-3">Relevanz-Score-Badge: grün ≥ 80, gelb ≥ 50, grau darunter</label></div>
 
+  <h3>Admin-Settings-Modul (Feature 1)</h3>
+  <div class="item"><input type="checkbox" id="s39-1"><label for="s39-1"><span class="step-id">39.1</span>Menü „Einstellungen" für super_admin sichtbar</label></div>
+  <div class="item"><input type="checkbox" id="s39-2"><label for="s39-2"><span class="step-id">39.2</span>Tab „Integrationen": API-Keys für Shop, Meta, TikTok, YouTube als Passwort-Felder</label></div>
+  <div class="item"><input type="checkbox" id="s39-3"><label for="s39-3"><span class="step-id">39.3</span>Tab „Features": Toggles für Influencer-Monitoring, CSV-Import, Galerie, Checkliste</label></div>
+  <div class="item"><input type="checkbox" id="s39-4"><label for="s39-4"><span class="step-id">39.4</span>Tab „Defaults": Währung, MwSt, Firmen-Angaben speichern</label></div>
+  <div class="item"><input type="checkbox" id="s39-5"><label for="s39-5"><span class="step-id">39.5</span>API-Keys werden verschlüsselt in DB abgelegt (nicht im Klartext einsehbar)</label></div>
+
+  <h3>Audit Log / Änderungshistorie (Feature 3)</h3>
+  <div class="item"><input type="checkbox" id="a40-1"><label for="a40-1"><span class="step-id">40.1</span>Produkt öffnen → Tab „Änderungshistorie" zeigt Einträge</label></div>
+  <div class="item"><input type="checkbox" id="a40-2"><label for="a40-2"><span class="step-id">40.2</span>Namen ändern → neuer „updated"-Eintrag mit Diff „alt → neu"</label></div>
+  <div class="item"><input type="checkbox" id="a40-3"><label for="a40-3"><span class="step-id">40.3</span>CO₂-Wert setzen → Eintrag zeigt Änderung am Feld co2_kg</label></div>
+  <div class="item"><input type="checkbox" id="a40-4"><label for="a40-4"><span class="step-id">40.4</span>Spalte „Wer" zeigt aktuellen User</label></div>
+  <div class="item"><input type="checkbox" id="a40-5"><label for="a40-5"><span class="step-id">40.5</span>Tab „Änderungshistorie" auch in Lieferant, Influencer, Development-Item</label></div>
+  <div class="item"><input type="checkbox" id="a40-6"><label for="a40-6"><span class="step-id">40.6</span>Log-Einträge sind Read-Only</label></div>
+
+  <h3>Globales Tagging (Feature 4)</h3>
+  <div class="item"><input type="checkbox" id="t41-1"><label for="t41-1"><span class="step-id">41.1</span>Produkt → Tab „Eigenschaften" → Feld „Tags (frei)" vorhanden</label></div>
+  <div class="item"><input type="checkbox" id="t41-2"><label for="t41-2"><span class="step-id">41.2</span>Tag „Best-Seller" eingeben + Enter → Pille erscheint</label></div>
+  <div class="item"><input type="checkbox" id="t41-3"><label for="t41-3"><span class="step-id">41.3</span>Liste zeigt Spalte „Tags" (toggleable)</label></div>
+  <div class="item"><input type="checkbox" id="t41-4"><label for="t41-4"><span class="step-id">41.4</span>Anderes Produkt: Autocomplete schlägt vorhandene Tags vor</label></div>
+  <div class="item"><input type="checkbox" id="t41-5"><label for="t41-5"><span class="step-id">41.5</span>Tags sind auch bei Influencer, Development-Item, Lieferant-Produkt nutzbar</label></div>
+
+  <h3>Nachhaltigkeits-Tracker (Feature 7)</h3>
+  <div class="item"><input type="checkbox" id="n42-1"><label for="n42-1"><span class="step-id">42.1</span>Produkt → Tab „Nachhaltigkeit": CO₂, Recycling-Anteil, Zertifikate</label></div>
+  <div class="item"><input type="checkbox" id="n42-2"><label for="n42-2"><span class="step-id">42.2</span>Werte eintragen + speichern → nach Reload erhalten</label></div>
+  <div class="item"><input type="checkbox" id="n42-3"><label for="n42-3"><span class="step-id">42.3</span>Liste: Spalten „CO₂" und „Recycled" (toggleable)</label></div>
+  <div class="item"><input type="checkbox" id="n42-4"><label for="n42-4"><span class="step-id">42.4</span>Nachhaltigkeit-Tab auch in Lieferanten-Produkt, Finalem Produkt, Development</label></div>
+  <div class="item"><input type="checkbox" id="n42-5"><label for="n42-5"><span class="step-id">42.5</span>Lieferant → Section „Nachhaltigkeit": Score 1-10 + Zertifikate (inkl. ISO 14001)</label></div>
+  <div class="item"><input type="checkbox" id="n42-6"><label for="n42-6"><span class="step-id">42.6</span>Lieferanten-Liste: Spalte „Nachhaltigkeit" zeigt Score x/10</label></div>
+  <div class="item"><input type="checkbox" id="n42-7"><label for="n42-7"><span class="step-id">42.7</span>Recycling-Feld validiert 0–100; Zertifikate Multi-Select</label></div>
+
   <h3>📄 Roadmap-Dokument</h3>
   <div class="item"><input type="checkbox" id="road-1"><label for="road-1"><code>docs/STRATEGIE-ROADMAP.md</code> durchgelesen (Shop-Empfehlung, ERP, Satelliten)</label></div>
   <div class="item"><input type="checkbox" id="road-2"><label for="road-2">Shop-Entscheidung getroffen (Shopware 6 oder Shopify)</label></div>
@@ -574,7 +605,7 @@
 <section>
   <h2>🧪 Automatische Tests <span class="count"></span></h2>
   <p class="intro">Diese laufen automatisch – müssen nur einmal geprüft werden.</p>
-  <div class="item"><input type="checkbox" id="a-1"><label for="a-1">Terminal: <code>php artisan test</code> → <strong>85 passed</strong></label></div>
+  <div class="item"><input type="checkbox" id="a-1"><label for="a-1">Terminal: <code>php artisan test</code> → <strong>86 passed</strong></label></div>
   <div class="item"><input type="checkbox" id="a-2"><label for="a-2">Terminal: <code>./vendor/bin/pint --test</code> → <strong>passed</strong></label></div>
   <div class="item"><input type="checkbox" id="a-3"><label for="a-3">Terminal: <code>./vendor/bin/phpstan analyse</code> → <strong>0 errors</strong></label></div>
 </section>

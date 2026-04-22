@@ -2,19 +2,20 @@
 
 > Merkzettel für die nächste Claude-Session. Zu Beginn lesen.
 
-**Letzte Aktualisierung:** 2026-04-22
+**Letzte Aktualisierung:** 2026-04-22 (Phase 8)
 
 ---
 
 ## 🎯 Aktueller Status
 
-MVP komplett + alle 5 Feature-Pakete (C, A, E, B, F.1) fertig. Phase 7 (Deployment Mittwald)
-pausiert, wartet auf GitHub-Repo + Mittwald-Server.
+MVP komplett + alle 5 Feature-Pakete (C, A, E, B, F.1) fertig.
+**Phase 8 Querschnittsfunktionen fertig:** Admin-Settings, Audit Log, Tagging, Nachhaltigkeit.
+Phase 7 (Deployment Mittwald) pausiert, wartet auf GitHub-Repo + Mittwald-Server.
 
 ### Zahlen
 
-- **25+ Commits** auf `main`-Branch (alle lokal, noch nicht gepusht)
-- **85 automatische Tests** grün
+- **30+ Commits** auf `main`-Branch (alle lokal, noch nicht gepusht)
+- **86 automatische Tests** grün
 - **PHPStan Level 5** – 0 Fehler
 - **Pint** – alle Files formatiert
 - **Site lokal:** http://staeze-pm.test/admin
@@ -61,10 +62,11 @@ pausiert, wartet auf GitHub-Repo + Mittwald-Server.
 
 ### Priorität 1 für nächste Sessions
 
-1. **Phase 7 – Deployment Mittwald** (wartet auf User: GitHub-Repo + Mittwald-Server)
-2. **Admin-Settings-Modul** (spatie/laravel-settings) – API-Keys + Feature-Toggles zentralisieren
+1. **Software-Name entscheiden** (Staeze ist nur die Marke, nicht der Produktname)
+2. **Phase 7 – Deployment Mittwald** (wartet auf User: GitHub-Repo + Mittwald-Server)
 3. **Variantenmanagement-Basis** – SKUs + Lagerstatus (Voraussetzung für Shop-Anbindung)
-4. **Audit Log** – spatie/laravel-activitylog
+4. **Import-Historie & Bulk-Edit** (Dashboard-Widget, Bulk-Actions in Produkt-Tabellen)
+5. **Kampagnen-Manager** (baut auf Influencer-Modul auf)
 
 ### Strategische Entscheidungen (User muss treffen)
 
@@ -92,7 +94,7 @@ pausiert, wartet auf GitHub-Repo + Mittwald-Server.
 ```bash
 cd /Users/svenk/BEQN_Webprojekte/STZ_staeze-produktmanagement
 git log --oneline -10
-php artisan test            # 85 passed
+php artisan test            # 86 passed
 open http://staeze-pm.test/admin  # admin@admin.com / password
 open docs/checkliste.html
 ```

@@ -621,6 +621,84 @@ Setzt Passwort neu und weist die super_admin-Rolle zu. Wird der User nicht gefun
 
 ---
 
+## ✅ Phase 8 – Querschnittsfunktionen testen
+
+### 🔹 39. Admin-Settings-Modul (Feature 1)
+
+**Pfad:** Menü → „Einstellungen" (nur super_admin sichtbar)
+
+| # | Was tun? | Erwartung |
+|---|---|---|
+| 39.1 | „Einstellungen" öffnen | Seite mit 3 Tabs: „Integrationen", „Features", „Defaults" |
+| 39.2 | Tab „Integrationen" → API-Keys für Shop, Meta, TikTok, YouTube etc. eintragen | Felder sind Passwort-Inputs, Werte werden verschlüsselt in DB abgelegt |
+| 39.3 | Tab „Features" → Toggle „Influencer-Monitoring aktiv" aus- und einschalten | Speichert + zeigt Erfolgsmeldung |
+| 39.4 | Tab „Defaults" → Währung auf „USD", MwSt. auf 7.0 setzen | Speichert, beim Neuladen erhalten |
+| 39.5 | Seite neu laden, API-Key-Feld checken | Wert ist wieder da, nicht lesbar im Klartext vom UI erkennbar |
+
+#### ❓ Was prüfen?
+- Als Nicht-Admin ist „Einstellungen" nicht sichtbar
+- Keine API-Keys landen im Frontend-Code/View-Source
+
+---
+
+### 🔹 40. Audit Log / Änderungshistorie (Feature 3)
+
+**Pfad:** Beliebiges Produkt / Lieferant / Influencer öffnen → Tab „Änderungshistorie"
+
+| # | Was tun? | Erwartung |
+|---|---|---|
+| 40.1 | „Castelli Climber Jersey" öffnen → Tab „Änderungshistorie" | Liste zeigt „created" + ggf. „updated"-Einträge mit Zeitstempel |
+| 40.2 | Produktname ändern, speichern | Neuer „updated"-Eintrag mit Diff „name: alt → neu" |
+| 40.3 | CO₂-Wert von leer auf 5.2 setzen | Eintrag zeigt Änderung im Feld `co2_kg` |
+| 40.4 | Spalte „Wer" | Zeigt aktuellen User (z.B. „Admin") |
+| 40.5 | Tab in Lieferant, Influencer, Development-Item | Überall vorhanden, funktioniert gleich |
+| 40.6 | Versuche einen Log-Eintrag zu löschen | Nicht möglich (Read-Only) |
+
+#### ❓ Was prüfen?
+- Nur echte Änderungen werden geloggt (leere Updates werden ignoriert)
+- Verschiedene Event-Typen farbig: created=grün, updated=gelb, deleted=rot
+
+---
+
+### 🔹 41. Globales Tagging (Feature 4)
+
+**Pfad:** Produkt-Formulare → Tab „Eigenschaften" → Feld „Tags (frei)"
+
+| # | Was tun? | Erwartung |
+|---|---|---|
+| 41.1 | „Castelli Climber Jersey" öffnen → Tag „Best-Seller" eingeben + Enter | Tag-Pille erscheint |
+| 41.2 | Weiteren Tag „Sommer 2026" anlegen | Zwei Pillen sichtbar |
+| 41.3 | Speichern, Liste aufrufen | Spalte „Tags" (toggleable) zeigt Pillen |
+| 41.4 | Anderes Produkt öffnen, im Tag-Feld „Bes…" tippen | Autocomplete schlägt „Best-Seller" vor |
+| 41.5 | Tags auch in Influencer / Development / Supplier-Produkt anlegen | Gleiche Tags sind wiederverwendbar (übergreifend) |
+
+#### ❓ Was prüfen?
+- Tags funktionieren modellübergreifend (gleiche Tabelle `tags`)
+- Tag entfernen → aus Pille das X klicken
+
+---
+
+### 🔹 42. Nachhaltigkeits-Tracker (Feature 7)
+
+**Pfad:** Produkt-Formulare → Tab „Nachhaltigkeit" / Lieferant-Formular → Section „Nachhaltigkeit"
+
+| # | Was tun? | Erwartung |
+|---|---|---|
+| 42.1 | „Castelli Climber Jersey" öffnen → Tab „Nachhaltigkeit" | 3 Felder: CO₂-Fußabdruck (kg), Recycling-Anteil (%), Zertifikate (Multi-Select) |
+| 42.2 | CO₂ = 8.50, Recycled = 65, Zertifikate = „Bluesign, GOTS" wählen, speichern | Speichert, Werte sind nach Reload erhalten |
+| 42.3 | In Liste: Spalte „CO₂" und „Recycled" einblenden (Toggle) | Werte sichtbar |
+| 42.4 | Gleiche Felder in Lieferanten-Produkt / Finalem Produkt / Entwicklungs-Item | Überall vorhanden |
+| 42.5 | Lieferant öffnen → Section „Nachhaltigkeit" | Score 1-10 + Zertifikate (inkl. ISO 14001, SA 8000) |
+| 42.6 | Nachhaltigkeits-Score 8/10 setzen, speichern | Spalte in Lieferanten-Liste zeigt „8/10" |
+| 42.7 | Entwicklungs-Item → Tab „Nachhaltigkeit" | Als „Ziel-Werte" beschriftet (weil Entwurf) |
+
+#### ❓ Was prüfen?
+- Recycling-Feld akzeptiert nur 0-100 (Validierung)
+- Zertifikate sind Multi-Select (mehrere möglich)
+- Alle Werte werden als JSON-Array in DB gespeichert
+
+---
+
 ## 🌍 Spätere Phasen *(Platzhalter)*
 
 ### Phase 7 – Deployment Mittwald *(folgt)*
