@@ -255,20 +255,69 @@ man muss erst ein Produkt/Entwicklungs-Item öffnen, um Bilder zu sehen.
 
 ---
 
+## 🗺️ Strategische Roadmap
+
+**Siehe `docs/STRATEGIE-ROADMAP.md`** – umfassendes Dokument mit:
+- Markt-Analyse zu Shop-Systemen für den DACH-Markt (Shopify vs. Shopware vs. JTL)
+- ERP-Evaluation (warum wir nicht selbst bauen – JTL-Wawi / Weclapp andocken)
+- Satelliten-Software-Ideen (Shop-Sync-Bridge, Kampagnen-Manager, Retouren-Intelligence, …)
+- Priorisierter 6-Phasen-Plan (Produktiv → Shop → Marketing → Intelligence → Skalierung → KI)
+- Kostenschätzung und Aufwand
+- Risiken & offene Entscheidungen
+
+---
+
+## ⚙️ Admin-Settings-Modul (geplant, hoch priorisiert für Phase 1)
+
+**Ziel:** Zentrale Einstellungsseite unter „System → Einstellungen" für:
+
+- **Feature-Toggles** (Influencer-Monitoring an/aus, Auto-Fetch an/aus,
+  CSV-Import-Größenlimit, usw.)
+- **API-Keys verschlüsselt** (Shopify-Token, Shopware-Credentials,
+  Meta Graph, TikTok Business, YouTube API, DHL-Account, Klaviyo, Sentry-DSN)
+- **Default-Werte** (Standard-Lieferant, Standard-Währung, Mehrwertsteuer,
+  Standard-Rating-Dimensionen)
+- **System-Info** (Versionen, Letzte Migrations, Queue-Status)
+
+**Umsetzungs-Skizze:**
+- [ ] `spatie/laravel-settings` + `filament/spatie-laravel-settings-plugin`
+- [ ] Settings-Klassen: `IntegrationsSettings`, `FeatureSettings`, `DefaultsSettings`
+- [ ] Felder mit `encrypted`-Cast für API-Keys
+- [ ] Rollen-geschützt: nur `super_admin` darf editieren
+- [ ] Bei Test-API-Call Feedback: „Verbindung OK" / „Fehler: …"
+- [ ] Tests: Setting setzen, encrypted bleibt encrypted, Access-Control
+
+---
+
 ## 💡 Ideen / Backlog (post-MVP)
 
-- Variantenmanagement
-- Audit Log
-- Historie je Objekt
-- Aufgaben-System
-- Externe Bewertungs-APIs (Amazon, Trustpilot)
-- Zentrales Medienmanagement
-- KI-Trendanalyse
-- KI-Bewertungsauswertung
-- KI-Produktvorschläge
-- API (REST/GraphQL) für externe Integration
-- Mehrsprachigkeit (DE/EN)
+**Kern-Erweiterungen (in Roadmap-Phase 1-2):**
+- Variantenmanagement (Größen × Farben × SKUs)
+- Audit Log / Historie je Objekt (spatie/laravel-activitylog)
+- Globales Tagging-System
+- Bulk-Edit für Produkte
+- Import-Historie
+
+**Satelliten-Software (in Roadmap-Phase 2+):**
+- Shop-Sync-Bridge (Shopware/Shopify ↔ Staeze PM)
+- Kampagnen-Manager für Influencer-Kooperationen
+- Retouren-Intelligence (ERP → Qualitätsmanagement)
+- Marketing-Kalender
+- Trend-Radar (Google Trends, TikTok, Hashtags)
+- Nachhaltigkeits-Tracker (CO2, Recycling)
+- B2B-Wholesale-Portal
+- PIM-Export für Marktplätze (Amazon, Zalando)
 - Lieferanten-Portal (externer Login)
+- Mobile-App für Qualitätscheck (QR-Code)
+- Kunden-Feedback-Ingestion (Shop-Reviews → Ratings)
+
+**Advanced (Roadmap-Phase 4-6):**
+- KI-Trendanalyse (LLM auf Kundenfeedback-Cluster)
+- KI-Produktvorschläge (Markt × Lieferanten-Kapazität)
+- Bild-Analyse für automatische Qualitätsbewertung
+- Mehrsprachigkeit DE/EN
+- Externe Bewertungs-APIs (Amazon, Trustpilot)
+- API (REST/GraphQL) für externe Integration
 
 ---
 

@@ -44,27 +44,34 @@ pausiert, wartet auf GitHub-Repo + Mittwald-Server.
 
 ## 🔜 Was als nächstes ansteht
 
-### F.2 – Auto-Monitoring Social Channels
+### ✅ F.2 + F.3 erledigt (2026-04-22)
 
-Aktuell: Snapshots manuell per Klick. Gewünscht: Cronjob fetcht Follower-/Engagement-Zahlen
-automatisch.
+- SimulatedFetcher + Artisan `staeze:fetch-channel-metrics` + Scheduler-Hook
+- CSV-Import für ChannelMetrics + „Snapshots jetzt holen"-Action
+- SocialStatsWidget + TopChannelsWidget mit Relevanz-Score
+- Siehe `docs/STRATEGIE-ROADMAP.md` für echte API-Integration (F.2 Phase 2)
 
-- Artisan-Befehl `php artisan staeze:fetch-channel-metrics`
-- Platform-APIs oder Scraping (Offene Frage für User!)
-- Scheduler-Eintrag (z.B. daily at 3am)
-- Test-Scenario
+### 📄 Strategische Roadmap erstellt
 
-### F.3 – Analytics & Relevanz-Score
+**Siehe `docs/STRATEGIE-ROADMAP.md`** (2026-04-22). Enthält:
+- Shop-Empfehlung: Shopware 6 (DACH-Fokus) oder Shopify (Time-to-Market)
+- ERP: nicht selbst bauen → JTL-Wawi andocken
+- 11 Satelliten-Software-Ideen (Shop-Sync, Kampagnen-Manager, Retouren-Intelligence, Trend-Radar, Nachhaltigkeit, B2B-Portal, Lieferanten-Portal, Mobile-App etc.)
+- 6-Phasen-Plan, Kostenschätzung, Risiken
 
-- Dashboard-Widgets: Top-5-Channels by Engagement, Wachstum-Chart
-- Ranking-Berechnung
-- Relevanz-Score für eigene Marke (thematische Kategorie-Treffer)
+### Priorität 1 für nächste Sessions
 
-### Phase 7 – Deployment Mittwald
+1. **Phase 7 – Deployment Mittwald** (wartet auf User: GitHub-Repo + Mittwald-Server)
+2. **Admin-Settings-Modul** (spatie/laravel-settings) – API-Keys + Feature-Toggles zentralisieren
+3. **Variantenmanagement-Basis** – SKUs + Lagerstatus (Voraussetzung für Shop-Anbindung)
+4. **Audit Log** – spatie/laravel-activitylog
 
-Wartet auf User:
-- GitHub-Repo anlegen
-- Mittwald-Server vorbereiten (SSH, Postgres 16+, PHP 8.3+)
+### Strategische Entscheidungen (User muss treffen)
+
+1. **Shop: Shopware 6 oder Shopify?** → Roadmap-Dokument liefert Entscheidungshilfe
+2. **Wann real launchen?** – Timing bestimmt Phase-Reihenfolge
+3. **Wie viele Produkte bei Launch?** – Lagerinvestition
+4. **D2C only oder auch B2B?** – Beeinflusst Shop-Auswahl
 
 ---
 
