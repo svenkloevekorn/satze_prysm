@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STAEZE : Prysm – Handbuch</title>
+<style>
+  :root {
+    --bg: #fafaf9;
+    --fg: #1c1917;
+    --muted: #78716c;
+    --accent: #d97706;
+    --accent-soft: #fef3c7;
+    --border: #e7e5e4;
+    --card: #ffffff;
+    --code-bg: #f5f5f4;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0c0a09;
+      --fg: #fafaf9;
+      --muted: #a8a29e;
+      --accent: #fbbf24;
+      --accent-soft: #422006;
+      --border: #292524;
+      --card: #1c1917;
+      --code-bg: #292524;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    line-height: 1.6;
+  }
+  .layout { display: grid; grid-template-columns: 280px 1fr; min-height: 100vh; }
+  nav.toc {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 2rem 1.5rem;
+    border-right: 1px solid var(--border);
+    background: var(--card);
+  }
+  nav.toc .brand {
+    font-weight: 800;
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+    letter-spacing: 0.02em;
+  }
+  nav.toc .claim {
+    color: var(--muted);
+    font-size: 0.8rem;
+    margin-bottom: 2rem;
+    font-style: italic;
+  }
+  nav.toc h3 {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin: 1.5rem 0 0.5rem;
+  }
+  nav.toc a {
+    display: block;
+    padding: 0.3rem 0.5rem;
+    margin: 0.1rem 0;
+    border-radius: 0.375rem;
+    color: var(--fg);
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+  nav.toc a:hover { background: var(--accent-soft); color: var(--accent); }
+  main {
+    padding: 3rem max(2rem, 5vw);
+    max-width: 900px;
+  }
+  h1 {
+    font-size: 2.2rem;
+    margin-top: 0;
+    letter-spacing: -0.02em;
+  }
+  h2 {
+    margin-top: 3rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--border);
+    font-size: 1.6rem;
+  }
+  h3 { margin-top: 2rem; font-size: 1.2rem; }
+  code {
+    background: var(--code-bg);
+    padding: 0.15em 0.4em;
+    border-radius: 0.25rem;
+    font-size: 0.88em;
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+  }
+  pre code { display: block; padding: 1rem; overflow-x: auto; }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    padding: 1.25rem 1.5rem;
+    margin: 1rem 0;
+  }
+  .tip {
+    border-left: 4px solid var(--accent);
+    background: var(--accent-soft);
+    padding: 0.75rem 1rem;
+    border-radius: 0 0.5rem 0.5rem 0;
+    margin: 1rem 0;
+  }
+  .tip strong { color: var(--accent); }
+  ol, ul { padding-left: 1.4rem; }
+  li { margin: 0.3rem 0; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 0.95rem;
+  }
+  th, td { padding: 0.6rem 0.8rem; text-align: left; border-bottom: 1px solid var(--border); }
+  th { font-weight: 600; color: var(--muted); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em; }
+  .badge {
+    display: inline-block;
+    padding: 0.15em 0.55em;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+  .muted { color: var(--muted); }
+  @media (max-width: 820px) {
+    .layout { grid-template-columns: 1fr; }
+    nav.toc { position: relative; height: auto; border-right: none; border-bottom: 1px solid var(--border); }
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+
+<nav class="toc">
+  <div class="brand">STAEZE : Prysm</div>
+  <div class="claim">From insight to product</div>
+
+  <h3>Einstieg</h3>
+  <a href="#was-ist-das">Was ist Prysm?</a>
+  <a href="#erster-login">Erster Login</a>
+  <a href="#dashboard">Dashboard</a>
+  <a href="#navigation">Navigation</a>
+
+  <h3>Kern-Workflows</h3>
+  <a href="#wf-wettbewerb">Wettbewerbsprodukt erfassen</a>
+  <a href="#wf-bewerten">Produkt bewerten</a>
+  <a href="#wf-csv">CSV-Import</a>
+  <a href="#wf-lieferant">Lieferant + Kontakt + Produkt</a>
+  <a href="#wf-entwicklung">Idee → Finales Produkt</a>
+  <a href="#wf-quality">Qualitäts-Checkliste</a>
+  <a href="#wf-influencer">Influencer & Social Media</a>
+
+  <h3>Querschnitts-Funktionen</h3>
+  <a href="#f-settings">Einstellungen</a>
+  <a href="#f-audit">Änderungshistorie</a>
+  <a href="#f-tags">Tags</a>
+  <a href="#f-nachhaltigkeit">Nachhaltigkeit</a>
+  <a href="#f-suche">Globale Suche</a>
+  <a href="#f-medien">Medien-Galerie</a>
+
+  <h3>Verwaltung</h3>
+  <a href="#a-rollen">Rollen & Rechte</a>
+  <a href="#a-stammdaten">Stammdaten</a>
+  <a href="#a-probleme">Wenn's hakt</a>
+
+  <h3>Meta</h3>
+  <a href="#kontakt">Kontakt</a>
+</nav>
+
+<main>
+  <h1>Handbuch – STAEZE : Prysm</h1>
+  <p class="muted">Willkommen in Prysm, der Product Intelligence Platform für Staeze. Dieses Handbuch erklärt dir Schritt für Schritt, was das System kann und wie du damit arbeitest – in einfachen Worten.</p>
+  <p class="muted"><em>Stand: 2026-04-22</em></p>
+
+  <h2 id="was-ist-das">Was ist Prysm?</h2>
+  <div class="card">
+    <p>Prysm bündelt alles, was ihr rund um eure Sportbekleidungs-Marke Staeze wissen und steuern müsst – an einer Stelle:</p>
+    <ul>
+      <li><strong>Marktanalyse</strong> – Was machen Wettbewerber?</li>
+      <li><strong>Lieferanten</strong> – Wer liefert was zu welchen Konditionen?</li>
+      <li><strong>Produkt-Entwicklung</strong> – Von der Idee bis zum fertigen Staeze-Produkt</li>
+      <li><strong>Bewertungen & Qualität</strong> – Strukturierte Einschätzungen statt Bauchgefühl</li>
+      <li><strong>Influencer & Social Media</strong> – Wer passt zur Marke?</li>
+      <li><strong>Nachhaltigkeit</strong> – CO₂, Recycling-Anteil, Zertifikate</li>
+    </ul>
+    <p>Claim: <em>„From insight to product"</em> – aus Marktwissen werden greifbare Produkte.</p>
+  </div>
+
+  <h2 id="erster-login">Erster Login</h2>
+  <ol>
+    <li>Öffne den Admin-Bereich (lokal: <code>http://staeze-pm.test/admin</code>, produktiv: siehe Admin)</li>
+    <li>E-Mail + Passwort eingeben</li>
+    <li>Du landest auf dem <strong>Dashboard</strong></li>
+  </ol>
+
+  <h2 id="dashboard">Dashboard</h2>
+  <p>Beim Einloggen siehst du:</p>
+  <h3>Kennzahlen (oben)</h3>
+  <ul>
+    <li>Wettbewerbsprodukte gesamt</li>
+    <li>Offene Entwicklungen (nicht-final)</li>
+    <li>Finale Produkte</li>
+    <li>Aktive Lieferanten</li>
+  </ul>
+  <h3>Widgets (unten)</h3>
+  <ul>
+    <li><strong>Offene Entwicklungen</strong> – was braucht deine Aufmerksamkeit? Deadlines werden rot, wenn überfällig</li>
+    <li><strong>Unbewertete Wettbewerbsprodukte</strong> – wofür fehlt noch eine Einschätzung?</li>
+    <li><strong>Letzte Bewertungen / Letzte Änderungen</strong> – was wurde zuletzt gemacht?</li>
+    <li><strong>Social Stats + Top-Kanäle</strong> – Reichweite &amp; Engagement auf einen Blick</li>
+  </ul>
+  <div class="tip"><strong>Tipp:</strong> Jede Zeile in jedem Widget ist klickbar – direkter Sprung ins Edit-Formular.</div>
+
+  <h2 id="navigation">Navigation</h2>
+  <p>Das Menü links ist in Gruppen geteilt (alle per Default eingeklappt, aufklappen mit Klick):</p>
+  <table>
+    <tr><th>Gruppe</th><th>Was findest du dort?</th></tr>
+    <tr><td>Marktanalyse</td><td>Wettbewerbsprodukte, Marken, Shops</td></tr>
+    <tr><td>Lieferanten</td><td>Lieferanten, Lieferanten-Produkte</td></tr>
+    <tr><td>Produkt-Entwicklung</td><td>Entwicklungs-Pipeline, Finale Produkte</td></tr>
+    <tr><td>Bewertungen</td><td>Alle Bewertungen übergreifend</td></tr>
+    <tr><td>Medien</td><td>Medien-Galerie (alle hochgeladenen Bilder)</td></tr>
+    <tr><td>Social Media</td><td>Influencer, Alle Kanäle</td></tr>
+    <tr><td>System</td><td>Einstellungen, Kategorien, Rollen, Stammdaten</td></tr>
+  </table>
+
+  <h2 id="wf-wettbewerb">Workflow: Wettbewerbsprodukt erfassen</h2>
+  <ol>
+    <li><strong>Marktanalyse → Wettbewerbsprodukte → „Neues Wettbewerbsprodukt"</strong></li>
+    <li>Tab <strong>Allgemein</strong>: Name, Marke (oder inline eine neue anlegen), Kategorie</li>
+    <li>Tab <strong>Eigenschaften</strong>: Materialien, Farben, Größen als Tags (Komma/Tab trennt)</li>
+    <li>Tab <strong>Preis</strong>: Preisrahmen min/max</li>
+    <li>Tab <strong>Nachhaltigkeit</strong>: CO₂-Fußabdruck, Recycling-Anteil, Zertifikate</li>
+    <li>Tab <strong>Bilder</strong>: Bis zu 10 Produktbilder hochladen</li>
+    <li><strong>Speichern</strong></li>
+  </ol>
+  <p>Danach im Edit-Modus <strong>Shop-Einträge</strong> (Preise pro Shop über Zeit) und <strong>Bewertungen</strong> hinzufügen.</p>
+
+  <h2 id="wf-bewerten">Workflow: Produkt bewerten</h2>
+  <p>Das Bewertungssystem ist <strong>universell</strong> – funktioniert an Wettbewerbsprodukt, Lieferanten-Produkt und Finalem Produkt gleich.</p>
+  <ol>
+    <li>Produkt öffnen → Tab <strong>„Bewertungen"</strong></li>
+    <li><strong>„Bewertung hinzufügen"</strong></li>
+    <li>Wähle:
+      <ul>
+        <li><strong>Quellen</strong>: Product ordered / worn / seen online / Story / Forum posts (Multi-Select)</li>
+        <li><strong>Dimension</strong>: Design, Material, Performance, … (oder leer = Gesamt-Bewertung)</li>
+        <li><strong>Score 1–10</strong></li>
+        <li><strong>Positive Punkte, Negative Punkte, Allgemeine Bewertung</strong></li>
+      </ul>
+    </li>
+    <li><strong>Speichern</strong></li>
+  </ol>
+  <p>Der Durchschnitts-Score erscheint automatisch in der Produkt-Liste.</p>
+  <div class="tip"><strong>Clou:</strong> Mehrere Bewertungen pro Produkt + Dimension sind erlaubt (z.B. zwei Personen bewerten Design separat).</div>
+
+  <h2 id="wf-csv">Workflow: CSV-Import</h2>
+  <ol>
+    <li>Im jeweiligen Bereich (Wettbewerbsprodukte oder Lieferanten-Produkte) → <strong>„CSV-Import"</strong></li>
+    <li>CSV-Datei hochladen</li>
+    <li>Spalten werden automatisch erkannt (Mapping prüfen)</li>
+    <li><strong>Import starten</strong></li>
+  </ol>
+  <p>Beispieldateien liegen in <code>docs/beispiel-imports/</code>.</p>
+  <div class="tip"><strong>Clever:</strong> Marken, Kategorien und Lieferanten, die noch nicht existieren, werden automatisch angelegt.</div>
+
+  <h2 id="wf-lieferant">Workflow: Lieferant + Kontakt + Produkt</h2>
+  <ol>
+    <li><strong>Lieferanten → Lieferanten → „Neu"</strong></li>
+    <li>Firmenname, Land, Bewertung 1-10, Nachhaltigkeits-Score, Notizen</li>
+    <li><strong>Speichern</strong> → Detail-Seite öffnet sich</li>
+    <li>Tab <strong>Ansprechpartner</strong> → Name, Email, Telefon pro Person</li>
+    <li>Tab <strong>Produkte des Lieferanten</strong> → EK, VK, MOQ pro Produkt</li>
+  </ol>
+
+  <h2 id="wf-entwicklung">Workflow: Von der Idee zum finalen Produkt</h2>
+  <p>Der Kern-Workflow der Plattform.</p>
+  <ol>
+    <li><strong>Produkt-Entwicklung → Entwicklungs-Pipeline → „Neu"</strong></li>
+    <li>Status: <code>1. Idee</code></li>
+    <li>Tab <strong>Inspiration &amp; Basis</strong>: Welche Wettbewerbsprodukte inspirieren? Welche Lieferanten-Produkte kommen als Basis in Frage?</li>
+    <li>Tab <strong>Nachhaltigkeit</strong>: Ziel-Werte für CO₂, Recycling-Anteil, angestrebte Zertifikate</li>
+    <li>Status Schritt für Schritt weiterschieben:
+      <ol>
+        <li>Idee</li>
+        <li>In Ausarbeitung</li>
+        <li>Konzept bestätigt</li>
+        <li>Tech Sheet erstellt</li>
+        <li>An Lieferant gesendet</li>
+        <li>Sample erhalten</li>
+        <li>Überarbeitet</li>
+        <li>Final ← hier passiert etwas Cooles</li>
+      </ol>
+    </li>
+    <li>Sobald Status auf <strong>„Final"</strong> → automatisch ein Eintrag unter <strong>Finale Produkte</strong> angelegt</li>
+    <li>Dort SKU, Selbstkosten, Verkaufspreis und finale Nachhaltigkeitswerte ergänzen</li>
+  </ol>
+
+  <h2 id="wf-quality">Workflow: Qualitäts-Checkliste</h2>
+  <p>Pro Produkt kannst du eine Checkliste von Qualitätskriterien führen (z.B. Nahtqualität, Passform, Atmungsaktivität).</p>
+  <ol>
+    <li>Produkt öffnen → Tab <strong>„Qualitäts-Checkliste"</strong></li>
+    <li>Button <strong>„Checkliste aus Kategorie füllen"</strong> – legt pro Kriterium aus der Produkt-Kategorie einen offenen Check an</li>
+    <li>Pro Check Status setzen: <span class="badge">Bestanden</span> / <span class="badge">Nicht bestanden</span> / <span class="badge">Nicht anwendbar</span> + Kommentar</li>
+  </ol>
+
+  <h2 id="wf-influencer">Workflow: Influencer &amp; Social Media</h2>
+  <ol>
+    <li><strong>Social Media → Influencer → „Neu"</strong></li>
+    <li>Name, Notizen, Profilbild</li>
+    <li>Tab <strong>Social-Media-Kanäle</strong>: Plattform (Instagram, TikTok, YouTube …), Handle, Followerzahl</li>
+    <li>Tab <strong>Monitoring-Snapshots</strong>: Zeitreihe der Metriken (Follower, Likes, Views …)</li>
+  </ol>
+  <p>Alternativ: <strong>Social Media → Alle Kanäle</strong> – übergreifende Liste mit Filter nach Plattform, Follower, Engagement.</p>
+  <div class="tip"><strong>Automatisierung:</strong> Kommandozeile <code>php artisan staeze:fetch-channel-metrics</code> holt neue Snapshots (Simulation aktiv, echte APIs kommen in Phase F.2).</div>
+
+  <h2 id="f-settings">Einstellungen</h2>
+  <p>Unter <strong>System → Einstellungen</strong> (nur super_admin sichtbar) konfigurierst du zentral:</p>
+  <ul>
+    <li><strong>Integrationen</strong> – API-Keys für Shop, Meta, TikTok, YouTube, DHL, Klaviyo, Postmark, Sentry. <em>Werden verschlüsselt gespeichert</em>.</li>
+    <li><strong>Features</strong> – Toggles für Influencer-Monitoring, Auto-Fetch, CSV-Import, Media-Galerie, Qualitäts-Checkliste</li>
+    <li><strong>Defaults</strong> – Währung, MwSt, Firmenname, E-Mail, Land</li>
+  </ul>
+
+  <h2 id="f-audit">Änderungshistorie</h2>
+  <p>Jedes wichtige Objekt (Produkte, Lieferanten, Influencer, Development-Items usw.) hat einen Tab <strong>„Änderungshistorie"</strong>.</p>
+  <ul>
+    <li>Wer hat wann was geändert?</li>
+    <li>Welche Felder mit welchen alten/neuen Werten?</li>
+    <li>Events farblich: <span class="badge">created</span> grün, <span class="badge">updated</span> gelb, <span class="badge">deleted</span> rot</li>
+  </ul>
+  <p>Read-Only – Einträge können nicht gelöscht oder verändert werden.</p>
+
+  <h2 id="f-tags">Tags</h2>
+  <p>In den Eigenschaften von Wettbewerbsprodukten, Lieferanten-Produkten, Finalen Produkten, Development-Items und Influencern gibt es das Feld <strong>„Tags (frei)"</strong>.</p>
+  <ul>
+    <li>Freie Schlagworte wie „Best-Seller", „Sommer 2026", „Trend"</li>
+    <li>Tags sind <strong>modellübergreifend</strong> – ein einmal angelegtes Tag schlägt überall als Autocomplete vor</li>
+    <li>In der Tabelle als toggleable Spalte einblendbar</li>
+  </ul>
+
+  <h2 id="f-nachhaltigkeit">Nachhaltigkeit</h2>
+  <p>In jedem Produkt-Formular (Wettbewerbs-, Lieferanten-, Finales, Development-Produkt) findest du den Tab <strong>Nachhaltigkeit</strong>:</p>
+  <ul>
+    <li><strong>CO₂-Fußabdruck</strong> in kg CO₂e</li>
+    <li><strong>Recycling-Anteil</strong> in %</li>
+    <li><strong>Zertifikate</strong> (Multi-Select): Fair Trade, Bluesign, GOTS, OEKO-TEX, BSCI, GRS, PFC-frei, Klimaneutral</li>
+  </ul>
+  <p>Beim Lieferanten zusätzlich <strong>Nachhaltigkeits-Score 1–10</strong> plus Zertifikate (inkl. ISO 14001, SA 8000).</p>
+
+  <h2 id="f-suche">Globale Suche</h2>
+  <p>Tastenkürzel: <code>⌘ + K</code> (Mac) oder <code>Strg + K</code> (Windows).</p>
+  <p>Sucht übergreifend in Wettbewerbsprodukten, Lieferanten-Produkten, Finalen Produkten, Development-Items, Marken, Influencern … Direkter Sprung ins Edit-Formular.</p>
+
+  <h2 id="f-medien">Medien-Galerie</h2>
+  <p>Unter <strong>Medien → Medien-Galerie</strong> siehst du alle hochgeladenen Bilder übergreifend – gruppiert nach Produkt-Typ, mit Filter und Vorschau.</p>
+
+  <h2 id="a-rollen">Rollen &amp; Rechte</h2>
+  <p>Unter <strong>System → Rollen</strong> (Filament Shield):</p>
+  <ol>
+    <li>Rolle anlegen (z.B. „editor")</li>
+    <li>Permissions per Checkbox auswählen (z.B. nur <code>view_any_brand</code>, <code>view_brand</code>)</li>
+    <li>User öffnen → Rolle zuweisen</li>
+  </ol>
+  <p>Als <code>super_admin</code> siehst &amp; darfst du alles.</p>
+
+  <h2 id="a-stammdaten">Stammdaten</h2>
+  <p>Unter <strong>System</strong> gepflegt – einmal sauber anlegen, danach nur noch gelegentlich:</p>
+  <ul>
+    <li><strong>Kategorien</strong> (2-stufig, mit Unter-Kategorien)</li>
+    <li><strong>Bewertungs-Dimensionen</strong> (Design, Material, Performance …)</li>
+    <li><strong>Qualitätskriterien</strong> (Nahtqualität, Passform, Reflektoren …)</li>
+  </ul>
+  <p>Marken und Shops liegen unter <strong>Marktanalyse</strong>, weil sie dort am häufigsten aufgerufen werden.</p>
+
+  <h2 id="a-probleme">Wenn's hakt</h2>
+  <ol>
+    <li>Seite einmal neu laden (F5)</li>
+    <li>Browser-Cache leeren</li>
+    <li>Browser-Konsole (F12) prüfen auf Fehler</li>
+    <li>Admin informieren – mit Hergang: Welche Seite? Was geklickt? Welche Fehlermeldung?</li>
+  </ol>
+
+  <h2 id="kontakt">Kontakt</h2>
+  <p>Technischer Ansprechpartner: Sven Kloevekorn · <a href="mailto:sven.kloevekorn@marbet.com">sven.kloevekorn@marbet.com</a></p>
+  <p class="muted"><em>Letzte Aktualisierung: 2026-04-22</em></p>
+</main>
+
+</div>
+</body>
+</html>

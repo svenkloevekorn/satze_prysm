@@ -45,6 +45,7 @@ Volles Briefing: siehe Konversation / `PLAN.md`.
 7. **Neue Features brauchen Tests** (Pest Feature-Tests für Filament Resources).
 8. **TODO.md + SESSION-STATE.md pflegen:** Am Ende jeder Aufgabe fragen, ob abgehakt werden soll.
 9. **Vor Destruktivem** (rm, git reset, DB drop) immer nachfragen.
+10. **User-Handbuch pflegen (MUSS):** `docs/handbuch.html` ist die Endnutzer-Doku. **Vor jedem Commit**, der neue oder geänderte Nutzer-sichtbare Funktionen enthält (neue Felder, Workflows, Navigations-Gruppen, UI-Änderungen, Settings), MUSS das Handbuch aktualisiert werden – neuer Abschnitt oder bestehender überarbeitet, Datum unten aktualisiert. Pure Tech-Änderungen (Refactor, Tests, Lint-Fixes) brauchen es nicht.
 
 ---
 
