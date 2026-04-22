@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\CompetitorProducts\RelationManagers;
 
 use App\Enums\RatingSource;
+use App\Filament\Actions\CreateMultiRatingAction;
 use App\Filament\Resources\Ratings\Schemas\RatingForm;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\CreateAction;
@@ -74,8 +75,9 @@ class RatingsRelationManager extends RelationManager
                     ->relationship('dimension', 'name'),
             ])
             ->headerActions([
+                CreateMultiRatingAction::make('competitor_product', fn () => $this->getOwnerRecord()->getKey()),
                 CreateAction::make()
-                    ->label('Bewertung hinzufügen')
+                    ->label('Einzelne Bewertung')
                     ->mutateFormDataUsing(function (array $data) {
                         $data['user_id'] ??= auth()->id();
 
