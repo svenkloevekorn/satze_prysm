@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\Brand;
 use App\Models\CompetitorProduct;
 use App\Models\DevelopmentItem;
 use App\Models\FinalProduct;
+use App\Models\Influencer;
 use App\Models\SupplierProduct;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Facades\Gate;
@@ -28,6 +30,8 @@ class AppServiceProvider extends ServiceProvider
             'supplier_product' => SupplierProduct::class,
             'final_product' => FinalProduct::class,
             'development_item' => DevelopmentItem::class,
+            'influencer' => Influencer::class,
+            'brand' => Brand::class,
         ]);
     }
 }

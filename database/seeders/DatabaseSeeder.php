@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             SupplierSeeder::class,
             RatingSeeder::class,
             DevelopmentItemSeeder::class,
+            InfluencerSeeder::class,
             PlaceholderImagesSeeder::class,
         ]);
     }
