@@ -418,7 +418,7 @@ Marke und Tool klar unterschieden werden.
   - `sustainability_score` (1-10) + `certifications` auf `suppliers`
   - Neuer Tab „Nachhaltigkeit" in allen Produkt-Formularen, Section im Supplier-Formular
   - Toggleable Tabellen-Spalten (CO₂, Recycled) in allen Produkt-Listen
-  - **86 Tests grün** (1 neuer Test für Nachhaltigkeits-Felder)
+  - **95 Tests grün** (3 SettingsTest, 3 AuditLogTest, 3 TaggingTest, 1 Nachhaltigkeits-Test)
 - [x] Dokumentation: `docs/MANUELLE-TESTS.md` Phase 8 (Tests 39–42), `docs/checkliste.html` Abschnitte Feature 1/3/4/7
 
 ### Phase 0 – Fundament *(2026-04-21)*

@@ -49,8 +49,9 @@ class ActivitiesRelationManager extends RelationManager
                 TextColumn::make('causer.name')
                     ->label('Wer')
                     ->placeholder('System'),
-                TextColumn::make('properties')
+                TextColumn::make('attribute_changes')
                     ->label('Änderungen')
+                    ->state(fn ($record) => $record->attribute_changes)
                     ->formatStateUsing(function ($state): string {
                         if (blank($state)) {
                             return '–';

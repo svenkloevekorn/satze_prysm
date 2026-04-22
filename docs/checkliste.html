@@ -605,9 +605,15 @@
 <section>
   <h2>🧪 Automatische Tests <span class="count"></span></h2>
   <p class="intro">Diese laufen automatisch – müssen nur einmal geprüft werden.</p>
-  <div class="item"><input type="checkbox" id="a-1"><label for="a-1">Terminal: <code>php artisan test</code> → <strong>86 passed</strong></label></div>
+  <div class="item"><input type="checkbox" id="a-1"><label for="a-1">Terminal: <code>php artisan test</code> → <strong>95 passed</strong></label></div>
   <div class="item"><input type="checkbox" id="a-2"><label for="a-2">Terminal: <code>./vendor/bin/pint --test</code> → <strong>passed</strong></label></div>
   <div class="item"><input type="checkbox" id="a-3"><label for="a-3">Terminal: <code>./vendor/bin/phpstan analyse</code> → <strong>0 errors</strong></label></div>
+
+  <h3>Neue Tests Phase 8</h3>
+  <div class="item"><input type="checkbox" id="a-4"><label for="a-4"><code>php artisan test --filter=SettingsTest</code> → <strong>3 passed</strong> (Feature 1)</label></div>
+  <div class="item"><input type="checkbox" id="a-5"><label for="a-5"><code>php artisan test --filter=AuditLogTest</code> → <strong>3 passed</strong> (Feature 3)</label></div>
+  <div class="item"><input type="checkbox" id="a-6"><label for="a-6"><code>php artisan test --filter=TaggingTest</code> → <strong>3 passed</strong> (Feature 4)</label></div>
+  <div class="item"><input type="checkbox" id="a-7"><label for="a-7"><code>php artisan test --filter="speichert Nachhaltigkeits"</code> → <strong>1 passed</strong> (Feature 7)</label></div>
 </section>
 
 <footer style="text-align: center; color: var(--muted); font-size: .875rem; padding: 2rem 0;">
