@@ -7,6 +7,7 @@ use App\Filament\Resources\Ratings\Pages\CreateRating;
 use App\Filament\Resources\Ratings\Pages\ListRatings;
 use App\Filament\Resources\SupplierProducts\Pages\EditSupplierProduct;
 use App\Filament\Resources\SupplierProducts\RelationManagers\RatingsRelationManager as SupplierRatingsRM;
+use App\Models\Brand;
 use App\Models\CompetitorProduct;
 use App\Models\Rating;
 use App\Models\RatingDimension;
@@ -44,6 +45,46 @@ it('legt eine Bewertung über die eigenständige Resource an', function () {
         ->assertHasNoFormErrors();
 
     expect(Rating::where('ratable_id', $product->id)->where('score', 8)->exists())->toBeTrue();
+});
+
+it('filtert Produkte nach gewählter Marke im Rating-Formular', function () {
+    $brandA = Brand::factory()->create(['name' => 'Marke A']);
+    $brandB = Brand::factory()->create(['name' => 'Marke B']);
+    $prodA = CompetitorProduct::factory()->create(['name' => 'A-Produkt', 'brand_id' => $brandA->id]);
+    $prodB = CompetitorProduct::factory()->create(['name' => 'B-Produkt', 'brand_id' => $brandB->id]);
+
+    // Produkt-Dropdown ohne Filter: beide sichtbar
+    $component = livewire(CreateRating::class)
+        ->fillForm(['ratable_type' => 'competitor_product']);
+
+    $optionsOhneFilter = $component->instance()->form->getComponent('ratable_id')->getOptions();
+    expect($optionsOhneFilter)->toHaveKey($prodA->id)->toHaveKey($prodB->id);
+
+    // Mit Filter auf Marke A: nur A-Produkt
+    $component->fillForm(['_brand_filter' => $brandA->id]);
+    $optionsGefiltert = $component->instance()->form->getComponent('ratable_id')->getOptions();
+    expect($optionsGefiltert)->toHaveKey($prodA->id)->not->toHaveKey($prodB->id);
+});
+
+it('speichert den Marken-Filter NICHT in der Bewertung (nur UI-Filter)', function () {
+    $brand = Brand::factory()->create();
+    $product = CompetitorProduct::factory()->create(['brand_id' => $brand->id]);
+
+    livewire(CreateRating::class)
+        ->fillForm([
+            'ratable_type' => 'competitor_product',
+            '_brand_filter' => $brand->id,
+            'ratable_id' => $product->id,
+            'sources' => [RatingSource::ProductWorn->value],
+            'score' => 7,
+        ])
+        ->call('create')
+        ->assertHasNoFormErrors();
+
+    // Rating-Tabelle hat keine brand_id-Spalte; wichtig ist nur, dass es keinen Fehler gibt
+    $rating = Rating::where('ratable_id', $product->id)->first();
+    expect($rating)->not->toBeNull();
+    expect($rating->getAttributes())->not->toHaveKey('_brand_filter');
 });
 
 it('verlangt einen Score zwischen 1 und 10', function () {

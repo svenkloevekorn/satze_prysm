@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Ratings\Schemas;
 
 use App\Enums\RatingSource;
+use App\Models\Brand;
 use App\Models\CompetitorProduct;
 use App\Models\FinalProduct;
 use App\Models\SupplierProduct;
@@ -22,7 +23,7 @@ class RatingForm
 
         if (! $inRelationManager) {
             $fields[] = Section::make('Bewertet wird')
-                ->columns(2)
+                ->columns(3)
                 ->schema([
                     Select::make('ratable_type')
                         ->label('Objekt-Typ')
@@ -33,18 +34,49 @@ class RatingForm
                         ])
                         ->required()
                         ->live()
-                        ->afterStateUpdated(fn ($set) => $set('ratable_id', null)),
+                        ->afterStateUpdated(function ($set) {
+                            $set('_brand_filter', null);
+                            $set('ratable_id', null);
+                        }),
+                    // Vorfilter Marke – nur bei Wettbewerbsprodukt, wird NICHT gespeichert
+                    Select::make('_brand_filter')
+                        ->label('Marke (Filter)')
+                        ->options(fn () => Brand::where('is_active', true)->orderBy('name')->pluck('name', 'id'))
+                        ->searchable()
+                        ->preload()
+                        ->live()
+                        ->dehydrated(false)
+                        ->visible(fn ($get) => $get('ratable_type') === 'competitor_product')
+                        ->afterStateUpdated(fn ($set) => $set('ratable_id', null))
+                        ->afterStateHydrated(function ($set, $get, $state) {
+                            // Beim Bearbeiten: Marke aus bestehendem Produkt ableiten
+                            if ($state || $get('ratable_type') !== 'competitor_product') {
+                                return;
+                            }
+                            if ($id = $get('ratable_id')) {
+                                $brandId = CompetitorProduct::whereKey($id)->value('brand_id');
+                                if ($brandId) {
+                                    $set('_brand_filter', $brandId);
+                                }
+                            }
+                        })
+                        ->helperText('Nur Filter – wird nicht gespeichert. Leer = alle Marken.'),
                     Select::make('ratable_id')
                         ->label('Objekt')
                         ->options(function ($get) {
                             return match ($get('ratable_type')) {
-                                'competitor_product' => CompetitorProduct::query()->pluck('name', 'id')->toArray(),
-                                'supplier_product' => SupplierProduct::query()->pluck('name', 'id')->toArray(),
-                                'final_product' => FinalProduct::query()->pluck('name', 'id')->toArray(),
+                                'competitor_product' => CompetitorProduct::query()
+                                    ->when($get('_brand_filter'), fn ($q, $brandId) => $q->where('brand_id', $brandId))
+                                    ->orderBy('name')
+                                    ->pluck('name', 'id')
+                                    ->toArray(),
+                                'supplier_product' => SupplierProduct::query()->orderBy('name')->pluck('name', 'id')->toArray(),
+                                'final_product' => FinalProduct::query()->orderBy('name')->pluck('name', 'id')->toArray(),
                                 default => [],
                             };
                         })
                         ->searchable()
+                        ->preload()
                         ->required(),
                 ]);
         }
