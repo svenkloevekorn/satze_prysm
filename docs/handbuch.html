@@ -98,6 +98,7 @@
     <div>
       <div class="text-xs font-semibold uppercase tracking-wider text-stone-400 mb-2">Verwaltung</div>
       <div class="space-y-0.5">
+        <a href="#a-benutzer" class="toc-link block px-3 py-1.5 rounded-md hover:bg-stone-100 dark:hover:bg-stone-800 transition">Benutzer</a>
         <a href="#a-rollen" class="toc-link block px-3 py-1.5 rounded-md hover:bg-stone-100 dark:hover:bg-stone-800 transition">Rollen &amp; Rechte</a>
         <a href="#a-stammdaten" class="toc-link block px-3 py-1.5 rounded-md hover:bg-stone-100 dark:hover:bg-stone-800 transition">Stammdaten</a>
         <a href="#a-probleme" class="toc-link block px-3 py-1.5 rounded-md hover:bg-stone-100 dark:hover:bg-stone-800 transition">Wenn's hakt</a>
@@ -245,7 +246,7 @@
           <tr><td class="px-5 py-3 font-medium">Bewertungen</td><td class="px-5 py-3 text-stone-600 dark:text-stone-400">Alle Bewertungen übergreifend</td></tr>
           <tr><td class="px-5 py-3 font-medium">Medien</td><td class="px-5 py-3 text-stone-600 dark:text-stone-400">Medien-Galerie (alle Bilder)</td></tr>
           <tr><td class="px-5 py-3 font-medium">Social Media</td><td class="px-5 py-3 text-stone-600 dark:text-stone-400">Influencer, Alle Kanäle</td></tr>
-          <tr><td class="px-5 py-3 font-medium">System</td><td class="px-5 py-3 text-stone-600 dark:text-stone-400">Einstellungen, Kategorien, Dimensionen, Qualitätskriterien, Rollen</td></tr>
+          <tr><td class="px-5 py-3 font-medium">System</td><td class="px-5 py-3 text-stone-600 dark:text-stone-400">Benutzer, Einstellungen, Kategorien, Dimensionen, Qualitätskriterien, Rollen</td></tr>
         </tbody>
       </table>
     </div>
@@ -482,6 +483,41 @@
     </div>
   </section>
 
+  <!-- BENUTZER -->
+  <section id="a-benutzer" class="scroll-mt-20">
+    <h3 class="text-2xl font-bold mb-1">Benutzer verwalten</h3>
+    <p class="text-stone-600 dark:text-stone-300 mb-4">Unter <strong>System → Benutzer</strong> legst du neue Teammitglieder an und steuerst ihre Zugänge.</p>
+    <ol class="space-y-3">
+      <li class="flex gap-4"><span class="step-number">1</span><div><strong>System → Benutzer → „Neu"</strong></div></li>
+      <li class="flex gap-4"><span class="step-number">2</span><div><strong>Name</strong>, <strong>E-Mail</strong>, <strong>Passwort</strong> (mind. 8 Zeichen) + Bestätigung eintragen</div></li>
+      <li class="flex gap-4"><span class="step-number">3</span><div><strong>Rollen</strong> zuweisen (Multi-Select) – Rollen selbst pflegst du unter <a href="#a-rollen" class="text-brand-600 dark:text-brand-400 underline">System → Rollen</a></div></li>
+      <li class="flex gap-4"><span class="step-number">4</span><div><strong>Aktiv-Toggle</strong> setzen – deaktivierte Benutzer können sich nicht mehr einloggen (Zugang sofort gesperrt)</div></li>
+      <li class="flex gap-4"><span class="step-number">5</span><div><strong>Speichern.</strong></div></li>
+    </ol>
+    <div class="mt-6 grid md:grid-cols-2 gap-3">
+      <div class="p-4 rounded-xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800">
+        <div class="font-semibold mb-1">Passwort ändern</div>
+        <p class="text-sm text-stone-500 dark:text-stone-400">Beim Bearbeiten das Passwort-Feld nur ausfüllen, wenn du es wirklich ändern willst – leer lassen = bleibt wie bisher.</p>
+      </div>
+      <div class="p-4 rounded-xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800">
+        <div class="font-semibold mb-1">Letzter Login</div>
+        <p class="text-sm text-stone-500 dark:text-stone-400">In der Liste siehst du, wann sich jeder Benutzer zuletzt eingeloggt hat. Hilfreich, um alte/inaktive Accounts zu finden.</p>
+      </div>
+      <div class="p-4 rounded-xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800">
+        <div class="font-semibold mb-1">Änderungshistorie</div>
+        <p class="text-sm text-stone-500 dark:text-stone-400">Jede Benutzer-Änderung (Name, E-Mail, Aktiv-Status) wird im Tab „Änderungshistorie" lückenlos geloggt.</p>
+      </div>
+      <div class="p-4 rounded-xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800">
+        <div class="font-semibold mb-1">Suche</div>
+        <p class="text-sm text-stone-500 dark:text-stone-400">Benutzer sind in der globalen Suche (⌘+K) auffindbar – nach Name oder E-Mail.</p>
+      </div>
+    </div>
+    <div class="mt-6 p-4 rounded-xl bg-amber-50 dark:bg-amber-900/20 border-l-4 border-amber-500">
+      <div class="text-sm font-semibold text-amber-700 dark:text-amber-300 mb-1">⚠ Achtung</div>
+      <div class="text-sm text-amber-900/80 dark:text-amber-100/80">Den eigenen Account nicht deaktivieren – sonst sperrst du dich selbst aus. Für den Notfall gibt es <code class="text-xs bg-amber-100 dark:bg-amber-900/40 px-1.5 py-0.5 rounded">php artisan staeze:reset-admin</code> auf der Konsole.</div>
+    </div>
+  </section>
+
   <!-- ROLLEN -->
   <section id="a-rollen" class="scroll-mt-20">
     <h3 class="text-2xl font-bold mb-1">Rollen &amp; Rechte</h3>
@@ -534,7 +570,7 @@
       <p class="text-stone-600 dark:text-stone-300 mb-3">Technischer Ansprechpartner für Prysm:</p>
       <div class="font-medium">Sven Kloevekorn</div>
       <a href="mailto:sven.kloevekorn@marbet.com" class="text-brand-600 dark:text-brand-400 hover:underline">sven.kloevekorn@marbet.com</a>
-      <p class="text-xs text-stone-400 mt-6">Letzte Aktualisierung: 2026-04-22</p>
+      <p class="text-xs text-stone-400 mt-6">Letzte Aktualisierung: 2026-04-22 · Benutzer-Management ergänzt</p>
     </div>
   </section>
 

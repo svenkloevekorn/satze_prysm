@@ -15,7 +15,7 @@ Phase 7 (Deployment Mittwald) pausiert, wartet auf GitHub-Repo + Mittwald-Server
 ### Zahlen
 
 - **30+ Commits** auf `main`-Branch (alle lokal, noch nicht gepusht)
-- **95 automatische Tests** grün
+- **102 automatische Tests** grün
 - **PHPStan Level 5** – 0 Fehler
 - **Pint** – alle Files formatiert
 - **Site lokal:** http://staeze-pm.test/admin
@@ -94,7 +94,7 @@ Phase 7 (Deployment Mittwald) pausiert, wartet auf GitHub-Repo + Mittwald-Server
 ```bash
 cd /Users/svenk/BEQN_Webprojekte/STZ_staeze-produktmanagement
 git log --oneline -10
-php artisan test            # 95 passed
+php artisan test            # 102 passed
 open http://staeze-pm.test/admin  # admin@admin.com / password
 open docs/checkliste.html
 ```
