@@ -35,7 +35,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
-            ->brandName('Prysm')
+            ->brandName('STAEZE : Prysm')
             ->colors([
                 'primary' => Color::Amber,
             ])
