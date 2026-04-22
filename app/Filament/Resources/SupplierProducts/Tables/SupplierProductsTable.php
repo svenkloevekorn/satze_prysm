@@ -8,6 +8,7 @@ use Filament\Actions\EditAction;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
 
 class SupplierProductsTable
@@ -16,6 +17,10 @@ class SupplierProductsTable
     {
         return $table
             ->defaultSort('created_at', 'desc')
+            ->groups([
+                Group::make('category.name')->label('Kategorie')->collapsible(),
+                Group::make('supplier.name')->label('Lieferant')->collapsible(),
+            ])
             ->emptyStateHeading('Noch keine Lieferanten-Produkte')
             ->emptyStateDescription('Leg ein Produkt an oder importiere eine CSV-Liste.')
             ->emptyStateIcon('heroicon-o-cube')

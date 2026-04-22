@@ -8,6 +8,7 @@ use Filament\Actions\EditAction;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
 
 class FinalProductsTable
@@ -16,6 +17,9 @@ class FinalProductsTable
     {
         return $table
             ->defaultSort('launched_at', 'desc')
+            ->groups([
+                Group::make('category.name')->label('Kategorie')->collapsible(),
+            ])
             ->emptyStateHeading('Noch keine finalen Produkte')
             ->emptyStateDescription('Sobald ein Entwicklungs-Item Status „Final" erreicht, erscheint es hier automatisch.')
             ->emptyStateIcon('heroicon-o-trophy')

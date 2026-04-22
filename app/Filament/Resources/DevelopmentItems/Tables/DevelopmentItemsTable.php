@@ -12,6 +12,7 @@ use Filament\Notifications\Notification;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -21,6 +22,10 @@ class DevelopmentItemsTable
     {
         return $table
             ->defaultSort('created_at', 'desc')
+            ->groups([
+                Group::make('category.name')->label('Kategorie')->collapsible(),
+                Group::make('status')->label('Status')->collapsible(),
+            ])
             ->emptyStateHeading('Noch keine Entwicklungs-Items')
             ->emptyStateDescription('Starte mit einer ersten Idee – Status „Idee" reicht zum Anfang.')
             ->emptyStateIcon('heroicon-o-light-bulb')

@@ -10,6 +10,7 @@ use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
 
 class CompetitorProductsTable
@@ -18,6 +19,10 @@ class CompetitorProductsTable
     {
         return $table
             ->defaultSort('created_at', 'desc')
+            ->groups([
+                Group::make('category.name')->label('Kategorie')->collapsible(),
+                Group::make('brand.name')->label('Marke / Hersteller')->collapsible(),
+            ])
             ->emptyStateHeading('Noch keine Wettbewerbsprodukte')
             ->emptyStateDescription('Leg das erste Produkt an – oder importiere mehrere via CSV.')
             ->emptyStateIcon('heroicon-o-magnifying-glass')
