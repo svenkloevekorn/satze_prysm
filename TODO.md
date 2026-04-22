@@ -163,6 +163,98 @@ eigener Farbe + Icon angezeigt. Filter nach Quelle möglich.
 
 ---
 
+## 🖼️ Feature E: Galerie / Medienmanagement (geplant, groß)
+
+**Ziel:** Zentrale Übersicht über alle verfügbaren Bilder, unabhängig
+von der Quelle (Wettbewerb / eigene / Lieferanten).
+
+**Aktuell:** Bilder sind via Spatie MediaLibrary je am Objekt angehängt
+(`media.model_type` + `model_id`). Es gibt KEINE übergreifende Galerie —
+man muss erst ein Produkt/Entwicklungs-Item öffnen, um Bilder zu sehen.
+
+**Gewünscht:**
+- Globale Filament-Page „Medien-Galerie" unter neuer Gruppe „Medien"
+- Grid-Darstellung aller Bilder aus `media`-Tabelle
+- Filter:
+  - Quelle: Wettbewerb / Intern / Lieferant (basiert auf `media.model_type`)
+  - Hersteller (nur bei Wettbewerb: via JOIN zu competitor_products.brand)
+  - Lieferant (nur bei Lieferant: via JOIN zu supplier_products.supplier)
+  - Produktkategorie (via JOIN)
+  - Kombination mehrerer Filter
+- Suche nach Dateiname / ggf. Tags
+- Klick auf Bild → öffnet Detail-Lightbox mit Link zum Host-Objekt
+
+**Umsetzungs-Skizze:**
+- [ ] Neue Filament-Page `app/Filament/Pages/MedienGalerie.php` mit
+  eigener Table-Query auf `media`-Tabelle
+- [ ] Spezial-Columns: `SpatieMediaLibraryImageColumn` (vorschau-grid),
+  Host-Name als TextColumn (`model->name`)
+- [ ] Filter via SelectFilter (model_type) + Relationship-Filter auf
+  joined tables
+- [ ] Volle Text-Suche über `name` und `custom_properties`
+- [ ] Später: Tags-System (nutzerdefinierte Tags pro Bild via
+  `custom_properties` oder neue Tabelle `media_tags`)
+- [ ] Navigation: eigene Gruppe „Medien" mit Foto-Icon
+- [ ] Tests: Filter kombinieren, Query-Count-Performance (N+1 vermeiden)
+
+**Größe:** Mittleres Feature (2-3 Tage ohne Tags, +1 Tag mit Tags-System).
+
+---
+
+## 📱 Feature F: Influencer & Social Media Monitoring (geplant, groß)
+
+**Ziel:** Datenbasierte Grundlage für Influencer-Kooperationen schaffen.
+
+**Neue Entitäten:**
+- `Influencer` (Person / Creator)
+  - Name, Profilbild, Beschreibung, Kontaktinfo, Status
+  - Relations: Channels (HasMany), assoziierte Marken
+- `SocialChannel` (ein Kanal eines Influencers oder einer Marke)
+  - Plattform (Enum: Instagram, TikTok, YouTube, X, LinkedIn, Facebook)
+  - Handle / URL
+  - Follower-Zahl, Engagement-Rate
+  - Sprache, Land
+  - Besitzer: `influencer_id` ODER `brand_id` (polymorph)
+- `ChannelMetric` (Zeitreihe / Monitoring-Snapshots)
+  - channel_id, captured_at
+  - followers, posts_count, avg_likes, avg_comments, engagement_rate
+- `InfluencerPost` (Content-Erfassung, optional)
+  - channel_id, posted_at, url, caption_excerpt, likes, comments
+
+**Filament:**
+- InfluencerResource (CRUD, mit Bild via MediaLibrary)
+- SocialChannelResource (Hauptliste aller Kanäle)
+- MetricsRelationManager an SocialChannel (Zeitreihen-Graph via
+  Filament-Charts oder Livewire-Chart-Package)
+- Dashboard-Widgets:
+  - Top 5 Channels by Engagement
+  - Wachstum (% Follower-Change letzte 30 Tage)
+
+**Auswertung (Analytics):**
+- Performance-Ranking (Engagement-Rate, Follower-Wachstum)
+- Relevanz-Score für eigene Marke (z.B. thematische Kategorie-Treffer)
+- Kombinationen: Kanäle in Kategorie X mit > 10k Follower + > 3 %
+  Engagement
+
+**Umsetzungs-Skizze:**
+- [ ] 4 Migrationen: influencers, social_channels, channel_metrics,
+  influencer_posts
+- [ ] Enum `SocialPlatform` mit Label + Icon + Farbe
+- [ ] Influencer- und SocialChannel-Resources (Phase 1)
+- [ ] Manuelles Eintragen / CSV-Import (Phase 1)
+- [ ] Monitoring-Snapshots per `php artisan staeze:fetch-channel-metrics`
+  (Cronjob, Phase 2 – nutzt Platform-APIs oder scraping)
+- [ ] Analytics-Widgets (Phase 3)
+- [ ] Relevanz-Score-Berechnung (Phase 3)
+- [ ] Tests: CRUD + Zeitreihen-Queries
+
+**Größe:** Groß (5-10 Tage). Sinnvoll als **3 Unter-Phasen**:
+- F.1 Stammdaten + manuelle Erfassung
+- F.2 Automatisches Monitoring (API/Scraping)
+- F.3 Analytics + Dashboard
+
+---
+
 ## 💡 Ideen / Backlog (post-MVP)
 
 - Variantenmanagement

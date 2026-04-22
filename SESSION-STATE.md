@@ -60,6 +60,15 @@ Details unter `TODO.md` → „UI-Ausbau: Produkte nach Kategorie gruppieren".
 ~~D) Bewertungs-Quellen~~ — ✅ erledigt 2026-04-22 (Multi-Select `sources` mit
 5 Werten, ersetzt altes intern/extern).
 
+**E) Galerie / Medienmanagement** (groß): Zentrale Bilder-Übersicht mit
+Filter nach Quelle/Hersteller/Lieferant/Kategorie. Neue Filament-Page
+auf Basis der `media`-Tabelle. Details unter `TODO.md` → „Feature E".
+
+**F) Influencer & Social Media Monitoring** (sehr groß): Neue Entitäten
+Influencer + SocialChannel + ChannelMetric + InfluencerPost. 3 Unter-Phasen
+(F.1 Stammdaten, F.2 automatisches Monitoring, F.3 Analytics). Details
+unter `TODO.md` → „Feature F".
+
 ### Phase 7 – Deployment Mittwald
 
 Wartet auf User, der erst folgendes vorbereiten muss:
