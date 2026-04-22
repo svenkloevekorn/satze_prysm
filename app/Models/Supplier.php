@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Activitylog\Models\Concerns\LogsActivity;
 use Spatie\Activitylog\Support\LogOptions;
 
-#[Fillable(['name', 'country', 'address', 'rating', 'notes', 'is_active'])]
+#[Fillable(['name', 'country', 'address', 'rating', 'notes', 'is_active', 'sustainability_score', 'certifications'])]
 class Supplier extends Model
 {
     /** @use HasFactory<SupplierFactory> */
@@ -31,6 +31,7 @@ class Supplier extends Model
     protected function casts(): array
     {
         return [
+            'certifications' => 'array',
             'is_active' => 'boolean',
             'rating' => 'integer',
         ];

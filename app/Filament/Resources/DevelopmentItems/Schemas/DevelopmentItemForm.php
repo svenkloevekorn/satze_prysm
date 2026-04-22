@@ -121,6 +121,41 @@ class DevelopmentItemForm
                                             ->columnSpanFull(),
                                     ]),
                             ]),
+                        Tab::make('Nachhaltigkeit')
+                            ->icon('heroicon-o-globe-europe-africa')
+                            ->schema([
+                                Section::make('Nachhaltigkeits-Ziele')
+                                    ->description('Plane schon in der Entwicklung, welche Nachhaltigkeits-Eigenschaften dein Produkt haben soll.')
+                                    ->columns(2)
+                                    ->schema([
+                                        TextInput::make('co2_kg')
+                                            ->label('CO₂-Ziel')
+                                            ->numeric()
+                                            ->step(0.01)
+                                            ->suffix('kg CO₂e'),
+                                        TextInput::make('recycled_content_pct')
+                                            ->label('Recycling-Anteil (Ziel)')
+                                            ->numeric()
+                                            ->minValue(0)
+                                            ->maxValue(100)
+                                            ->suffix('%'),
+                                        Select::make('certifications')
+                                            ->label('Angestrebte Zertifikate')
+                                            ->multiple()
+                                            ->options([
+                                                'fair_trade' => 'Fair Trade',
+                                                'bluesign' => 'Bluesign',
+                                                'gots' => 'GOTS',
+                                                'oeko_tex' => 'OEKO-TEX',
+                                                'bsci' => 'BSCI',
+                                                'grs' => 'GRS (Global Recycled Standard)',
+                                                'pfc_free' => 'PFC-frei',
+                                                'climate_neutral' => 'Klimaneutral',
+                                            ])
+                                            ->searchable()
+                                            ->columnSpanFull(),
+                                    ]),
+                            ]),
                         Tab::make('Bilder & Skizzen')
                             ->icon('heroicon-o-photo')
                             ->schema([

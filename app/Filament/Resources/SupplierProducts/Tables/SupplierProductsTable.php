@@ -64,6 +64,17 @@ class SupplierProductsTable
                     ->label('⌀ Bewertung')
                     ->avg('ratings', 'score')
                     ->formatStateUsing(fn ($state) => $state ? round($state, 1).'/10' : '–'),
+                TextColumn::make('co2_kg')
+                    ->label('CO₂')
+                    ->suffix(' kg')
+                    ->numeric(decimalPlaces: 2)
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('recycled_content_pct')
+                    ->label('Recycled')
+                    ->suffix(' %')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
                     ->label('Geändert')
                     ->dateTime('d.m.Y H:i')

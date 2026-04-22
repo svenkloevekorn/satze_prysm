@@ -23,7 +23,9 @@ use Spatie\Tags\HasTags;
     'description',
     'cost_price',
     'retail_price',
-    'launched_at',
+    'launched_at',    'co2_kg',
+    'recycled_content_pct',
+    'certifications',
 ])]
 class FinalProduct extends Model implements HasMedia
 {
@@ -49,6 +51,8 @@ class FinalProduct extends Model implements HasMedia
     protected function casts(): array
     {
         return [
+            'certifications' => 'array',
+            'co2_kg' => 'decimal:2',
             'cost_price' => 'decimal:2',
             'retail_price' => 'decimal:2',
             'launched_at' => 'date',

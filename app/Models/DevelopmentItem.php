@@ -36,7 +36,9 @@ use Spatie\Tags\HasTags;
     'sizes',
     'target_price',
     'notes',
-    'deadline',
+    'deadline',    'co2_kg',
+    'recycled_content_pct',
+    'certifications',
 ])]
 class DevelopmentItem extends Model implements HasMedia
 {
@@ -101,6 +103,8 @@ class DevelopmentItem extends Model implements HasMedia
     protected function casts(): array
     {
         return [
+            'certifications' => 'array',
+            'co2_kg' => 'decimal:2',
             'status' => DevelopmentStatus::class,
             'materials' => 'array',
             'colors' => 'array',

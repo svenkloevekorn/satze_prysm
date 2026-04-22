@@ -64,6 +64,37 @@ class FinalProductForm
                             ->step(0.01)
                             ->prefix('€'),
                     ]),
+                Section::make('Nachhaltigkeit')
+                    ->description('CO₂-Bilanz, Recycling-Anteil und Zertifikate des finalen Produkts.')
+                    ->columns(2)
+                    ->schema([
+                        TextInput::make('co2_kg')
+                            ->label('CO₂-Fußabdruck')
+                            ->numeric()
+                            ->step(0.01)
+                            ->suffix('kg CO₂e'),
+                        TextInput::make('recycled_content_pct')
+                            ->label('Recycling-Anteil')
+                            ->numeric()
+                            ->minValue(0)
+                            ->maxValue(100)
+                            ->suffix('%'),
+                        Select::make('certifications')
+                            ->label('Zertifikate')
+                            ->multiple()
+                            ->options([
+                                'fair_trade' => 'Fair Trade',
+                                'bluesign' => 'Bluesign',
+                                'gots' => 'GOTS',
+                                'oeko_tex' => 'OEKO-TEX',
+                                'bsci' => 'BSCI',
+                                'grs' => 'GRS (Global Recycled Standard)',
+                                'pfc_free' => 'PFC-frei',
+                                'climate_neutral' => 'Klimaneutral',
+                            ])
+                            ->searchable()
+                            ->columnSpanFull(),
+                    ]),
                 Section::make('Bilder')
                     ->schema([
                         SpatieMediaLibraryFileUpload::make('images')

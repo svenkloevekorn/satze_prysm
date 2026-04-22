@@ -75,6 +75,17 @@ class CompetitorProductsTable
                 SpatieTagsColumn::make('tags')
                     ->label('Tags')
                     ->toggleable(),
+                TextColumn::make('co2_kg')
+                    ->label('CO₂')
+                    ->suffix(' kg')
+                    ->numeric(decimalPlaces: 2)
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('recycled_content_pct')
+                    ->label('Recycled')
+                    ->suffix(' %')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
                     ->label('Geändert')
                     ->dateTime('d.m.Y H:i')

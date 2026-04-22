@@ -99,6 +99,42 @@ class CompetitorProductForm
                                     ]),
                             ]),
 
+                        Tab::make('Nachhaltigkeit')
+                            ->icon('heroicon-o-globe-europe-africa')
+                            ->schema([
+                                Section::make('Nachhaltigkeits-Kennzahlen')
+                                    ->description('Diese Daten helfen bei der Vergleichbarkeit und Bewertung von Wettbewerbsprodukten.')
+                                    ->columns(2)
+                                    ->schema([
+                                        TextInput::make('co2_kg')
+                                            ->label('CO₂-Fußabdruck')
+                                            ->numeric()
+                                            ->step(0.01)
+                                            ->suffix('kg CO₂e')
+                                            ->helperText('Falls bekannt (z.B. aus Label, Studie, Herstellerangabe).'),
+                                        TextInput::make('recycled_content_pct')
+                                            ->label('Recycling-Anteil')
+                                            ->numeric()
+                                            ->minValue(0)
+                                            ->maxValue(100)
+                                            ->suffix('%'),
+                                        Select::make('certifications')
+                                            ->label('Zertifikate')
+                                            ->multiple()
+                                            ->options([
+                                                'fair_trade' => 'Fair Trade',
+                                                'bluesign' => 'Bluesign',
+                                                'gots' => 'GOTS',
+                                                'oeko_tex' => 'OEKO-TEX',
+                                                'bsci' => 'BSCI',
+                                                'grs' => 'GRS (Global Recycled Standard)',
+                                                'pfc_free' => 'PFC-frei',
+                                                'climate_neutral' => 'Klimaneutral',
+                                            ])
+                                            ->searchable()
+                                            ->columnSpanFull(),
+                                    ]),
+                            ]),
                         Tab::make('Bilder')
                             ->icon('heroicon-o-photo')
                             ->schema([

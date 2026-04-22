@@ -46,6 +46,11 @@ class SuppliersTable
                 IconColumn::make('is_active')
                     ->label('Aktiv')
                     ->boolean(),
+                TextColumn::make('sustainability_score')
+                    ->label('Nachhaltigkeit')
+                    ->formatStateUsing(fn ($state) => $state ? "{$state}/10" : '–')
+                    ->sortable()
+                    ->toggleable(),
                 TextColumn::make('updated_at')
                     ->label('Geändert')
                     ->dateTime('d.m.Y H:i')

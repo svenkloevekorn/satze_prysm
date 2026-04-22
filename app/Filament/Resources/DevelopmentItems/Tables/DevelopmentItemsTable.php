@@ -68,6 +68,17 @@ class DevelopmentItemsTable
                     ->label('SKU')
                     ->placeholder('–')
                     ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('co2_kg')
+                    ->label('CO₂-Ziel')
+                    ->suffix(' kg')
+                    ->numeric(decimalPlaces: 2)
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('recycled_content_pct')
+                    ->label('Recycled')
+                    ->suffix(' %')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 SelectFilter::make('status')

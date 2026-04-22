@@ -71,6 +71,17 @@ class FinalProductsTable
                     ->avg('ratings', 'score')
                     ->formatStateUsing(fn ($state) => $state ? round($state, 1).'/10' : '–')
                     ->toggleable(),
+                TextColumn::make('co2_kg')
+                    ->label('CO₂')
+                    ->suffix(' kg')
+                    ->numeric(decimalPlaces: 2)
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('recycled_content_pct')
+                    ->label('Recycled')
+                    ->suffix(' %')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 SelectFilter::make('category')

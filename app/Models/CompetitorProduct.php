@@ -25,7 +25,9 @@ use Spatie\Tags\HasTags;
     'colors',
     'sizes',
     'price_min',
-    'price_max',
+    'price_max',    'co2_kg',
+    'recycled_content_pct',
+    'certifications',
 ])]
 class CompetitorProduct extends Model implements HasMedia
 {
@@ -56,6 +58,8 @@ class CompetitorProduct extends Model implements HasMedia
     protected function casts(): array
     {
         return [
+            'certifications' => 'array',
+            'co2_kg' => 'decimal:2',
             'materials' => 'array',
             'colors' => 'array',
             'sizes' => 'array',

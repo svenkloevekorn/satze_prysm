@@ -104,3 +104,25 @@ it('zeigt Shop-Eintraege im Relation-Manager', function () {
         'pageClass' => EditCompetitorProduct::class,
     ])->assertSuccessful();
 });
+
+it('speichert Nachhaltigkeits-Felder', function () {
+    $brand = Brand::factory()->create();
+    $category = Category::factory()->create();
+
+    livewire(CreateCompetitorProduct::class)
+        ->fillForm([
+            'name' => 'Nachhaltiges Trikot',
+            'brand_id' => $brand->id,
+            'category_id' => $category->id,
+            'co2_kg' => 12.50,
+            'recycled_content_pct' => 80,
+            'certifications' => ['bluesign', 'gots'],
+        ])
+        ->call('create')
+        ->assertHasNoFormErrors();
+
+    $product = CompetitorProduct::where('name', 'Nachhaltiges Trikot')->first();
+    expect((float) $product->co2_kg)->toBe(12.50);
+    expect($product->recycled_content_pct)->toBe(80);
+    expect($product->certifications)->toBe(['bluesign', 'gots']);
+});
