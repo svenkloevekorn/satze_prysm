@@ -5,6 +5,7 @@ namespace App\Filament\Resources\CompetitorProducts;
 use App\Filament\Resources\CompetitorProducts\Pages\CreateCompetitorProduct;
 use App\Filament\Resources\CompetitorProducts\Pages\EditCompetitorProduct;
 use App\Filament\Resources\CompetitorProducts\Pages\ListCompetitorProducts;
+use App\Filament\Resources\CompetitorProducts\RelationManagers\QualityChecksRelationManager;
 use App\Filament\Resources\CompetitorProducts\RelationManagers\RatingsRelationManager;
 use App\Filament\Resources\CompetitorProducts\RelationManagers\ShopEntriesRelationManager;
 use App\Filament\Resources\CompetitorProducts\Schemas\CompetitorProductForm;
@@ -62,6 +63,7 @@ class CompetitorProductResource extends Resource
         return [
             ShopEntriesRelationManager::class,
             RatingsRelationManager::class,
+            QualityChecksRelationManager::class,
         ];
     }
 

@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\CompetitorProduct;
+use App\Models\DevelopmentItem;
 use App\Models\FinalProduct;
 use App\Models\SupplierProduct;
 use Illuminate\Database\Eloquent\Relations\Relation;
@@ -26,6 +27,7 @@ class AppServiceProvider extends ServiceProvider
             'competitor_product' => CompetitorProduct::class,
             'supplier_product' => SupplierProduct::class,
             'final_product' => FinalProduct::class,
+            'development_item' => DevelopmentItem::class,
         ]);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\HasQualityChecks;
 use App\Models\Concerns\HasRatings;
 use Database\Factories\SupplierProductFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
@@ -29,6 +30,7 @@ class SupplierProduct extends Model implements HasMedia
     /** @use HasFactory<SupplierProductFactory> */
     use HasFactory;
 
+    use HasQualityChecks;
     use HasRatings;
     use InteractsWithMedia;
 

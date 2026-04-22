@@ -5,6 +5,7 @@ namespace App\Filament\Resources\FinalProducts;
 use App\Filament\Resources\FinalProducts\Pages\CreateFinalProduct;
 use App\Filament\Resources\FinalProducts\Pages\EditFinalProduct;
 use App\Filament\Resources\FinalProducts\Pages\ListFinalProducts;
+use App\Filament\Resources\FinalProducts\RelationManagers\QualityChecksRelationManager;
 use App\Filament\Resources\FinalProducts\RelationManagers\RatingsRelationManager;
 use App\Filament\Resources\FinalProducts\Schemas\FinalProductForm;
 use App\Filament\Resources\FinalProducts\Tables\FinalProductsTable;
@@ -60,6 +61,7 @@ class FinalProductResource extends Resource
     {
         return [
             RatingsRelationManager::class,
+            QualityChecksRelationManager::class,
         ];
     }
 

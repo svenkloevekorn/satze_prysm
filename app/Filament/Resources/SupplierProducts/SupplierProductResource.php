@@ -5,6 +5,7 @@ namespace App\Filament\Resources\SupplierProducts;
 use App\Filament\Resources\SupplierProducts\Pages\CreateSupplierProduct;
 use App\Filament\Resources\SupplierProducts\Pages\EditSupplierProduct;
 use App\Filament\Resources\SupplierProducts\Pages\ListSupplierProducts;
+use App\Filament\Resources\SupplierProducts\RelationManagers\QualityChecksRelationManager;
 use App\Filament\Resources\SupplierProducts\RelationManagers\RatingsRelationManager;
 use App\Filament\Resources\SupplierProducts\Schemas\SupplierProductForm;
 use App\Filament\Resources\SupplierProducts\Tables\SupplierProductsTable;
@@ -60,6 +61,7 @@ class SupplierProductResource extends Resource
     {
         return [
             RatingsRelationManager::class,
+            QualityChecksRelationManager::class,
         ];
     }
 

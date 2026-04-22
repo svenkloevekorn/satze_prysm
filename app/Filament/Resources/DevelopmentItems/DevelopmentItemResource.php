@@ -5,6 +5,7 @@ namespace App\Filament\Resources\DevelopmentItems;
 use App\Filament\Resources\DevelopmentItems\Pages\CreateDevelopmentItem;
 use App\Filament\Resources\DevelopmentItems\Pages\EditDevelopmentItem;
 use App\Filament\Resources\DevelopmentItems\Pages\ListDevelopmentItems;
+use App\Filament\Resources\DevelopmentItems\RelationManagers\QualityChecksRelationManager;
 use App\Filament\Resources\DevelopmentItems\Schemas\DevelopmentItemForm;
 use App\Filament\Resources\DevelopmentItems\Tables\DevelopmentItemsTable;
 use App\Models\DevelopmentItem;
@@ -58,7 +59,7 @@ class DevelopmentItemResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            QualityChecksRelationManager::class,
         ];
     }
 

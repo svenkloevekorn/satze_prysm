@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\DevelopmentStatus;
+use App\Models\Concerns\HasQualityChecks;
 use Database\Factories\DevelopmentItemFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -39,6 +40,7 @@ class DevelopmentItem extends Model implements HasMedia
     /** @use HasFactory<DevelopmentItemFactory> */
     use HasFactory;
 
+    use HasQualityChecks;
     use InteractsWithMedia;
 
     public function category(): BelongsTo
