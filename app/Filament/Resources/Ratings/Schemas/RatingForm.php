@@ -79,9 +79,10 @@ class RatingForm
                     ->default(now())
                     ->displayFormat('d.m.Y'),
                 Textarea::make('comment')
-                    ->label('Kommentar')
+                    ->label('Allgemeine Bewertung')
                     ->rows(3)
-                    ->columnSpanFull(),
+                    ->columnSpanFull()
+                    ->helperText('Freier Text zur Gesamteinschätzung.'),
                 Textarea::make('positives')
                     ->label('👍 Positive Punkte')
                     ->rows(3)

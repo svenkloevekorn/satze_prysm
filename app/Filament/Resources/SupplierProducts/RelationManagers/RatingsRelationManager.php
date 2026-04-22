@@ -51,7 +51,7 @@ class RatingsRelationManager extends RelationManager
                     ->formatStateUsing(fn (int $state) => "{$state}/10")
                     ->sortable(),
                 TextColumn::make('comment')
-                    ->label('Kommentar')
+                    ->label('Allgemeine Bewertung')
                     ->limit(60)
                     ->tooltip(fn ($record) => $record->comment),
                 TextColumn::make('rated_at')
