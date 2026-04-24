@@ -1,10 +1,11 @@
 name: CI
 
+# Hinweis: CI laeuft aktuell NICHT automatisch.
+# Grund: warten auf Mittwald-Server-Setup, dann wird der Workflow zusammen
+# mit einem Deploy-Job neu aufgesetzt (PostgreSQL-Service, korrekte Extensions).
+# Bis dahin manuell ausloesbar via "Actions" -> "CI" -> "Run workflow".
 on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+  workflow_dispatch:
 
 jobs:
   lint-and-test:
