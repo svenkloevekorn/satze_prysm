@@ -699,6 +699,85 @@ Setzt Passwort neu und weist die super_admin-Rolle zu. Wird der User nicht gefun
 
 ---
 
+## ✅ Phase 10 – Support-Tools testen
+
+### 🔹 43. User-Impersonation („Anmelden als")
+
+**Pfad:** System → Benutzer → Liste
+
+**Vorbereitung:** Mindestens einen 2. Test-User anlegen, der NICHT super_admin ist (z.B. mit Rolle „editor"), und einen weiteren super_admin-User.
+
+| # | Was tun? | Erwartung |
+|---|---|---|
+| 43.1 | Als super_admin in die Benutzer-Liste | In der Spalte „Aktionen" sieht man neben „Bearbeiten" auch **„Anmelden als"** mit Tür-Icon |
+| 43.2 | Bei einem Editor-User auf „Anmelden als" klicken | Wird sofort ins Dashboard umgeleitet, oben am Bildschirm erscheint ein **dunkler Banner**: „You are impersonating … Leave" |
+| 43.3 | Im Banner auf „Leave" klicken | Zurück zum eigenen Account, Banner verschwindet |
+| 43.4 | Bei einem zweiten **super_admin** schauen | „Anmelden als" ist NICHT sichtbar (Schutz) |
+| 43.5 | Bei einem **deaktivierten** Benutzer schauen | „Anmelden als" ist NICHT sichtbar |
+| 43.6 | Aktuellen Benutzer (sich selbst) in der Liste suchen | „Anmelden als" ist NICHT sichtbar |
+| 43.7 | Als Editor (nicht super_admin) einloggen, in Benutzer-Liste schauen | „Anmelden als"-Aktion gar nicht sichtbar (Editor darf nicht impersonieren) |
+
+#### ❓ Was prüfen?
+- Banner ist während der gesamten Impersonation immer sichtbar (auch nach Seitenwechsel)
+- Während du impersonierst, hast du die Rechte des fremden Users (siehst nur was er sieht)
+- Nach „Leave" bist du wieder auf der Seite, von der du impersoniert hast
+
+---
+
+### 🔹 44. Bulk-Edit (Wettbewerbsprodukte)
+
+**Pfad:** Marktanalyse → Wettbewerbsprodukte
+
+| # | Was tun? | Erwartung |
+|---|---|---|
+| 44.1 | 3 Produkte mit Checkbox markieren | Toolbar oben zeigt Bulk-Aktionen-Menü |
+| 44.2 | „Marke setzen" wählen, eine andere Marke auswählen, bestätigen | Erfolgsmeldung „3 Produkte aktualisiert", in der Liste haben alle die neue Marke |
+| 44.3 | „Kategorie setzen" auf 2 Produkten | Beide haben die neue Kategorie |
+| 44.4 | „Preis ändern" – Preis von 50 / Preis bis 99 setzen, bestätigen | Beide Preis-Felder aktualisiert |
+| 44.5 | „Preis ändern" – beide Felder leer lassen | Warn-Notification „Mindestens einen Preis angeben" |
+| 44.6 | Tab „Änderungshistorie" eines bulk-bearbeiteten Produkts öffnen | Zeigt das Update mit alten/neuen Werten |
+
+---
+
+### 🔹 45. Bulk-Edit (Lieferanten-Produkte)
+
+**Pfad:** Lieferanten → Lieferanten-Produkte
+
+| # | Was tun? | Erwartung |
+|---|---|---|
+| 45.1 | 2 Lieferanten-Produkte markieren | Bulk-Menü erscheint |
+| 45.2 | „Lieferant ändern" → anderen Lieferanten | Beide Produkte haben neuen Lieferanten |
+| 45.3 | „EK ändern" → 12.50 setzen | EK-Spalte zeigt 12,50 € bei beiden |
+| 45.4 | „MOQ setzen" → 200 | MOQ-Spalte 200 bei beiden |
+| 45.5 | „Kategorie setzen" → andere Kategorie | Aktualisiert |
+
+#### ❓ Was prüfen?
+- Bulk-Aktionen sind im **toolbar action group** oben sichtbar, NICHT in der pro-Zeile-Aktion
+- Nach jeder Bulk-Aktion ist die Auswahl wieder leer (deselectRecordsAfterCompletion)
+
+---
+
+### 🔹 46. Dashboard-Widget „Letzte CSV-Imports"
+
+**Pfad:** Dashboard
+
+**Vorbereitung:** Vorher mindestens 1× CSV importieren (z.B. `docs/beispiel-imports/wettbewerbsprodukte-beispiel.csv` mit absichtlichem Tippfehler in einer Zeile, damit Fehler entstehen).
+
+| # | Was tun? | Erwartung |
+|---|---|---|
+| 46.1 | Dashboard öffnen → nach unten scrollen | Widget „Letzte CSV-Imports" sichtbar |
+| 46.2 | Spalten prüfen | Datei, Typ (z.B. „Wettbewerbsprodukte"), Von (User), Erfolgreich (8 / 10), Fehler (Badge), Abgeschlossen (vor x Min) |
+| 46.3 | Bei einer Zeile mit Fehlern auf „Fehler-CSV" klicken | CSV-Datei mit den fehlgeschlagenen Zeilen + Fehlermeldungen wird heruntergeladen |
+| 46.4 | Bei einer Zeile ohne Fehler: Button „Fehler-CSV" | NICHT sichtbar (visible-Bedingung) |
+| 46.5 | Wenn noch nie importiert wurde | Empty-State „Noch keine Imports" mit Tray-Icon |
+
+#### ❓ Was prüfen?
+- Importer-Typ ist deutsch beschriftet (nicht der Klassenname)
+- Sortierung: neuester Import zuerst
+- Maximal 5 Einträge pro Seite
+
+---
+
 ## 🌍 Spätere Phasen *(Platzhalter)*
 
 ### Phase 7 – Deployment Mittwald *(folgt)*

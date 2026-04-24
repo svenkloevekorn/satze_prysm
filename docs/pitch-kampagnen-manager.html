@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prysm – Kampagnen-Manager (Pitch)</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    darkMode: 'media',
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['-apple-system', 'BlinkMacSystemFont', 'Inter', 'Segoe UI', 'sans-serif'],
+        },
+        colors: {
+          brand: {
+            50: '#fffbeb', 100: '#fef3c7', 200: '#fde68a', 300: '#fcd34d',
+            400: '#fbbf24', 500: '#f59e0b', 600: '#d97706', 700: '#b45309',
+            800: '#92400e', 900: '#78350f'
+          }
+        },
+      },
+    },
+  };
+</script>
+<style>
+  body { font-feature-settings: "ss01", "cv11"; }
+  .grain {
+    background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.06) 1px, transparent 0);
+    background-size: 20px 20px;
+  }
+  .status-dot {
+    @apply inline-block w-2 h-2 rounded-full;
+  }
+  details > summary { list-style: none; cursor: pointer; }
+  details > summary::-webkit-details-marker { display: none; }
+</style>
+</head>
+<body class="font-sans bg-stone-50 dark:bg-stone-950 text-stone-900 dark:text-stone-100 antialiased">
+
+<!-- HERO -->
+<section class="relative overflow-hidden bg-gradient-to-br from-brand-600 via-brand-700 to-amber-900 text-white">
+  <div class="absolute inset-0 grain opacity-50"></div>
+  <div class="relative max-w-6xl mx-auto px-6 py-20 lg:py-28">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 backdrop-blur text-xs font-medium tracking-wider uppercase mb-6">
+      <span class="w-1.5 h-1.5 rounded-full bg-emerald-300 animate-pulse"></span>
+      Feature-Pitch · Modul-Vorschlag für Prysm
+    </div>
+    <h1 class="text-5xl lg:text-7xl font-bold tracking-tight leading-[0.95]">
+      Vom Influencer-<br>Profil zur abgerechneten<br>
+      <span class="text-brand-200">Kampagne.</span>
+    </h1>
+    <p class="text-xl lg:text-2xl text-white/85 max-w-3xl mt-8 font-light">
+      Du hast Influencer in Prysm. Du hast Produkte in Prysm.
+      Was fehlt, ist die <strong class="font-semibold">Brücke dazwischen</strong> – die Kampagne.
+    </p>
+    <div class="flex flex-wrap gap-3 mt-10">
+      <a href="#problem" class="px-6 py-3 rounded-lg bg-white text-brand-700 hover:bg-brand-50 font-semibold text-sm transition shadow-lg">Das Problem →</a>
+      <a href="#mockup" class="px-6 py-3 rounded-lg bg-white/15 backdrop-blur border border-white/20 hover:bg-white/25 font-semibold text-sm transition">So sieht's aus</a>
+      <a href="#entscheidung" class="px-6 py-3 rounded-lg bg-white/15 backdrop-blur border border-white/20 hover:bg-white/25 font-semibold text-sm transition">Entscheidung treffen</a>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section id="problem" class="py-24 px-6">
+  <div class="max-w-4xl mx-auto">
+    <div class="text-xs font-semibold uppercase tracking-wider text-brand-600 dark:text-brand-400 mb-3">Heute</div>
+    <h2 class="text-4xl font-bold tracking-tight mb-8">Du hast die Daten – aber kein System für die Aktion</h2>
+    <div class="grid md:grid-cols-2 gap-5">
+      <div class="p-6 rounded-2xl border-2 border-red-200 dark:border-red-900/50 bg-red-50/50 dark:bg-red-950/30">
+        <div class="text-2xl mb-3">😩</div>
+        <div class="font-semibold mb-2">Excel + Notion + WhatsApp</div>
+        <p class="text-sm text-stone-600 dark:text-stone-300">Welcher Influencer hat zugesagt? Welches Produkt war für sie? Wann war der Posting-Termin? Steht in 4 verschiedenen Tools.</p>
+      </div>
+      <div class="p-6 rounded-2xl border-2 border-red-200 dark:border-red-900/50 bg-red-50/50 dark:bg-red-950/30">
+        <div class="text-2xl mb-3">📭</div>
+        <div class="font-semibold mb-2">Briefings gehen verloren</div>
+        <p class="text-sm text-stone-600 dark:text-stone-300">Wer hat welches Briefing wann verschickt? Welche Version war final? Hat die Influencerin „erhalten" bestätigt?</p>
+      </div>
+      <div class="p-6 rounded-2xl border-2 border-red-200 dark:border-red-900/50 bg-red-50/50 dark:bg-red-950/30">
+        <div class="text-2xl mb-3">💸</div>
+        <div class="font-semibold mb-2">Kein Kosten-Überblick</div>
+        <p class="text-sm text-stone-600 dark:text-stone-300">Was hat die letzte Kampagne gekostet? Welcher Influencer war wie teuer? Wie viel Budget für Q3?</p>
+      </div>
+      <div class="p-6 rounded-2xl border-2 border-red-200 dark:border-red-900/50 bg-red-50/50 dark:bg-red-950/30">
+        <div class="text-2xl mb-3">🔮</div>
+        <div class="font-semibold mb-2">Keine Lerneffekte</div>
+        <p class="text-sm text-stone-600 dark:text-stone-300">Welche Kampagne hat performt? Welcher Influencer-Typ? Welche Produkt-Kategorie? Bauchgefühl statt Daten.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LÖSUNG -->
+<section class="py-24 px-6 bg-stone-100 dark:bg-stone-900/50 border-y border-stone-200 dark:border-stone-800">
+  <div class="max-w-5xl mx-auto">
+    <div class="text-xs font-semibold uppercase tracking-wider text-brand-600 dark:text-brand-400 mb-3">Mit Prysm Kampagnen-Manager</div>
+    <h2 class="text-4xl font-bold tracking-tight mb-12">Eine Kampagne. Ein Ort. Klarer Workflow.</h2>
+
+    <!-- WORKFLOW -->
+    <div class="rounded-3xl bg-white dark:bg-stone-900 p-8 lg:p-10 border border-stone-200 dark:border-stone-800 shadow-sm">
+      <div class="font-semibold mb-6 text-stone-500 dark:text-stone-400 text-sm uppercase tracking-wider">Der Workflow in 6 Stati</div>
+      <div class="grid grid-cols-2 md:grid-cols-6 gap-3">
+        <div class="p-4 rounded-xl bg-stone-50 dark:bg-stone-800 border border-stone-200 dark:border-stone-700">
+          <div class="text-xs font-semibold text-stone-500 mb-1">01</div>
+          <div class="font-semibold text-sm">Anfrage</div>
+          <div class="text-xs text-stone-500 mt-1">Influencer angefragt</div>
+        </div>
+        <div class="p-4 rounded-xl bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-900">
+          <div class="text-xs font-semibold text-blue-600 dark:text-blue-400 mb-1">02</div>
+          <div class="font-semibold text-sm">Verhandlung</div>
+          <div class="text-xs text-stone-500 mt-1">Konditionen klären</div>
+        </div>
+        <div class="p-4 rounded-xl bg-purple-50 dark:bg-purple-950/30 border border-purple-200 dark:border-purple-900">
+          <div class="text-xs font-semibold text-purple-600 dark:text-purple-400 mb-1">03</div>
+          <div class="font-semibold text-sm">Briefing</div>
+          <div class="text-xs text-stone-500 mt-1">Vorgaben verschickt</div>
+        </div>
+        <div class="p-4 rounded-xl bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900">
+          <div class="text-xs font-semibold text-amber-600 dark:text-amber-400 mb-1">04</div>
+          <div class="font-semibold text-sm">Produktion</div>
+          <div class="text-xs text-stone-500 mt-1">Content wird erstellt</div>
+        </div>
+        <div class="p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-900">
+          <div class="text-xs font-semibold text-emerald-600 dark:text-emerald-400 mb-1">05</div>
+          <div class="font-semibold text-sm">Live</div>
+          <div class="text-xs text-stone-500 mt-1">Post veröffentlicht</div>
+        </div>
+        <div class="p-4 rounded-xl bg-gradient-to-br from-emerald-600 to-emerald-700 text-white border border-emerald-700">
+          <div class="text-xs font-semibold opacity-80 mb-1">06</div>
+          <div class="font-semibold text-sm">Abgerechnet</div>
+          <div class="text-xs opacity-80 mt-1">Rechnung bezahlt</div>
+        </div>
+      </div>
+      <p class="text-xs text-stone-400 mt-5 italic">Status pro <strong>CampaignSlot</strong> (= ein Influencer in einer Kampagne). Eine Kampagne hat viele Slots.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MOCKUP -->
+<section id="mockup" class="py-24 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-xs font-semibold uppercase tracking-wider text-brand-600 dark:text-brand-400 mb-3">So würde es aussehen</div>
+    <h2 class="text-4xl font-bold tracking-tight mb-3">Mockup: Kampagne „Sommer-Launch 2026"</h2>
+    <p class="text-stone-500 dark:text-stone-400 mb-10">Filament-Resource im Prysm-Stil – konsistent mit allem, was du schon hast.</p>
+
+    <!-- Browser Mockup -->
+    <div class="rounded-2xl overflow-hidden shadow-2xl border border-stone-300 dark:border-stone-700">
+      <!-- Browser Bar -->
+      <div class="bg-stone-200 dark:bg-stone-800 px-4 py-3 flex items-center gap-2 border-b border-stone-300 dark:border-stone-700">
+        <div class="flex gap-1.5">
+          <div class="w-3 h-3 rounded-full bg-red-400"></div>
+          <div class="w-3 h-3 rounded-full bg-amber-400"></div>
+          <div class="w-3 h-3 rounded-full bg-emerald-400"></div>
+        </div>
+        <div class="flex-1 mx-4 px-4 py-1 rounded-md bg-white dark:bg-stone-900 text-xs text-stone-500 font-mono truncate">
+          prysm.example.de/admin/campaigns/14
+        </div>
+      </div>
+
+      <!-- App Body -->
+      <div class="bg-white dark:bg-stone-900 p-8">
+        <!-- Header -->
+        <div class="flex items-start justify-between mb-6">
+          <div>
+            <div class="text-xs text-stone-400 mb-1">Marketing → Kampagnen → Sommer-Launch 2026</div>
+            <h3 class="text-2xl font-bold">Sommer-Launch 2026 – Cycling Jersey</h3>
+            <div class="flex items-center gap-2 mt-2">
+              <span class="px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300">Aktiv</span>
+              <span class="text-xs text-stone-500">15.06.2026 – 31.07.2026 · Budget: 12.500 €</span>
+            </div>
+          </div>
+          <button class="px-3 py-1.5 rounded-md bg-brand-500 text-white text-sm font-medium">+ Slot hinzufügen</button>
+        </div>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-4 gap-3 mb-6">
+          <div class="p-3 rounded-lg bg-stone-50 dark:bg-stone-800 border border-stone-200 dark:border-stone-700">
+            <div class="text-xs text-stone-500 mb-1">Slots gesamt</div>
+            <div class="text-2xl font-bold">8</div>
+          </div>
+          <div class="p-3 rounded-lg bg-stone-50 dark:bg-stone-800 border border-stone-200 dark:border-stone-700">
+            <div class="text-xs text-stone-500 mb-1">Live</div>
+            <div class="text-2xl font-bold text-emerald-600">3</div>
+          </div>
+          <div class="p-3 rounded-lg bg-stone-50 dark:bg-stone-800 border border-stone-200 dark:border-stone-700">
+            <div class="text-xs text-stone-500 mb-1">Budget genutzt</div>
+            <div class="text-2xl font-bold">7.200 €</div>
+          </div>
+          <div class="p-3 rounded-lg bg-stone-50 dark:bg-stone-800 border border-stone-200 dark:border-stone-700">
+            <div class="text-xs text-stone-500 mb-1">Reichweite (live)</div>
+            <div class="text-2xl font-bold">487 K</div>
+          </div>
+        </div>
+
+        <!-- Slots Table -->
+        <div class="border border-stone-200 dark:border-stone-700 rounded-lg overflow-hidden">
+          <div class="bg-stone-100 dark:bg-stone-800 px-4 py-2 border-b border-stone-200 dark:border-stone-700">
+            <div class="font-semibold text-sm">Influencer-Slots</div>
+          </div>
+          <table class="w-full text-sm">
+            <thead class="bg-stone-50 dark:bg-stone-800/50 text-xs text-stone-500">
+              <tr>
+                <th class="text-left px-4 py-2 font-medium">Influencer</th>
+                <th class="text-left px-4 py-2 font-medium">Produkt</th>
+                <th class="text-left px-4 py-2 font-medium">Status</th>
+                <th class="text-left px-4 py-2 font-medium">Honorar</th>
+                <th class="text-left px-4 py-2 font-medium">Posting-Termin</th>
+                <th class="text-left px-4 py-2 font-medium">Performance</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-stone-200 dark:divide-stone-700">
+              <tr>
+                <td class="px-4 py-3">
+                  <div class="font-medium">Marie Schreiber</div>
+                  <div class="text-xs text-stone-500">@marie.cycles · 87K Insta</div>
+                </td>
+                <td class="px-4 py-3 text-stone-600 dark:text-stone-300">Pro Summer Jersey</td>
+                <td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300">Live</span></td>
+                <td class="px-4 py-3 font-medium">1.800 €</td>
+                <td class="px-4 py-3 text-stone-600 dark:text-stone-300">22.06.2026</td>
+                <td class="px-4 py-3 text-emerald-600 font-medium">12.4K Likes · 3,8% Eng.</td>
+              </tr>
+              <tr>
+                <td class="px-4 py-3">
+                  <div class="font-medium">Ben Höher</div>
+                  <div class="text-xs text-stone-500">@bennycycles · 142K YT</div>
+                </td>
+                <td class="px-4 py-3 text-stone-600 dark:text-stone-300">Pro Summer Jersey</td>
+                <td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300">Produktion</span></td>
+                <td class="px-4 py-3 font-medium">3.200 €</td>
+                <td class="px-4 py-3 text-stone-600 dark:text-stone-300">05.07.2026</td>
+                <td class="px-4 py-3 text-stone-400">–</td>
+              </tr>
+              <tr>
+                <td class="px-4 py-3">
+                  <div class="font-medium">Sophie Lang</div>
+                  <div class="text-xs text-stone-500">@sophie.runs · 54K TikTok</div>
+                </td>
+                <td class="px-4 py-3 text-stone-600 dark:text-stone-300">Race Bib 2026</td>
+                <td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-700 dark:bg-purple-900/40 dark:text-purple-300">Briefing</span></td>
+                <td class="px-4 py-3 font-medium">900 €</td>
+                <td class="px-4 py-3 text-stone-600 dark:text-stone-300">14.07.2026</td>
+                <td class="px-4 py-3 text-stone-400">–</td>
+              </tr>
+              <tr class="bg-stone-50/50 dark:bg-stone-800/20">
+                <td colspan="6" class="px-4 py-2 text-xs text-stone-400 italic">+ 5 weitere Slots …</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <p class="text-xs text-stone-400 mt-4 text-center italic">Visualisierungs-Mockup · noch nicht implementiert</p>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="py-24 px-6 bg-stone-100 dark:bg-stone-900/50 border-y border-stone-200 dark:border-stone-800">
+  <div class="max-w-5xl mx-auto">
+    <div class="text-xs font-semibold uppercase tracking-wider text-brand-600 dark:text-brand-400 mb-3">Was du genau bekommst</div>
+    <h2 class="text-4xl font-bold tracking-tight mb-12">Module im Detail</h2>
+
+    <div class="grid md:grid-cols-3 gap-5">
+      <div class="p-6 rounded-2xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800">
+        <div class="w-10 h-10 rounded-lg bg-brand-100 text-brand-700 dark:bg-brand-900/40 dark:text-brand-300 grid place-items-center mb-4 text-lg">📋</div>
+        <div class="font-semibold mb-2">Campaign</div>
+        <p class="text-sm text-stone-500 dark:text-stone-400">Name, Zeitraum, Budget, Ziel-Produkt(e), Status. Eine Klammer um alles, was zur Kampagne gehört.</p>
+      </div>
+      <div class="p-6 rounded-2xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800">
+        <div class="w-10 h-10 rounded-lg bg-purple-100 text-purple-700 dark:bg-purple-900/40 dark:text-purple-300 grid place-items-center mb-4 text-lg">🤝</div>
+        <div class="font-semibold mb-2">CampaignSlot</div>
+        <p class="text-sm text-stone-500 dark:text-stone-400">Ein Influencer + ein Produkt + Honorar + Status. Das ist die zentrale Arbeits-Einheit – jeder Slot durchläuft die 6 Stati.</p>
+      </div>
+      <div class="p-6 rounded-2xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800">
+        <div class="w-10 h-10 rounded-lg bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300 grid place-items-center mb-4 text-lg">📝</div>
+        <div class="font-semibold mb-2">Briefing</div>
+        <p class="text-sm text-stone-500 dark:text-stone-400">Strukturiertes Briefing pro Slot: Tonalität, Hashtags, Pflicht-Mentions, Posting-Fenster. Versionierbar.</p>
+      </div>
+      <div class="p-6 rounded-2xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800">
+        <div class="w-10 h-10 rounded-lg bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300 grid place-items-center mb-4 text-lg">🎬</div>
+        <div class="font-semibold mb-2">Deliverable</div>
+        <p class="text-sm text-stone-500 dark:text-stone-400">Einzelner geforderter Content pro Slot (1 Reel + 2 Stories + 1 Feed-Post). Jeder mit eigenem Status (offen / abgenommen / live).</p>
+      </div>
+      <div class="p-6 rounded-2xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800">
+        <div class="w-10 h-10 rounded-lg bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300 grid place-items-center mb-4 text-lg">📊</div>
+        <div class="font-semibold mb-2">Performance-Snapshot</div>
+        <p class="text-sm text-stone-500 dark:text-stone-400">Nach Live: Likes, Kommentare, Shares, Engagement-Rate erfassen. Manuell oder später per API.</p>
+      </div>
+      <div class="p-6 rounded-2xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800">
+        <div class="w-10 h-10 rounded-lg bg-rose-100 text-rose-700 dark:bg-rose-900/40 dark:text-rose-300 grid place-items-center mb-4 text-lg">💰</div>
+        <div class="font-semibold mb-2">Kosten-Tracker</div>
+        <p class="text-sm text-stone-500 dark:text-stone-400">Honorare summieren sich pro Kampagne. Budget vs. Ist. Kosten pro 1.000 Reichweite, pro Engagement.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VORTEILE -->
+<section class="py-24 px-6">
+  <div class="max-w-4xl mx-auto">
+    <div class="text-xs font-semibold uppercase tracking-wider text-brand-600 dark:text-brand-400 mb-3">Warum jetzt</div>
+    <h2 class="text-4xl font-bold tracking-tight mb-10">Das macht es besonders – im Vergleich zu Standalone-Tools</h2>
+
+    <div class="space-y-4">
+      <div class="flex gap-5 p-6 rounded-2xl bg-gradient-to-r from-emerald-50 to-emerald-50/50 dark:from-emerald-950/30 dark:to-emerald-950/10 border border-emerald-200 dark:border-emerald-900/50">
+        <div class="w-12 h-12 rounded-xl bg-emerald-500 text-white grid place-items-center font-bold text-lg shrink-0">1</div>
+        <div>
+          <div class="font-semibold text-lg mb-1">Es ist da, wo deine Daten schon sind</div>
+          <p class="text-stone-600 dark:text-stone-300">Kein neues Tool, kein Login, kein Sync-Hickhack. Influencer- und Produkt-Daten sind 1 Klick entfernt.</p>
+        </div>
+      </div>
+      <div class="flex gap-5 p-6 rounded-2xl bg-gradient-to-r from-emerald-50 to-emerald-50/50 dark:from-emerald-950/30 dark:to-emerald-950/10 border border-emerald-200 dark:border-emerald-900/50">
+        <div class="w-12 h-12 rounded-xl bg-emerald-500 text-white grid place-items-center font-bold text-lg shrink-0">2</div>
+        <div>
+          <div class="font-semibold text-lg mb-1">Lerneffekt baut sich auf</div>
+          <p class="text-stone-600 dark:text-stone-300">Performance-Snapshots reichern Influencer-Profile an: „Welche Influencer haben für deine Marke gut performt?" – das wird über Jahre wertvoll.</p>
+        </div>
+      </div>
+      <div class="flex gap-5 p-6 rounded-2xl bg-gradient-to-r from-emerald-50 to-emerald-50/50 dark:from-emerald-950/30 dark:to-emerald-950/10 border border-emerald-200 dark:border-emerald-900/50">
+        <div class="w-12 h-12 rounded-xl bg-emerald-500 text-white grid place-items-center font-bold text-lg shrink-0">3</div>
+        <div>
+          <div class="font-semibold text-lg mb-1">Kein Briefing geht verloren</div>
+          <p class="text-stone-600 dark:text-stone-300">Briefings sind versioniert und mit der Kampagne verknüpft. „Welches Briefing hat sie bekommen?" → 1 Klick.</p>
+        </div>
+      </div>
+      <div class="flex gap-5 p-6 rounded-2xl bg-gradient-to-r from-emerald-50 to-emerald-50/50 dark:from-emerald-950/30 dark:to-emerald-950/10 border border-emerald-200 dark:border-emerald-900/50">
+        <div class="w-12 h-12 rounded-xl bg-emerald-500 text-white grid place-items-center font-bold text-lg shrink-0">4</div>
+        <div>
+          <div class="font-semibold text-lg mb-1">ROI-fähig ab Tag 1</div>
+          <p class="text-stone-600 dark:text-stone-300">Honorar pro Slot vs. erreichte Reichweite/Engagement → Kosten-pro-Tausend automatisch. Erste echte Effizienz-Zahl.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AUFWAND -->
+<section class="py-20 px-6 bg-stone-100 dark:bg-stone-900/50 border-y border-stone-200 dark:border-stone-800">
+  <div class="max-w-4xl mx-auto">
+    <div class="text-xs font-semibold uppercase tracking-wider text-brand-600 dark:text-brand-400 mb-3">Realistisch</div>
+    <h2 class="text-4xl font-bold tracking-tight mb-3">Aufwand & Phasen</h2>
+    <p class="text-stone-500 dark:text-stone-400 mb-10">Wir bauen es schrittweise auf, damit du früh nutzbar reinkommst.</p>
+
+    <div class="space-y-4">
+      <div class="rounded-2xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 overflow-hidden">
+        <div class="px-6 py-4 bg-gradient-to-r from-brand-500/10 to-transparent border-b border-stone-200 dark:border-stone-800 flex items-center justify-between">
+          <div>
+            <div class="text-xs font-semibold text-brand-600 dark:text-brand-400 uppercase tracking-wider">MVP – nutzbar nach</div>
+            <div class="text-2xl font-bold">Phase 1 · 1–2 Sessions</div>
+          </div>
+          <span class="px-3 py-1 rounded-full bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300 text-xs font-semibold">Empfohlener Start</span>
+        </div>
+        <div class="px-6 py-5">
+          <ul class="space-y-2 text-sm text-stone-600 dark:text-stone-300">
+            <li class="flex gap-2"><span class="text-emerald-500">✓</span> Campaign + CampaignSlot mit den 6 Stati</li>
+            <li class="flex gap-2"><span class="text-emerald-500">✓</span> Honorar pro Slot, Budget pro Kampagne</li>
+            <li class="flex gap-2"><span class="text-emerald-500">✓</span> Verknüpfung zu Influencer + Produkt</li>
+            <li class="flex gap-2"><span class="text-emerald-500">✓</span> Status-Bulk-Update („alle Slots dieser Kampagne auf Live setzen")</li>
+            <li class="flex gap-2"><span class="text-emerald-500">✓</span> Dashboard-Widget „Aktive Kampagnen + Budget-Status"</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="rounded-2xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 overflow-hidden">
+        <div class="px-6 py-4 bg-stone-50 dark:bg-stone-800/50 border-b border-stone-200 dark:border-stone-800">
+          <div class="text-xs font-semibold text-stone-500 dark:text-stone-400 uppercase tracking-wider">Phase 2 · 1 Session</div>
+          <div class="text-xl font-bold">Briefings & Deliverables</div>
+        </div>
+        <div class="px-6 py-5">
+          <ul class="space-y-2 text-sm text-stone-600 dark:text-stone-300">
+            <li class="flex gap-2"><span class="text-stone-400">→</span> Briefing-Editor pro Slot (Tonalität, Hashtags, Mentions, Posting-Fenster)</li>
+            <li class="flex gap-2"><span class="text-stone-400">→</span> Versionierung („Wer hat welche Version bekommen?")</li>
+            <li class="flex gap-2"><span class="text-stone-400">→</span> Deliverables als Sub-Liste (1 Reel + 2 Stories …)</li>
+            <li class="flex gap-2"><span class="text-stone-400">→</span> Briefing-PDF-Export für die Influencer</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="rounded-2xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 overflow-hidden">
+        <div class="px-6 py-4 bg-stone-50 dark:bg-stone-800/50 border-b border-stone-200 dark:border-stone-800">
+          <div class="text-xs font-semibold text-stone-500 dark:text-stone-400 uppercase tracking-wider">Phase 3 · 1–2 Sessions</div>
+          <div class="text-xl font-bold">Performance-Tracking</div>
+        </div>
+        <div class="px-6 py-5">
+          <ul class="space-y-2 text-sm text-stone-600 dark:text-stone-300">
+            <li class="flex gap-2"><span class="text-stone-400">→</span> Performance-Snapshots pro Deliverable (Likes, Reach, Eng-Rate)</li>
+            <li class="flex gap-2"><span class="text-stone-400">→</span> ROI-Auswertung: Kosten pro 1.000 Reichweite, pro Engagement</li>
+            <li class="flex gap-2"><span class="text-stone-400">→</span> Influencer-Ranking nach Marken-Performance</li>
+            <li class="flex gap-2"><span class="text-stone-400">→</span> Kampagnen-Vergleichs-Report</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-8 p-5 rounded-xl bg-blue-50 dark:bg-blue-950/30 border-l-4 border-blue-500 text-sm">
+      <div class="font-semibold text-blue-700 dark:text-blue-300 mb-1">💡 Mein Vorschlag</div>
+      <p class="text-blue-900/80 dark:text-blue-100/80">
+        Wir starten mit Phase 1 (MVP). Du kannst sofort Kampagnen anlegen und Slots bewirtschaften.
+        Phase 2 + 3 ergänzen wir, sobald du das im Alltag wirklich nutzt – sonst bauen wir Features,
+        die niemand braucht.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ENTSCHEIDUNG -->
+<section id="entscheidung" class="py-24 px-6">
+  <div class="max-w-3xl mx-auto text-center">
+    <div class="text-xs font-semibold uppercase tracking-wider text-brand-600 dark:text-brand-400 mb-3">Deine Entscheidung</div>
+    <h2 class="text-4xl font-bold tracking-tight mb-6">Sollen wir das bauen?</h2>
+    <p class="text-lg text-stone-600 dark:text-stone-300 mb-10">
+      Drei Optionen – such dir aus, was sich für dich richtig anfühlt.
+    </p>
+
+    <div class="grid md:grid-cols-3 gap-4 text-left">
+      <div class="p-6 rounded-2xl bg-emerald-50 dark:bg-emerald-950/30 border-2 border-emerald-300 dark:border-emerald-800">
+        <div class="text-2xl mb-2">🚀</div>
+        <div class="font-bold mb-2">Ja, bauen wir!</div>
+        <p class="text-sm text-stone-600 dark:text-stone-300 mb-3">Phase 1 (MVP) starten, sobald wir mit dem aktuellen Kram durch sind.</p>
+        <div class="text-xs text-emerald-700 dark:text-emerald-300 font-mono">→ ich lege es als TODO an</div>
+      </div>
+      <div class="p-6 rounded-2xl bg-amber-50 dark:bg-amber-950/30 border-2 border-amber-300 dark:border-amber-800">
+        <div class="text-2xl mb-2">🤔</div>
+        <div class="font-bold mb-2">Erst was anderes</div>
+        <p class="text-sm text-stone-600 dark:text-stone-300 mb-3">Klingt sinnvoll, aber Variantenmanagement / Marketing-Kalender / Trend-Radar zuerst.</p>
+        <div class="text-xs text-amber-700 dark:text-amber-300 font-mono">→ wandert nach hinten in TODO.md</div>
+      </div>
+      <div class="p-6 rounded-2xl bg-stone-100 dark:bg-stone-800/50 border-2 border-stone-200 dark:border-stone-700">
+        <div class="text-2xl mb-2">❌</div>
+        <div class="font-bold mb-2">Nicht jetzt</div>
+        <p class="text-sm text-stone-600 dark:text-stone-300 mb-3">Brauchst du eher externes Tool (z.B. Influence.co, Aspire, …) oder gar nichts.</p>
+        <div class="text-xs text-stone-500 font-mono">→ aus TODO.md raus</div>
+      </div>
+    </div>
+
+    <div class="mt-12 p-6 rounded-2xl bg-stone-100 dark:bg-stone-900 border border-stone-200 dark:border-stone-800">
+      <div class="text-sm text-stone-500 dark:text-stone-400 mb-3">📝 Anmerkungen / Änderungswünsche</div>
+      <p class="text-sm text-stone-600 dark:text-stone-300 italic">
+        „Andere Stati?", „Brauche ich Performance gar nicht?", „Briefing als Markdown statt strukturiert?"<br>
+        → Sag mir was, dann passen wir's an.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="border-t border-stone-200 dark:border-stone-800 py-10 text-center text-sm text-stone-500 dark:text-stone-400">
+  <div class="font-semibold text-stone-700 dark:text-stone-300">Prysm · From insight to product</div>
+  <div class="text-xs mt-2">Pitch-Dokument · Stand 2026-04-24 · Visualisierungs-Mockups, kein Live-System</div>
+</footer>
+
+</body>
+</html>

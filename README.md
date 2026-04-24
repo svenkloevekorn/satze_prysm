@@ -1,6 +1,8 @@
-# Staeze PM – Product Intelligence Platform
+# Prysm – Product Intelligence Platform
 
-Interne Software zur Marktanalyse, Produktentwicklung und Lieferantenverwaltung im Bereich Sportbekleidung (Cycling, Running, Outdoor).
+> **Staeze : Prysm** – „From insight to product."
+
+Interne Software zur Marktanalyse, Produktentwicklung und Lieferantenverwaltung für die Sportbekleidungs-Marke **Staeze** (Cycling, Running, Outdoor).
 
 **Ziel:** Datenbasierte Produktentwicklung statt Bauchgefühl.
 
@@ -31,8 +33,8 @@ Interne Software zur Marktanalyse, Produktentwicklung und Lieferantenverwaltung 
 ### Installation
 
 ```bash
-git clone <repo-url> staeze-produktmanagement
-cd staeze-produktmanagement
+git clone git@github.com:svenkloevekorn/satze_prysm.git prysm
+cd prysm
 
 # Abhängigkeiten
 composer install
@@ -56,10 +58,10 @@ php artisan make:filament-user
 php artisan shield:generate --all --panel=admin
 
 # Herd-Site verlinken
-herd link staeze-pm
+herd link prysm
 ```
 
-App läuft dann auf **http://staeze-pm.test** – Admin-Panel unter **http://staeze-pm.test/admin**.
+App läuft dann auf **http://prysm.test** – Admin-Panel unter **http://prysm.test/admin**.
 
 Login: `admin@admin.com` / `password`
 
@@ -76,7 +78,7 @@ npm run build  # Produktions-Build
 php artisan test
 ```
 
-Erwartung: **58+ Tests grün**.
+Erwartung: **114+ Tests grün** (Stand 2026-04-24, Phase 10).
 
 ---
 
@@ -84,23 +86,27 @@ Erwartung: **58+ Tests grün**.
 
 ```
 app/
-  Enums/               # DevelopmentStatus, RatingType
+  Enums/               # DevelopmentStatus, RatingType, SocialPlatform …
   Filament/
     Imports/           # CSV-Importer
-    Resources/         # 9 Filament-Resources (alle CRUDs)
-    Widgets/           # Dashboard-Widgets
+    Pages/             # Settings, Medien-Galerie
+    Resources/         # 14 Filament-Resources (alle CRUDs)
+    Widgets/           # 7 Dashboard-Widgets (inkl. „Letzte CSV-Imports")
   Models/
-    Concerns/          # HasRatings Trait
+    Concerns/          # HasRatings, HasQualityChecks
   Providers/           # Gate::before, Morph-Map
+  Settings/            # Spatie-Settings-Klassen
 database/
   migrations/          # DB-Schema
   seeders/             # Demo-Daten
 docs/
-  MANUELLE-TESTS.md    # ~100 Browser-Test-Schritte
+  handbuch.html        # Endnutzer-Handbuch (Tailwind, gelayoutet)
+  MANUELLE-TESTS.md    # ~220 Browser-Test-Schritte
+  checkliste.html      # Interaktive HTML-Checkliste mit localStorage
+  STRATEGIE-ROADMAP.md # Shop-Strategie, ERP, Satelliten-Software
   beispiel-imports/    # CSV-Vorlagen
-  user-guide.md        # Endnutzer-Dokumentation
 tests/
-  Feature/Filament/    # Pest-Tests
+  Feature/Filament/    # Pest-Tests (Resources, Widgets, Bulk-Edit, Impersonation)
 ```
 
 ---
@@ -108,15 +114,23 @@ tests/
 ## 📐 Fachliches Modell (Überblick)
 
 ```
-Stammdaten: Category · Brand · Shop · RatingDimension · QualityCriterion
-Marktanalyse: CompetitorProduct (↔ Shop via ProductShopEntry)
-Lieferanten: Supplier (hat Contacts + SupplierProducts)
-Entwicklung: DevelopmentItem (8 Stati) → FinalProduct (bei "final" auto-erstellt)
-Bewertungen: Rating (polymorph an allen Produkt-Typen)
+Stammdaten:    Category · Brand · Shop · RatingDimension · QualityCriterion
+Marktanalyse:  CompetitorProduct (↔ Shop via ProductShopEntry)
+Lieferanten:   Supplier (hat Contacts + SupplierProducts)
+Entwicklung:   DevelopmentItem (8 Stati) → FinalProduct (bei „final" auto-erstellt)
+Bewertungen:   Rating (polymorph an allen Produkt-Typen)
+Qualität:      QualityCheck (polymorph, Checkliste pro Kategorie)
+Social:        Influencer · SocialChannel (polymorph) · ChannelMetric
+Querschnitt:   Tags · ActivityLog · Settings · Nachhaltigkeits-Felder
+Auth:          User · Rollen (Shield) · 2FA (Breezy) · Impersonation
 ```
 
-**Kernfeature:** Setzt man ein Entwicklungs-Item auf Status „Final", wird automatisch
-ein `FinalProduct` erzeugt (Model-Hook in `booted()`).
+**Kernfeature Produkt-Lifecycle:** Setzt man ein Entwicklungs-Item auf Status „Final",
+wird automatisch ein `FinalProduct` erzeugt (Model-Hook in `booted()`).
+
+**Phase 10 (Support-Tools):** User-Impersonation („Anmelden als" für super_admin),
+Bulk-Edit-Actions in Produkt-Tabellen, Dashboard-Widget „Letzte CSV-Imports" mit
+Fehler-CSV-Download.
 
 ---
 
@@ -162,7 +176,9 @@ Siehe [`docs/MANUELLE-TESTS.md`](docs/MANUELLE-TESTS.md) – Schritt-für-Schrit
 
 ## 📖 Nutzer-Dokumentation
 
-Siehe [`docs/user-guide.md`](docs/user-guide.md).
+Endnutzer-Handbuch: **[`docs/handbuch.html`](docs/handbuch.html)** (Tailwind-Layout, im Browser öffnen).
+
+Ältere Markdown-Variante: [`docs/user-guide.md`](docs/user-guide.md).
 
 ---
 
