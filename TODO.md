@@ -255,39 +255,6 @@ man muss erst ein Produkt/Entwicklungs-Item öffnen, um Bilder zu sehen.
 
 ---
 
-## 🏷️ NAMING FIX (höchste Prio – Refactoring-Task)
-
-**Problem:** Die Software heißt aktuell „Staeze PM" — aber **„Staeze" ist die
-Marke** (Sportbekleidung), nicht das Tool. Muss umbenannt werden, damit
-Marke und Tool klar unterschieden werden.
-
-**Vorschlag-Optionen:** Pulse / BrandBrain / Fluxo / Basis / Radar
-(Empfehlung: **Pulse** – kurz, Dashboard-Gefühl)
-
-**Refactoring-Umfang (wenn Name entschieden ist):**
-- [ ] `.env` und `.env.example`: `APP_NAME="<Name>"`
-- [ ] `README.md` Titel + alle Texte
-- [ ] `CLAUDE.md`, `PLAN.md`, `TODO.md`, `SESSION-STATE.md`
-- [ ] `docs/*.md` (MANUELLE-TESTS, user-guide, STRATEGIE-ROADMAP)
-- [ ] `docs/checkliste.html` (Titel, Storage-Key `staeze-pm-checkliste-v1`)
-- [ ] Artisan-Befehle:
-  * `staeze:reset-admin` → `<kurz>:reset-admin`
-  * `staeze:fetch-channel-metrics` → `<kurz>:fetch-channel-metrics`
-- [ ] Session-Cookie-Name in `config/session.php` (aktuell `staeze-pm-session`)
-- [ ] Cache-Prefix in `config/cache.php` (aktuell `staeze-pm-cache`)
-- [ ] Mail-Absender-Defaults
-- [ ] Admin-Panel-Title (Filament `$brandName`)
-- [ ] Playwright-/Test-Fixtures falls vorhanden
-- [ ] Commit-Message: "refactor: rename application Staeze PM → <Name>"
-
-**Nicht ändern:**
-- Marken-Namen in Demo-Daten (Seeder: „Staeze Pro Summer Jersey v1" bleibt –
-  das ist die ECHTE Marke, das ist korrekt)
-- Git-Repo-Name + Ordnername (Ordner heißt `STZ_staeze-produktmanagement` –
-  kann bleiben oder auch umbenannt werden, User-Entscheidung)
-
----
-
 ## 🗺️ Strategische Roadmap
 
 **Siehe `docs/STRATEGIE-ROADMAP.md`** – umfassendes Dokument mit:
@@ -326,8 +293,8 @@ Marke und Tool klar unterschieden werden.
 
 ### ⏸️ Wartet auf User
 
-- [ ] **Software-Name entscheiden** (Pulse / BrandBrain / Fluxo / Basis / Radar / eigener)
-- [ ] **Shop-Entscheidung:** Shopware 6 oder Shopify?
+- [x] **Software-Name entscheiden** ✅ entschieden 2026-04-24: bleibt **Prysm**
+- [x] **Shop-Entscheidung** ✅ entschieden 2026-04-24: zuerst **Shopify**, später ggf. Wechsel auf Shopware
 - [ ] **Phase 7 Deployment:** GitHub-Repo anlegen + Mittwald-Server vorbereiten
   (SSH, PostgreSQL 16+, PHP 8.3+, Domain)
 
@@ -350,10 +317,10 @@ Marke und Tool klar unterschieden werden.
    - `spatie/laravel-tags` installieren
    - Tags auf Produkte, Entwicklungs-Items, Influencer, Media
    - Filter & Bulk-Tagging in Tabellen
-5. [ ] **Import-Historie & Bulk-Edit**
-   - Dashboard-Widget „Letzte Imports"
-   - Link zu Failed-Rows
-   - Bulk-Action „Preis ändern" / „Status setzen" in Produkt-Tabellen
+5. [x] **Import-Historie & Bulk-Edit** ✅ 2026-04-24
+   - Dashboard-Widget „Letzte CSV-Imports" mit Fehler-CSV-Download
+   - Bulk-Actions Wettbewerbsprodukte: Marke / Kategorie / Preis-Range
+   - Bulk-Actions Lieferanten-Produkte: Lieferant / Kategorie / EK / MOQ
 6. [ ] **Kampagnen-Manager** (Roadmap 5.2.2 – baut auf Influencer-Modul auf)
    - Entitäten: Campaign, CampaignSlot, Briefing, Deliverable
    - Status-Workflow: Anfrage → Zusage → Briefing → Live → Abgerechnet
@@ -370,11 +337,11 @@ Marke und Tool klar unterschieden werden.
    - Entitäten: Trend, TrendObservation
    - Manuelle Pflege + CSV-Import später
    - APIs (Google Trends, TikTok) in Phase F.2-ähnlichen Satellit
-10. [ ] **User-Impersonation** (Support-Feature)
-   - `stechstudio/filament-impersonate` installieren
-   - Aktion „Als diesen Benutzer einloggen" in UserResource
-   - Nur für `super_admin`-Rolle erlauben
-   - Prominentes Banner beim Impersonation („Du bist als X eingeloggt · Zurückwechseln")
+10. [x] **User-Impersonation** ✅ 2026-04-24
+   - `stechstudio/filament-impersonate` installiert
+   - Aktion „Anmelden als" in UserResource (nur super_admin)
+   - Schutz: super_admins + deaktivierte Benutzer können nicht impersoniert werden
+   - Banner beim Impersonation aktiv (Render-Hook in panels::body.start)
 
 ### 🟡 Auf externe Abhängigkeit (Shop/ERP) wartend
 
@@ -403,6 +370,22 @@ Marke und Tool klar unterschieden werden.
 ---
 
 ## ✅ Erledigt
+
+### Phase 10 – Support-Tools *(2026-04-24)*
+
+- [x] **User-Impersonation:**
+  - `stechstudio/filament-impersonate` v5.3 installiert
+  - Aktion „Anmelden als" in der Benutzer-Liste, nur für `super_admin` sichtbar
+  - `canImpersonate()` + `canBeImpersonated()` am User-Model: super_admins und deaktivierte Benutzer sind geschützt
+  - Banner beim Impersonation am oberen Rand, Redirect zum Dashboard
+  - 5 neue Tests
+- [x] **Import-Historie & Bulk-Edit:**
+  - Dashboard-Widget „Letzte CSV-Imports" (Datei, Importer-Typ, User, Erfolg/Gesamt, Fehler-Counter, Fehler-CSV-Download)
+  - Bulk-Action `changeBrand` / `changeCategory` / `changePrice` in Wettbewerbsprodukten
+  - Bulk-Action `changeSupplier` / `changeCategory` / `changePurchasePrice` / `changeMoq` in Lieferanten-Produkten
+  - 6 neue Bulk-Tests + 1 Widget-Test
+- [x] **Handbuch:** Abschnitt „Anmelden als (Support-Modus)", Abschnitt „Bulk-Edit (mehrere auf einmal)", Hinweis auf Import-Historie im CSV-Workflow
+- **114 Tests grün, PHPStan 0 Errors, Pint sauber**
 
 ### Phase 8 – Querschnittsfunktionen *(2026-04-22)*
 

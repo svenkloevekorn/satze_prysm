@@ -17,7 +17,8 @@
         "spatie/laravel-activitylog": "^5.0",
         "spatie/laravel-medialibrary": "^11.21",
         "spatie/laravel-settings": "^3.7",
-        "spatie/laravel-tags": "^4.11"
+        "spatie/laravel-tags": "^4.11",
+        "stechstudio/filament-impersonate": "^5.3"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

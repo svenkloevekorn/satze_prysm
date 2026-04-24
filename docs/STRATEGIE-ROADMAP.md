@@ -1,4 +1,4 @@
-# 🗺️ Staeze PM – Strategie & Roadmap (Version 1, 2026-04-22)
+# 🗺️ Prysm – Strategie & Roadmap (Version 1, Stand 2026-04-24)
 
 > Lang-Perspektive: Vom internen Product-Intelligence-Tool zur Startup-Plattform
 > mit Online-Shop, Lieferkette, Marketing und Analytics.
@@ -6,6 +6,11 @@
 > Dieses Dokument ist **ein lebendes Planungs-Papier** – keine fixe Festlegung.
 > Die Entscheidungen weiter unten sind Empfehlungen mit Begründung, die wir
 > gemeinsam schärfen, sobald Geschäftsmodell-Details konkreter werden.
+
+> **🟢 Entscheidung 2026-04-24 (User Sven):**
+> - **Software-Name bleibt „Prysm"** – kein Naming-Refactoring nötig
+> - **Shop-Strategie: zuerst Shopify** (Time-to-Market), später ggf. Wechsel
+>   auf Shopware, sobald Sortiment & Umsatz tragen
 
 ---
 
@@ -26,7 +31,7 @@
   Systeme liefern Daten, PM wertet aus und steuert
 
 **Kernempfehlungen:**
-1. **Shop: Shopware 6 (DACH) oder Shopify** – abhängig vom Tempo (siehe §3)
+1. **Shop: Shopify zuerst (entschieden)** – Time-to-Market schlägt Tiefe; spätere Migration auf Shopware bleibt offen (siehe §3)
 2. **ERP: nicht selbst bauen** – JTL-Wawi (DACH) oder plentymarkets andocken
 3. **Staeze PM als „Brain"** – Shop und ERP sind Satelliten, Daten fließen rein
 4. **Modular in 4 Phasen** – zuerst MVP produktiv, dann Shop, dann ERP, dann

@@ -3,6 +3,7 @@
 use App\Enums\DevelopmentStatus;
 use App\Filament\Widgets\LetzteAenderungenWidget;
 use App\Filament\Widgets\LetzteBewertungenWidget;
+use App\Filament\Widgets\LetzteImportsWidget;
 use App\Filament\Widgets\OffeneEntwicklungenWidget;
 use App\Filament\Widgets\StatsOverview;
 use App\Filament\Widgets\UnbewerteteProdukteWidget;
@@ -10,6 +11,7 @@ use App\Models\CompetitorProduct;
 use App\Models\DevelopmentItem;
 use App\Models\Rating;
 use App\Models\User;
+use Filament\Actions\Imports\Models\Import;
 
 use function Pest\Livewire\livewire;
 
@@ -77,4 +79,22 @@ it('rendert das Widget Letzte Bewertungen', function () {
     ]);
 
     livewire(LetzteBewertungenWidget::class)->assertSuccessful();
+});
+
+it('rendert das Widget Letzte Imports und zeigt Import-Records', function () {
+    $admin = auth()->user();
+    $import = Import::create([
+        'file_name' => 'wettbewerber.csv',
+        'file_path' => 'imports/wettbewerber.csv',
+        'importer' => 'App\\Filament\\Imports\\CompetitorProductImporter',
+        'processed_rows' => 10,
+        'total_rows' => 10,
+        'successful_rows' => 8,
+        'user_id' => $admin->id,
+        'completed_at' => now(),
+    ]);
+
+    livewire(LetzteImportsWidget::class)
+        ->assertSuccessful()
+        ->assertCanSeeTableRecords([$import]);
 });

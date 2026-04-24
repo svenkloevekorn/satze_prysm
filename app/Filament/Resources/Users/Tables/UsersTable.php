@@ -10,6 +10,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
+use STS\FilamentImpersonate\Actions\Impersonate;
 
 class UsersTable
 {
@@ -63,6 +64,10 @@ class UsersTable
                     ->preload(),
             ])
             ->recordActions([
+                Impersonate::make()
+                    ->label('Anmelden als')
+                    ->icon('heroicon-o-arrow-right-on-rectangle')
+                    ->redirectTo(fn () => route('filament.admin.pages.dashboard')),
                 EditAction::make(),
             ])
             ->toolbarActions([

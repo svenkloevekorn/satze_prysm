@@ -53,7 +53,7 @@
     </div>
     <div class="hidden md:flex items-center gap-4 text-sm">
       <span class="text-stone-500 dark:text-stone-400">Handbuch · v1.0</span>
-      <span class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300 text-xs font-medium">Stand 2026-04-22</span>
+      <span class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300 text-xs font-medium">Stand 2026-04-24</span>
     </div>
   </div>
 </header>
@@ -78,6 +78,7 @@
         <a href="#wf-wettbewerb" class="toc-link block px-3 py-1.5 rounded-md hover:bg-stone-100 dark:hover:bg-stone-800 transition">Wettbewerb erfassen</a>
         <a href="#wf-bewerten" class="toc-link block px-3 py-1.5 rounded-md hover:bg-stone-100 dark:hover:bg-stone-800 transition">Produkt bewerten</a>
         <a href="#wf-csv" class="toc-link block px-3 py-1.5 rounded-md hover:bg-stone-100 dark:hover:bg-stone-800 transition">CSV-Import</a>
+        <a href="#wf-bulk" class="toc-link block px-3 py-1.5 rounded-md hover:bg-stone-100 dark:hover:bg-stone-800 transition">Bulk-Edit</a>
         <a href="#wf-lieferant" class="toc-link block px-3 py-1.5 rounded-md hover:bg-stone-100 dark:hover:bg-stone-800 transition">Lieferanten pflegen</a>
         <a href="#wf-entwicklung" class="toc-link block px-3 py-1.5 rounded-md hover:bg-stone-100 dark:hover:bg-stone-800 transition">Idee → Final</a>
         <a href="#wf-quality" class="toc-link block px-3 py-1.5 rounded-md hover:bg-stone-100 dark:hover:bg-stone-800 transition">Qualitäts-Checkliste</a>
@@ -222,6 +223,7 @@
           <li>• <strong>Offene Entwicklungen</strong> – Deadlines, rot wenn überfällig</li>
           <li>• <strong>Unbewertete Produkte</strong> – wo fehlt Einschätzung?</li>
           <li>• <strong>Letzte Bewertungen + Änderungen</strong></li>
+          <li>• <strong>Letzte CSV-Imports</strong> – wer hat was importiert, wie viele Zeilen erfolgreich, Fehler-CSV runterladen</li>
           <li>• <strong>Social Stats + Top-Kanäle</strong></li>
         </ul>
       </div>
@@ -307,6 +309,44 @@
     <div class="mt-6 p-4 rounded-xl bg-emerald-50 dark:bg-emerald-900/20 border-l-4 border-emerald-500">
       <div class="text-sm font-semibold text-emerald-700 dark:text-emerald-300 mb-1">✨ Clever</div>
       <div class="text-sm text-emerald-900/80 dark:text-emerald-100/80">Marken, Kategorien und Lieferanten, die noch nicht existieren, werden automatisch mit angelegt. Beispieldateien: <code class="text-xs px-1.5 py-0.5 rounded bg-emerald-100 dark:bg-emerald-900/40">docs/beispiel-imports/</code></div>
+    </div>
+    <div class="mt-4 p-4 rounded-xl bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500">
+      <div class="text-sm font-semibold text-blue-700 dark:text-blue-300 mb-1">📋 Import-Historie auf dem Dashboard</div>
+      <div class="text-sm text-blue-900/80 dark:text-blue-100/80">Jeder fertige Import erscheint im Dashboard-Widget <strong>„Letzte CSV-Imports"</strong>: Dateiname, wer importiert hat, erfolgreiche Zeilen / gesamt, Fehlerzahl. Bei Fehlern lädst du dir per <strong>„Fehler-CSV"</strong>-Button die fehlgeschlagenen Zeilen zur Korrektur runter.</div>
+    </div>
+  </section>
+
+  <!-- BULK-EDIT -->
+  <section id="wf-bulk" class="scroll-mt-20">
+    <h3 class="text-2xl font-bold mb-1">Bulk-Edit (mehrere auf einmal)</h3>
+    <p class="text-stone-500 dark:text-stone-400 mb-6 text-sm">Wenn du viele Produkte gleichzeitig ändern willst – etwa nach Re-Import oder Sortiments-Umstellung.</p>
+    <ol class="space-y-3">
+      <li class="flex gap-4"><span class="step-number">1</span><div>In <strong>Wettbewerbsprodukte</strong> oder <strong>Lieferanten-Produkte</strong> die Zeilen per Checkbox auswählen</div></li>
+      <li class="flex gap-4"><span class="step-number">2</span><div>Oben die <strong>Bulk-Action</strong> auswählen, das passende Feld ausfüllen, bestätigen</div></li>
+      <li class="flex gap-4"><span class="step-number">3</span><div>Alle ausgewählten Produkte werden in einem Schritt aktualisiert</div></li>
+    </ol>
+    <div class="grid md:grid-cols-2 gap-3 mt-6">
+      <div class="p-4 rounded-xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800">
+        <div class="font-semibold mb-1">Wettbewerbsprodukte</div>
+        <ul class="text-sm text-stone-500 dark:text-stone-400 space-y-1">
+          <li>• Marke setzen</li>
+          <li>• Kategorie setzen</li>
+          <li>• Preis ändern (von/bis)</li>
+        </ul>
+      </div>
+      <div class="p-4 rounded-xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800">
+        <div class="font-semibold mb-1">Lieferanten-Produkte</div>
+        <ul class="text-sm text-stone-500 dark:text-stone-400 space-y-1">
+          <li>• Lieferant ändern</li>
+          <li>• Kategorie setzen</li>
+          <li>• EK-Preis ändern</li>
+          <li>• MOQ setzen</li>
+        </ul>
+      </div>
+    </div>
+    <div class="mt-6 p-4 rounded-xl bg-amber-50 dark:bg-amber-900/20 border-l-4 border-amber-500">
+      <div class="text-sm font-semibold text-amber-700 dark:text-amber-300 mb-1">⚠ Vorsicht</div>
+      <div class="text-sm text-amber-900/80 dark:text-amber-100/80">Bulk-Änderungen sind <strong>nicht</strong> per Klick rückgängig zu machen. Vorher prüfen, welche Zeilen ausgewählt sind. Jede Änderung steht aber im Tab <strong>Änderungshistorie</strong> der einzelnen Produkte.</div>
     </div>
   </section>
 
@@ -553,6 +593,18 @@
       <div class="text-sm font-semibold text-amber-700 dark:text-amber-300 mb-1">⚠ Achtung</div>
       <div class="text-sm text-amber-900/80 dark:text-amber-100/80">Den eigenen Account nicht deaktivieren – sonst sperrst du dich selbst aus. Für den Notfall gibt es <code class="text-xs bg-amber-100 dark:bg-amber-900/40 px-1.5 py-0.5 rounded">php artisan staeze:reset-admin</code> auf der Konsole.</div>
     </div>
+
+    <h4 class="font-semibold text-lg mt-8 mb-3">Anmelden als (Support-Modus)</h4>
+    <p class="text-sm text-stone-600 dark:text-stone-300 mb-3">In der Benutzer-Liste hat jeder Eintrag den Button <strong>„Anmelden als"</strong>. Damit übernimmst du kurz die Sitzung dieses Benutzers – nützlich, um zu sehen, was er sieht und prüft, oder um ein Problem nachzustellen.</p>
+    <ol class="space-y-3">
+      <li class="flex gap-4"><span class="step-number">1</span><div>In der Benutzer-Liste auf <strong>„Anmelden als"</strong> beim gewünschten Benutzer klicken</div></li>
+      <li class="flex gap-4"><span class="step-number">2</span><div>Du landest direkt auf dem Dashboard – ein <strong>Banner oben am Bildschirm</strong> zeigt, dass du gerade jemand anderen vertrittst</div></li>
+      <li class="flex gap-4"><span class="step-number">3</span><div>Über den Banner-Button <strong>„Leave"</strong> kommst du jederzeit zu deinem eigenen Account zurück</div></li>
+    </ol>
+    <div class="mt-6 p-4 rounded-xl bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500">
+      <div class="text-sm font-semibold text-blue-700 dark:text-blue-300 mb-1">🔒 Sicherheit</div>
+      <div class="text-sm text-blue-900/80 dark:text-blue-100/80">Nur <code class="text-xs bg-blue-100 dark:bg-blue-900/40 px-1.5 py-0.5 rounded">super_admin</code> sieht den Button. Andere super_admins lassen sich <strong>nicht</strong> impersonieren, ebenso wenig deaktivierte Benutzer.</div>
+    </div>
   </section>
 
   <!-- ROLLEN -->
@@ -607,7 +659,7 @@
       <p class="text-stone-600 dark:text-stone-300 mb-3">Technischer Ansprechpartner für Prysm:</p>
       <div class="font-medium">Sven Kloevekorn</div>
       <a href="mailto:sven.kloevekorn@marbet.com" class="text-brand-600 dark:text-brand-400 hover:underline">sven.kloevekorn@marbet.com</a>
-      <p class="text-xs text-stone-400 mt-6">Letzte Aktualisierung: 2026-04-22 · Mein Profil + 2FA ergänzt</p>
+      <p class="text-xs text-stone-400 mt-6">Letzte Aktualisierung: 2026-04-24 · User-Impersonation, Bulk-Edit, Import-Historie ergänzt</p>
     </div>
   </section>
 

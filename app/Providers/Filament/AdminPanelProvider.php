@@ -4,6 +4,7 @@ namespace App\Providers\Filament;
 
 use App\Filament\Widgets\LetzteAenderungenWidget;
 use App\Filament\Widgets\LetzteBewertungenWidget;
+use App\Filament\Widgets\LetzteImportsWidget;
 use App\Filament\Widgets\OffeneEntwicklungenWidget;
 use App\Filament\Widgets\SocialStatsWidget;
 use App\Filament\Widgets\StatsOverview;
@@ -52,6 +53,7 @@ class AdminPanelProvider extends PanelProvider
                 UnbewerteteProdukteWidget::class,
                 LetzteBewertungenWidget::class,
                 LetzteAenderungenWidget::class,
+                LetzteImportsWidget::class,
                 SocialStatsWidget::class,
                 TopChannelsWidget::class,
             ])

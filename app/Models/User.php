@@ -28,6 +28,16 @@ class User extends Authenticatable implements FilamentUser
         return (bool) $this->is_active;
     }
 
+    public function canImpersonate(): bool
+    {
+        return $this->hasRole('super_admin');
+    }
+
+    public function canBeImpersonated(): bool
+    {
+        return $this->is_active && ! $this->hasRole('super_admin');
+    }
+
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()

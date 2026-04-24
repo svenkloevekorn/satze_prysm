@@ -2,10 +2,15 @@
 
 namespace App\Filament\Resources\CompetitorProducts\Tables;
 
+use App\Models\Brand;
+use App\Models\Category;
+use Filament\Actions\BulkAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Notifications\Notification;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\SpatieTagsColumn;
 use Filament\Tables\Columns\TextColumn;
@@ -13,6 +18,7 @@ use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Collection;
 
 class CompetitorProductsTable
 {
@@ -121,6 +127,80 @@ class CompetitorProductsTable
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
+                    BulkAction::make('changeBrand')
+                        ->label('Marke setzen')
+                        ->icon('heroicon-o-tag')
+                        ->schema([
+                            Select::make('brand_id')
+                                ->label('Neue Marke')
+                                ->options(fn () => Brand::orderBy('name')->pluck('name', 'id'))
+                                ->searchable()
+                                ->required(),
+                        ])
+                        ->action(function (array $data, Collection $records) {
+                            $records->each(fn ($record) => $record->update(['brand_id' => $data['brand_id']]));
+
+                            Notification::make()
+                                ->title($records->count().' Produkte aktualisiert')
+                                ->success()
+                                ->send();
+                        })
+                        ->deselectRecordsAfterCompletion(),
+                    BulkAction::make('changeCategory')
+                        ->label('Kategorie setzen')
+                        ->icon('heroicon-o-folder')
+                        ->schema([
+                            Select::make('category_id')
+                                ->label('Neue Kategorie')
+                                ->options(fn () => Category::orderBy('name')->pluck('name', 'id'))
+                                ->searchable()
+                                ->required(),
+                        ])
+                        ->action(function (array $data, Collection $records) {
+                            $records->each(fn ($record) => $record->update(['category_id' => $data['category_id']]));
+
+                            Notification::make()
+                                ->title($records->count().' Produkte aktualisiert')
+                                ->success()
+                                ->send();
+                        })
+                        ->deselectRecordsAfterCompletion(),
+                    BulkAction::make('changePrice')
+                        ->label('Preis ändern')
+                        ->icon('heroicon-o-currency-euro')
+                        ->schema([
+                            TextInput::make('price_min')
+                                ->label('Preis von €')
+                                ->numeric()
+                                ->minValue(0),
+                            TextInput::make('price_max')
+                                ->label('Preis bis €')
+                                ->numeric()
+                                ->minValue(0),
+                        ])
+                        ->action(function (array $data, Collection $records) {
+                            $update = array_filter([
+                                'price_min' => $data['price_min'] ?? null,
+                                'price_max' => $data['price_max'] ?? null,
+                            ], fn ($v) => $v !== null && $v !== '');
+
+                            if (empty($update)) {
+                                Notification::make()
+                                    ->title('Mindestens einen Preis angeben')
+                                    ->warning()
+                                    ->send();
+
+                                return;
+                            }
+
+                            $records->each(fn ($record) => $record->update($update));
+
+                            Notification::make()
+                                ->title($records->count().' Produkte aktualisiert')
+                                ->success()
+                                ->send();
+                        })
+                        ->deselectRecordsAfterCompletion(),
                     DeleteBulkAction::make(),
                 ]),
             ]);

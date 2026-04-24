@@ -2,7 +2,7 @@
 
 > Merkzettel für die nächste Claude-Session. Zu Beginn lesen.
 
-**Letzte Aktualisierung:** 2026-04-22 (Ende der Session: Breezy/2FA)
+**Letzte Aktualisierung:** 2026-04-24 (Ende der Session: Impersonation + Bulk-Edit + Import-Historie)
 
 ---
 
@@ -14,13 +14,18 @@ Staeze = Marke des Users. Claim gehört **NICHT** ins Header-Logo (nur in Login-
 MVP + alle 5 Feature-Pakete (C, A, E, B, F.1/F.2/F.3) fertig.
 **Phase 8 Querschnittsfunktionen fertig:** Admin-Settings, Audit Log, Tagging, Nachhaltigkeit.
 **Phase 9 Auth/User-Mgmt fertig:** UserResource + filament-breezy (2FA, Browser-Sessions, „Mein Profil").
+**Phase 10 Support-Tools fertig:** User-Impersonation, Import-Historie-Widget, Bulk-Edit-Actions.
 
 Phase 7 (Deployment Mittwald) pausiert, wartet auf GitHub-Repo + Mittwald-Server.
+
+**Strategische Entscheidungen (2026-04-24):**
+- Software-Name **Prysm** ist final (kein Refactoring mehr nötig)
+- Shop-Strategie: zuerst **Shopify**, später ggf. Wechsel auf Shopware
 
 ### Zahlen
 
 - **35+ Commits** auf `main`-Branch (alle lokal, noch nicht gepusht)
-- **102 automatische Tests** grün
+- **114 automatische Tests** grün
 - **PHPStan Level 5** – 0 Fehler
 - **Pint** – alle Files formatiert
 - **Site lokal:** http://staeze-pm.test/admin
@@ -52,6 +57,7 @@ Phase 7 (Deployment Mittwald) pausiert, wartet auf GitHub-Repo + Mittwald-Server
 - `spatie/laravel-settings` + Filament-Plugin → Admin-Settings
 - `spatie/laravel-activitylog` → Audit Log (RelationManager `activitiesAsSubject`)
 - `jeffgreco13/filament-breezy` v3.2 → Mein Profil, 2FA (TOTP), Browser-Sessions
+- `stechstudio/filament-impersonate` v5.3 → „Anmelden als"-Aktion in Benutzer-Liste (nur super_admin)
 
 ---
 
@@ -59,19 +65,17 @@ Phase 7 (Deployment Mittwald) pausiert, wartet auf GitHub-Repo + Mittwald-Server
 
 ### Offene hochpriorisierte TODOs (siehe TODO.md)
 
-1. **User-Impersonation** – `stechstudio/filament-impersonate` (nur super_admin, Banner beim Wechsel)
-2. **Phase 7 – Deployment Mittwald** (wartet auf User: GitHub-Repo + Mittwald-Server)
-3. **Variantenmanagement-Basis** – SKUs + Lagerstatus (Voraussetzung für Shop-Anbindung)
-4. **Import-Historie & Bulk-Edit** (Dashboard-Widget, Bulk-Actions in Produkt-Tabellen)
-5. **Kampagnen-Manager** (baut auf Influencer-Modul auf)
-6. **Trend-Radar-Struktur** (ohne externe APIs)
+1. **Variantenmanagement-Basis** – SKUs + Lagerstatus (Voraussetzung für Shopify-Anbindung)
+2. **Kampagnen-Manager** (baut auf Influencer-Modul auf)
+3. **Marketing-Kalender** (Filament-Kalender-View)
+4. **Trend-Radar-Struktur** (ohne externe APIs)
+5. **Phase 7 – Deployment Mittwald** (wartet auf User: GitHub-Repo + Mittwald-Server)
 
-### Strategische Entscheidungen (User muss treffen)
+### Offene strategische Entscheidungen (User muss treffen)
 
-1. **Shop: Shopware 6 oder Shopify?** → `docs/STRATEGIE-ROADMAP.md`
-2. **Wann real launchen?**
-3. **Wie viele Produkte bei Launch?**
-4. **D2C only oder auch B2B?**
+1. **Wann real launchen?**
+2. **Wie viele Produkte bei Launch?**
+3. **D2C only oder auch B2B?**
 
 ---
 
