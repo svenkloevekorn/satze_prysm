@@ -154,23 +154,41 @@ Im Admin-Panel oben rechts auf **„CSV-Import"**. Marken, Lieferanten und Kateg
 
 ## 🌍 Produktions-Deployment (Mittwald)
 
-> ⏸️ **In Vorbereitung.** Siehe `TODO.md` – Phase 7.
+> ⏸️ **Wartet auf Server-Setup.** Siehe `TODO.md` – Phase 7.
 
-Grobe Schritte (werden ergänzt):
+**Aktueller Stand (2026-04-25):**
 
-1. GitHub-Repo anlegen, lokal pushen
-2. Mittwald-Webspace aufsetzen (PostgreSQL 16+, PHP 8.3+)
-3. SSH-Key + Deployment-Secrets in GitHub konfigurieren
-4. GitHub-Actions Workflow (`.github/workflows/deploy.yml`) triggert bei Push auf `main`
-5. Auf Server: `composer install --no-dev`, `migrate --force`, `optimize`, Shield cachen
+- ✅ GitHub-Repo angelegt: `git@github.com:svenkloevekorn/satze_prysm.git`
+- ✅ Lokale `.env.production.example` für Mittwald + PostgreSQL vorbereitet
+- ✅ CI-Workflow auf manuellen Trigger umgestellt (läuft nicht bei jedem Push)
+- ⏸️ Mittwald-Server mit PostgreSQL-Tarif wird neu eingerichtet
 
-Detail-Anleitung folgt nach Vorbereitung des Servers.
+**Geplanter Ablauf, sobald Server steht:**
+
+1. SSH-Key auf Mittwald hinterlegen (Alias `prysm` in `~/.ssh/config`)
+2. PostgreSQL-DB im mStudio anlegen
+3. PHP 8.4 für die Domain einstellen
+4. Composer auf dem Server bereitstellen
+5. Code-Verzeichnis vorbereiten + `.env` mit echten DB-Credentials hinterlegen
+6. GitHub-Secrets eintragen (`MITTWALD_HOST`, `MITTWALD_USER`, `MITTWALD_SSH_KEY`, `MITTWALD_DEPLOY_PATH`)
+7. `.github/workflows/deploy.yml` schreiben (CI + rsync-Deploy + remote `migrate --force`)
+8. Erster Test-Push, danach automatischer Deploy bei jedem Push auf `main`
+
+**Strategische Roadmap:** siehe `docs/STRATEGIE-ROADMAP.md`
+- **Shop:** zuerst Shopify, später ggf. Wechsel auf Shopware
+- **ERP:** anbinden statt selbst bauen (JTL-Wawi oder ähnlich)
 
 ---
 
 ## 🧪 Manuelles Testen
 
-Siehe [`docs/MANUELLE-TESTS.md`](docs/MANUELLE-TESTS.md) – Schritt-für-Schritt-Anleitung für alle Module (~100 Test-Schritte).
+Siehe [`docs/MANUELLE-TESTS.md`](docs/MANUELLE-TESTS.md) – Schritt-für-Schritt-Anleitung für alle Module (~250 Test-Schritte).
+Interaktiv abhaken: [`docs/checkliste.html`](docs/checkliste.html).
+
+**Feature-Pitches (Entscheidungs-Vorlagen):**
+- [`docs/pitch-kampagnen-manager.html`](docs/pitch-kampagnen-manager.html)
+- [`docs/pitch-marketing-kalender.html`](docs/pitch-marketing-kalender.html)
+- [`docs/pitch-variantenmanagement.html`](docs/pitch-variantenmanagement.html)
 
 ---
 

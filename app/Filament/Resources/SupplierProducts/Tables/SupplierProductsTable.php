@@ -2,21 +2,19 @@
 
 namespace App\Filament\Resources\SupplierProducts\Tables;
 
+use App\Filament\Actions\BulkUpdateAction;
 use App\Models\Category;
 use App\Models\Supplier;
-use Filament\Actions\BulkAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Notifications\Notification;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Collection;
 
 class SupplierProductsTable
 {
@@ -106,82 +104,62 @@ class SupplierProductsTable
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    BulkAction::make('changeSupplier')
-                        ->label('Lieferant ändern')
-                        ->icon('heroicon-o-truck')
-                        ->schema([
+                    BulkUpdateAction::singleField(
+                        name: 'changeSupplier',
+                        label: 'Lieferant ändern',
+                        icon: 'heroicon-o-truck',
+                        schema: [
                             Select::make('supplier_id')
                                 ->label('Neuer Lieferant')
                                 ->options(fn () => Supplier::orderBy('name')->pluck('name', 'id'))
                                 ->searchable()
                                 ->required(),
-                        ])
-                        ->action(function (array $data, Collection $records) {
-                            $records->each(fn ($record) => $record->update(['supplier_id' => $data['supplier_id']]));
-
-                            Notification::make()
-                                ->title($records->count().' Produkte aktualisiert')
-                                ->success()
-                                ->send();
-                        })
-                        ->deselectRecordsAfterCompletion(),
-                    BulkAction::make('changeCategory')
-                        ->label('Kategorie setzen')
-                        ->icon('heroicon-o-folder')
-                        ->schema([
+                        ],
+                        field: 'supplier_id',
+                        successLabel: 'Produkte aktualisiert',
+                    ),
+                    BulkUpdateAction::singleField(
+                        name: 'changeCategory',
+                        label: 'Kategorie setzen',
+                        icon: 'heroicon-o-folder',
+                        schema: [
                             Select::make('category_id')
                                 ->label('Neue Kategorie')
                                 ->options(fn () => Category::orderBy('name')->pluck('name', 'id'))
                                 ->searchable()
                                 ->required(),
-                        ])
-                        ->action(function (array $data, Collection $records) {
-                            $records->each(fn ($record) => $record->update(['category_id' => $data['category_id']]));
-
-                            Notification::make()
-                                ->title($records->count().' Produkte aktualisiert')
-                                ->success()
-                                ->send();
-                        })
-                        ->deselectRecordsAfterCompletion(),
-                    BulkAction::make('changePurchasePrice')
-                        ->label('EK ändern')
-                        ->icon('heroicon-o-currency-euro')
-                        ->schema([
+                        ],
+                        field: 'category_id',
+                        successLabel: 'Produkte aktualisiert',
+                    ),
+                    BulkUpdateAction::singleField(
+                        name: 'changePurchasePrice',
+                        label: 'EK ändern',
+                        icon: 'heroicon-o-currency-euro',
+                        schema: [
                             TextInput::make('purchase_price')
                                 ->label('Neuer Einkaufspreis €')
                                 ->numeric()
                                 ->minValue(0)
                                 ->required(),
-                        ])
-                        ->action(function (array $data, Collection $records) {
-                            $records->each(fn ($record) => $record->update(['purchase_price' => $data['purchase_price']]));
-
-                            Notification::make()
-                                ->title($records->count().' Produkte aktualisiert')
-                                ->success()
-                                ->send();
-                        })
-                        ->deselectRecordsAfterCompletion(),
-                    BulkAction::make('changeMoq')
-                        ->label('MOQ setzen')
-                        ->icon('heroicon-o-cube')
-                        ->schema([
+                        ],
+                        field: 'purchase_price',
+                        successLabel: 'Produkte aktualisiert',
+                    ),
+                    BulkUpdateAction::singleField(
+                        name: 'changeMoq',
+                        label: 'MOQ setzen',
+                        icon: 'heroicon-o-cube',
+                        schema: [
                             TextInput::make('moq')
                                 ->label('Mindestabnahmemenge')
                                 ->integer()
                                 ->minValue(1)
                                 ->required(),
-                        ])
-                        ->action(function (array $data, Collection $records) {
-                            $records->each(fn ($record) => $record->update(['moq' => $data['moq']]));
-
-                            Notification::make()
-                                ->title($records->count().' Produkte aktualisiert')
-                                ->success()
-                                ->send();
-                        })
-                        ->deselectRecordsAfterCompletion(),
+                        ],
+                        field: 'moq',
+                        successLabel: 'Produkte aktualisiert',
+                    ),
                     DeleteBulkAction::make(),
                 ]),
             ]);
