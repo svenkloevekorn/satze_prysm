@@ -38,7 +38,7 @@ class FetchChannelMetrics extends Command
         foreach ($channels as $channel) {
             // Nicht mehrfach pro Tag
             $exists = ChannelMetric::where('social_channel_id', $channel->id)
-                ->where('captured_at', $today)
+                ->whereDate('captured_at', $today)
                 ->exists();
 
             if ($exists) {
