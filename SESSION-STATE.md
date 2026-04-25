@@ -87,7 +87,6 @@ Phase 7 (Deployment Mittwald) pausiert, wartet auf GitHub-Repo + Mittwald-Server
 - `docs/handbuch.html` – **Endnutzer-Handbuch** (Tailwind, gelayoutet) · MUSS bei nutzer-sichtbaren Änderungen aktualisiert werden
 - `docs/MANUELLE-TESTS.md` – ~220 Test-Schritte (Phase 8 inkl.)
 - `docs/checkliste.html` – Interaktive HTML-Checkliste mit localStorage
-- `docs/user-guide.md` – ältere Markdown-Doku (wird vom handbuch.html abgelöst)
 - `docs/STRATEGIE-ROADMAP.md` – Shop/ERP/Satelliten-Strategie
 - `SESSION-STATE.md` – diese Datei
 

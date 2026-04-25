@@ -67,7 +67,7 @@ Siehe Erledigt-Bereich unten.
 - [ ] GitHub-Actions Workflow `.github/workflows/deploy.yml`
 - [ ] SSH-Key + Deployment-Secrets in GitHub anlegen (Sven)
 - [ ] Erste Deployment-Testrunde auf Mittwald
-- [ ] User-Dokumentation (`docs/user-guide.md`) schreiben
+- [x] User-Dokumentation (`docs/handbuch.html`) – Tailwind-Handbuch fertig (2026-04-22)
 - [ ] README.md: Produktions-Setup ergänzen
 
 ---

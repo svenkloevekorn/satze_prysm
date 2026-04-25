@@ -196,8 +196,6 @@ Interaktiv abhaken: [`docs/checkliste.html`](docs/checkliste.html).
 
 Endnutzer-Handbuch: **[`docs/handbuch.html`](docs/handbuch.html)** (Tailwind-Layout, im Browser öffnen).
 
-Ältere Markdown-Variante: [`docs/user-guide.md`](docs/user-guide.md).
-
 ---
 
 ## ℹ️ Konventionen
