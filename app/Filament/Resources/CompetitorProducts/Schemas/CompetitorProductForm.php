@@ -89,11 +89,13 @@ class CompetitorProductForm
                                         TextInput::make('price_min')
                                             ->label('Mindestpreis (€)')
                                             ->numeric()
+                                            ->minValue(0)
                                             ->step(0.01)
                                             ->prefix('€'),
                                         TextInput::make('price_max')
                                             ->label('Höchstpreis (€)')
                                             ->numeric()
+                                            ->minValue(0)
                                             ->step(0.01)
                                             ->prefix('€'),
                                     ]),
