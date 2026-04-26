@@ -8,6 +8,7 @@ use App\Models\CompetitorProduct;
 use Filament\Actions\Imports\ImportColumn;
 use Filament\Actions\Imports\Importer;
 use Filament\Actions\Imports\Models\Import;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Number;
 use Illuminate\Support\Str;
 
@@ -25,21 +26,31 @@ class CompetitorProductImporter extends Importer
             ImportColumn::make('brand')
                 ->label('Marke (Name)')
                 ->fillRecordUsing(function (CompetitorProduct $record, ?string $state) {
-                    if (filled($state)) {
-                        $brand = Brand::firstOrCreate(['name' => trim($state)], ['is_active' => true]);
-                        $record->brand_id = $brand->id;
+                    if (blank($state)) {
+                        return;
                     }
+                    $name = trim($state);
+                    $brand = Brand::firstWhere('name', $name);
+                    if (! $brand) {
+                        Gate::authorize('create', Brand::class);
+                        $brand = Brand::create(['name' => $name, 'is_active' => true]);
+                    }
+                    $record->brand_id = $brand->id;
                 }),
             ImportColumn::make('category')
                 ->label('Kategorie (Name)')
                 ->fillRecordUsing(function (CompetitorProduct $record, ?string $state) {
-                    if (filled($state)) {
-                        $category = Category::firstOrCreate(
-                            ['slug' => Str::slug($state)],
-                            ['name' => trim($state), 'is_active' => true],
-                        );
-                        $record->category_id = $category->id;
+                    if (blank($state)) {
+                        return;
                     }
+                    $name = trim($state);
+                    $slug = Str::slug($name);
+                    $category = Category::firstWhere('slug', $slug);
+                    if (! $category) {
+                        Gate::authorize('create', Category::class);
+                        $category = Category::create(['name' => $name, 'slug' => $slug, 'is_active' => true]);
+                    }
+                    $record->category_id = $category->id;
                 }),
             ImportColumn::make('description')
                 ->label('Beschreibung'),

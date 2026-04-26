@@ -6,6 +6,7 @@ use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Support\HtmlString;
 
 class ActivitiesRelationManager extends RelationManager
 {
@@ -52,25 +53,25 @@ class ActivitiesRelationManager extends RelationManager
                 TextColumn::make('attribute_changes')
                     ->label('Änderungen')
                     ->state(fn ($record) => $record->attribute_changes)
-                    ->formatStateUsing(function ($state): string {
+                    ->formatStateUsing(function ($state): HtmlString {
                         if (blank($state)) {
-                            return '–';
+                            return new HtmlString('–');
                         }
                         $data = is_array($state) ? $state : (array) $state;
                         $attrs = $data['attributes'] ?? [];
                         $old = $data['old'] ?? [];
                         if (empty($attrs)) {
-                            return '–';
+                            return new HtmlString('–');
                         }
                         $rows = [];
                         foreach ($attrs as $field => $newVal) {
                             $oldVal = $old[$field] ?? null;
                             $newStr = is_scalar($newVal) ? (string) $newVal : json_encode($newVal);
                             $oldStr = is_scalar($oldVal) ? (string) $oldVal : json_encode($oldVal);
-                            $rows[] = "<strong>{$field}</strong>: „{$oldStr}".'" → „'."{$newStr}".'"';
+                            $rows[] = '<strong>'.e($field).'</strong>: „'.e($oldStr).'" → „'.e($newStr).'"';
                         }
 
-                        return implode('<br>', array_slice($rows, 0, 5));
+                        return new HtmlString(implode('<br>', array_slice($rows, 0, 5)));
                     })
                     ->html()
                     ->wrap(),

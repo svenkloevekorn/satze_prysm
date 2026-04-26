@@ -49,6 +49,8 @@ class InfluencerForm
                         ->label('Profilbild')
                         ->collection('avatar')
                         ->image()
+                        ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/avif'])
+                        ->maxSize(2048)
                         ->imageEditor()
                         ->avatar()
                         ->columnSpanFull(),

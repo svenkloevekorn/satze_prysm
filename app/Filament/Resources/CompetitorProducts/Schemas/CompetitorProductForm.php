@@ -146,6 +146,8 @@ class CompetitorProductForm
                                     ->multiple()
                                     ->reorderable()
                                     ->image()
+                                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/avif'])
+                                    ->maxSize(5120)
                                     ->imageEditor()
                                     ->maxFiles(10)
                                     ->columnSpanFull(),

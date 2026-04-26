@@ -7,9 +7,13 @@ use App\Models\SupplierProduct;
 use App\Models\User;
 use Filament\Actions\Imports\Models\Import;
 use Illuminate\Validation\ValidationException;
+use Spatie\Permission\Models\Role;
 
 beforeEach(function () {
+    $role = Role::firstOrCreate(['name' => 'super_admin', 'guard_name' => 'web']);
     $this->admin = User::factory()->create();
+    $this->admin->assignRole($role);
+    $this->actingAs($this->admin);
 
     $this->import = new Import;
     $this->import->user_id = $this->admin->id;
