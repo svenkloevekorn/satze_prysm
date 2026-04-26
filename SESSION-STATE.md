@@ -2,7 +2,7 @@
 
 > Merkzettel für die nächste Claude-Session. Zu Beginn lesen.
 
-**Letzte Aktualisierung:** 2026-04-24 (Ende der Session: Impersonation + Bulk-Edit + Import-Historie)
+**Letzte Aktualisierung:** 2026-04-26 (Ende der Session: Test-Hardening + Cleanup + 2 Bugfixes)
 
 ---
 
@@ -15,19 +15,30 @@ MVP + alle 5 Feature-Pakete (C, A, E, B, F.1/F.2/F.3) fertig.
 **Phase 8 Querschnittsfunktionen fertig:** Admin-Settings, Audit Log, Tagging, Nachhaltigkeit.
 **Phase 9 Auth/User-Mgmt fertig:** UserResource + filament-breezy (2FA, Browser-Sessions, „Mein Profil").
 **Phase 10 Support-Tools fertig:** User-Impersonation, Import-Historie-Widget, Bulk-Edit-Actions.
+**Phase 11 Test-Hardening + Cleanup fertig (25.-26.04.):** 108 neue Tests (114 → 222), Refactor BulkUpdateAction-Helper, 470 Zeilen Dead Code raus, 2 echte Bugs gefixt.
 
-Phase 7 (Deployment Mittwald) pausiert, wartet auf GitHub-Repo + Mittwald-Server.
+**Phase 7 (Deployment Mittwald) wartet auf neuen Server:**
+- Erster Mittwald-Server (`p708333`) wurde am 24.04. eingerichtet, aber wieder freigegeben (kein PostgreSQL im Tarif).
+- GitHub-Repo bereits angelegt: `git@github.com:svenkloevekorn/satze_prysm.git`
+- CI-Workflow läuft NICHT mehr automatisch (auf `workflow_dispatch` umgestellt) bis neuer Server steht.
+- Wartet auf User: neuen Mittwald-Server mit PostgreSQL-Tarif einrichten.
 
 **Strategische Entscheidungen (2026-04-24):**
 - Software-Name **Prysm** ist final (kein Refactoring mehr nötig)
 - Shop-Strategie: zuerst **Shopify**, später ggf. Wechsel auf Shopware
 
+**Drei Pitches als HTML zur Entscheidung:**
+- `docs/pitch-kampagnen-manager.html` (Influencer-Kampagnen-Workflow)
+- `docs/pitch-marketing-kalender.html` (Filament-Kalender-View)
+- `docs/pitch-variantenmanagement.html` (Shop-Blocker für Shopify)
+
 ### Zahlen
 
-- **35+ Commits** auf `main`-Branch (alle lokal, noch nicht gepusht)
-- **114 automatische Tests** grün
+- **57 Commits** auf `main`-Branch, **alle auf GitHub gepusht**
+- **222 automatische Tests** grün (684 Assertions)
 - **PHPStan Level 5** – 0 Fehler
 - **Pint** – alle Files formatiert
+- **Filament 5.6.1**, **Medialibrary 11.21.2** (aktuell)
 - **Site lokal:** http://staeze-pm.test/admin
 
 ### Branding / Konventionen
@@ -65,11 +76,12 @@ Phase 7 (Deployment Mittwald) pausiert, wartet auf GitHub-Repo + Mittwald-Server
 
 ### Offene hochpriorisierte TODOs (siehe TODO.md)
 
-1. **Variantenmanagement-Basis** – SKUs + Lagerstatus (Voraussetzung für Shopify-Anbindung)
-2. **Kampagnen-Manager** (baut auf Influencer-Modul auf)
-3. **Marketing-Kalender** (Filament-Kalender-View)
-4. **Trend-Radar-Struktur** (ohne externe APIs)
-5. **Phase 7 – Deployment Mittwald** (wartet auf User: GitHub-Repo + Mittwald-Server)
+1. **Mittwald-Server (PostgreSQL) einrichten** – Voraussetzung für Phase 7
+2. **Pitch-Entscheidung treffen** – welcher der drei (Variantenmanagement / Kampagnen-Manager / Marketing-Kalender) zuerst?
+3. **Variantenmanagement-Basis** – SKUs + Lagerstatus (Voraussetzung für Shopify-Anbindung)
+4. **Kampagnen-Manager** (baut auf Influencer-Modul auf)
+5. **Marketing-Kalender** (Filament-Kalender-View)
+6. **Trend-Radar-Struktur** (ohne externe APIs)
 
 ### Offene strategische Entscheidungen (User muss treffen)
 
@@ -85,9 +97,10 @@ Phase 7 (Deployment Mittwald) pausiert, wartet auf GitHub-Repo + Mittwald-Server
 - `README.md` – Install, Tech-Stack
 - `TODO.md` – alle Features, Phase-8-Block Erledigt
 - `docs/handbuch.html` – **Endnutzer-Handbuch** (Tailwind, gelayoutet) · MUSS bei nutzer-sichtbaren Änderungen aktualisiert werden
-- `docs/MANUELLE-TESTS.md` – ~220 Test-Schritte (Phase 8 inkl.)
+- `docs/MANUELLE-TESTS.md` – ~250 Test-Schritte (Phase 10 inkl.)
 - `docs/checkliste.html` – Interaktive HTML-Checkliste mit localStorage
-- `docs/STRATEGIE-ROADMAP.md` – Shop/ERP/Satelliten-Strategie
+- `docs/STRATEGIE-ROADMAP.md` – Shop/ERP/Satelliten-Strategie (Shopify-zuerst eingetragen)
+- `docs/pitch-*.html` – drei Feature-Pitches zur Entscheidung
 - `SESSION-STATE.md` – diese Datei
 
 ---
@@ -97,7 +110,7 @@ Phase 7 (Deployment Mittwald) pausiert, wartet auf GitHub-Repo + Mittwald-Server
 ```bash
 cd /Users/svenk/BEQN_Webprojekte/STZ_staeze-produktmanagement
 git log --oneline -10
-php artisan test            # 102 passed
+php artisan test            # 222 passed
 open http://staeze-pm.test/admin  # admin@admin.com / password
 open docs/handbuch.html
 ```

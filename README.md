@@ -78,7 +78,7 @@ npm run build  # Produktions-Build
 php artisan test
 ```
 
-Erwartung: **114+ Tests grün** (Stand 2026-04-24, Phase 10).
+Erwartung: **222+ Tests grün** (Stand 2026-04-26, nach Phase 11 Test-Hardening).
 
 ---
 
@@ -156,12 +156,13 @@ Im Admin-Panel oben rechts auf **„CSV-Import"**. Marken, Lieferanten und Kateg
 
 > ⏸️ **Wartet auf Server-Setup.** Siehe `TODO.md` – Phase 7.
 
-**Aktueller Stand (2026-04-25):**
+**Aktueller Stand (2026-04-26):**
 
 - ✅ GitHub-Repo angelegt: `git@github.com:svenkloevekorn/satze_prysm.git`
 - ✅ Lokale `.env.production.example` für Mittwald + PostgreSQL vorbereitet
 - ✅ CI-Workflow auf manuellen Trigger umgestellt (läuft nicht bei jedem Push)
-- ⏸️ Mittwald-Server mit PostgreSQL-Tarif wird neu eingerichtet
+- ✅ 222 automatische Tests grün, PHPStan Level 5 sauber
+- ⏸️ Mittwald-Server mit PostgreSQL-Tarif wird neu eingerichtet (alter ohne PG)
 
 **Geplanter Ablauf, sobald Server steht:**
 

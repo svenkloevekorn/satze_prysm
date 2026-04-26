@@ -295,8 +295,14 @@ man muss erst ein Produkt/Entwicklungs-Item öffnen, um Bilder zu sehen.
 
 - [x] **Software-Name entscheiden** ✅ entschieden 2026-04-24: bleibt **Prysm**
 - [x] **Shop-Entscheidung** ✅ entschieden 2026-04-24: zuerst **Shopify**, später ggf. Wechsel auf Shopware
-- [ ] **Phase 7 Deployment:** GitHub-Repo anlegen + Mittwald-Server vorbereiten
-  (SSH, PostgreSQL 16+, PHP 8.3+, Domain)
+- [x] **GitHub-Repo angelegt** ✅ 2026-04-24: `git@github.com:svenkloevekorn/satze_prysm.git`
+- [ ] **Neuen Mittwald-Server mit PostgreSQL-Tarif einrichten**
+  (alter Server `p708333` hatte kein PostgreSQL, wurde wieder freigegeben)
+- [ ] **Pitch-Entscheidung treffen** zwischen drei Vorschlägen:
+  - `docs/pitch-kampagnen-manager.html`
+  - `docs/pitch-marketing-kalender.html`
+  - `docs/pitch-variantenmanagement.html`
+- [ ] **Phase 7 Deployment** sobald neuer Server steht (SSH-Key, .env.production, GitHub-Actions deploy.yml)
 
 ### 🔥 Direkt machbar – keine externen Abhängigkeiten (empfohlene Reihenfolge)
 
@@ -370,6 +376,27 @@ man muss erst ein Produkt/Entwicklungs-Item öffnen, um Bilder zu sehen.
 ---
 
 ## ✅ Erledigt
+
+### Phase 11 – Test-Hardening + Cleanup *(2026-04-25 bis 2026-04-26)*
+
+- [x] **Filament 5.5.2 → 5.6.1** + spatie/laravel-medialibrary 11.21.0 → 11.21.2 (Minor + Patch)
+- [x] **nunomaduro/collision** 8.9.3 → 8.9.4
+- [x] **Refactor:** `app/Filament/Actions/BulkUpdateAction` Helper extrahiert → ersetzt 7× Boilerplate in Wettbewerbs-/Lieferanten-/Entwicklungs-Tabellen
+- [x] **Test-Welle 1 (Coverage-Lücken):** Influencer (5), SocialChannel (7), MedienGalerie (2), CompetitorProductImporter (5), Quality-Checks (8) — 27 Tests
+- [x] **Test-Welle 2 (Edge-Cases):** Morph-Map (2), Enums (8), HasRatings (5), FetchChannelMetrics-Command (6), SupplierProductImporter (5), CompetitorProductExporter (4) — 30 Tests
+- [x] **Test-Welle 3 (Detail):** WebRoutes (1), CategoryHierarchy (10), ShopAndProductEntry (3), DevelopmentItemAutoFinal (5), ChannelMetricsTimeSeries (4), AuditLogPolymorph (5), SettingsEncryptionRoundtrip (8), Scheduler (2), AppServiceProviderLoginListener (2), FinalProduct-Resource (6), FilamentAuth-Routes (4), CompetitorProductValidation (3) — 53 Tests
+- [x] **2 echte Bugs gefunden + gefixt:**
+  - `FetchChannelMetrics::handle`: `where('captured_at', $today)` matchte nicht durch String/DateTime-Konflikt → `whereDate()`
+  - `CompetitorProductForm`: akzeptierte negative Preise → `minValue(0)` ergänzt
+- [x] **Restbestände entfernt** (470 Zeilen Dead Code raus):
+  - `tests/Unit/ExampleTest.php` + `tests/Feature/ExampleTest.php` (Laravel-Boilerplate)
+  - `resources/views/welcome.blade.php` (225 Zeilen, niemand landet auf `/`)
+  - `docs/user-guide.md` (durch `handbuch.html` abgelöst)
+  - `routes/web.php`: `/` → Redirect auf `/admin`
+- [x] **CI-Workflow** auf `workflow_dispatch` umgestellt (läuft nicht mehr automatisch bei jedem Push, bis Mittwald-Server steht)
+- [x] **README.md, Strategie-Roadmap, .env.production.example** auf Prysm-Naming + Shopify-zuerst aktualisiert
+- [x] **Drei Pitches** (Kampagnen-Manager, Marketing-Kalender, Variantenmanagement) als HTML-Dokumente
+- **114 → 222 Tests grün (+108)**, PHPStan 0 Errors, Pint sauber
 
 ### Phase 10 – Support-Tools *(2026-04-24)*
 
